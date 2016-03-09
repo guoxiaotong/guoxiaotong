@@ -25,6 +25,17 @@
 		0011596A1C8FD375001E7CA8 /* GXTTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 001159691C8FD375001E7CA8 /* GXTTabBar.m */; };
 		0011596C1C8FD805001E7CA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0011596B1C8FD805001E7CA8 /* Assets.xcassets */; };
 		00F29B101C8FE281004D031D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F29B0F1C8FE281004D031D /* LoginViewController.m */; };
+		00F724AC1C901B510092D9DD /* RoleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724AB1C901B510092D9DD /* RoleListViewController.m */; };
+		00F724AF1C901B8C0092D9DD /* MyAddressListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724AE1C901B8C0092D9DD /* MyAddressListViewController.m */; };
+		00F724B21C901BAE0092D9DD /* MyCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724B11C901BAE0092D9DD /* MyCollectionViewController.m */; };
+		00F724B51C901BEA0092D9DD /* MyTrendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724B41C901BEA0092D9DD /* MyTrendsViewController.m */; };
+		00F724B81C901C250092D9DD /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724B71C901C250092D9DD /* MyProfileViewController.m */; };
+		00F724BB1C901C3D0092D9DD /* SettingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724BA1C901C3D0092D9DD /* SettingViewController.m */; };
+		00F724C01C901CE60092D9DD /* EditPassWordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724BF1C901CE60092D9DD /* EditPassWordViewController.m */; };
+		00F724C31C901CF90092D9DD /* AboutUsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724C21C901CF90092D9DD /* AboutUsViewController.m */; };
+		00F724C61C901D280092D9DD /* ScanCodeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724C51C901D280092D9DD /* ScanCodeViewController.m */; };
+		00F724C91C901D490092D9DD /* AdviceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724C81C901D490092D9DD /* AdviceViewController.m */; };
+		00F724CC1C901D730092D9DD /* AddRoleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00F724CB1C901D730092D9DD /* AddRoleViewController.m */; };
 		CF7646CE18E6D047D4C99CE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080692A9D1B36040A8466472 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -75,6 +86,28 @@
 		0011596B1C8FD805001E7CA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		00F29B0E1C8FE281004D031D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		00F29B0F1C8FE281004D031D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		00F724AA1C901B510092D9DD /* RoleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleListViewController.h; sourceTree = "<group>"; };
+		00F724AB1C901B510092D9DD /* RoleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleListViewController.m; sourceTree = "<group>"; };
+		00F724AD1C901B8C0092D9DD /* MyAddressListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAddressListViewController.h; sourceTree = "<group>"; };
+		00F724AE1C901B8C0092D9DD /* MyAddressListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAddressListViewController.m; sourceTree = "<group>"; };
+		00F724B01C901BAE0092D9DD /* MyCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCollectionViewController.h; sourceTree = "<group>"; };
+		00F724B11C901BAE0092D9DD /* MyCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCollectionViewController.m; sourceTree = "<group>"; };
+		00F724B31C901BEA0092D9DD /* MyTrendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyTrendsViewController.h; sourceTree = "<group>"; };
+		00F724B41C901BEA0092D9DD /* MyTrendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyTrendsViewController.m; sourceTree = "<group>"; };
+		00F724B61C901C250092D9DD /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
+		00F724B71C901C250092D9DD /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
+		00F724B91C901C3D0092D9DD /* SettingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingViewController.h; sourceTree = "<group>"; };
+		00F724BA1C901C3D0092D9DD /* SettingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingViewController.m; sourceTree = "<group>"; };
+		00F724BE1C901CE60092D9DD /* EditPassWordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPassWordViewController.h; sourceTree = "<group>"; };
+		00F724BF1C901CE60092D9DD /* EditPassWordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPassWordViewController.m; sourceTree = "<group>"; };
+		00F724C11C901CF90092D9DD /* AboutUsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutUsViewController.h; sourceTree = "<group>"; };
+		00F724C21C901CF90092D9DD /* AboutUsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutUsViewController.m; sourceTree = "<group>"; };
+		00F724C41C901D280092D9DD /* ScanCodeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScanCodeViewController.h; sourceTree = "<group>"; };
+		00F724C51C901D280092D9DD /* ScanCodeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScanCodeViewController.m; sourceTree = "<group>"; };
+		00F724C71C901D490092D9DD /* AdviceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdviceViewController.h; sourceTree = "<group>"; };
+		00F724C81C901D490092D9DD /* AdviceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdviceViewController.m; sourceTree = "<group>"; };
+		00F724CA1C901D730092D9DD /* AddRoleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddRoleViewController.h; sourceTree = "<group>"; };
+		00F724CB1C901D730092D9DD /* AddRoleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddRoleViewController.m; sourceTree = "<group>"; };
 		080692A9D1B36040A8466472 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DDC6AA5720949B57EB60EF6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CAF997D8BA6E1F22D842A922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -204,8 +237,22 @@
 		001159401C8FC179001E7CA8 /* WoDe */ = {
 			isa = PBXGroup;
 			children = (
+				00F724BD1C901C5F0092D9DD /* Role */,
+				00F724BC1C901C4F0092D9DD /* Setting */,
+				00F724B91C901C3D0092D9DD /* SettingViewController.h */,
+				00F724BA1C901C3D0092D9DD /* SettingViewController.m */,
 				001159621C8FD0EE001E7CA8 /* WoDeViewController.h */,
 				001159631C8FD0EE001E7CA8 /* WoDeViewController.m */,
+				00F724B61C901C250092D9DD /* MyProfileViewController.h */,
+				00F724B71C901C250092D9DD /* MyProfileViewController.m */,
+				00F724AA1C901B510092D9DD /* RoleListViewController.h */,
+				00F724AB1C901B510092D9DD /* RoleListViewController.m */,
+				00F724AD1C901B8C0092D9DD /* MyAddressListViewController.h */,
+				00F724AE1C901B8C0092D9DD /* MyAddressListViewController.m */,
+				00F724B01C901BAE0092D9DD /* MyCollectionViewController.h */,
+				00F724B11C901BAE0092D9DD /* MyCollectionViewController.m */,
+				00F724B31C901BEA0092D9DD /* MyTrendsViewController.h */,
+				00F724B41C901BEA0092D9DD /* MyTrendsViewController.m */,
 			);
 			path = WoDe;
 			sourceTree = "<group>";
@@ -325,6 +372,30 @@
 			children = (
 			);
 			path = "zh-Hans.lproj";
+			sourceTree = "<group>";
+		};
+		00F724BC1C901C4F0092D9DD /* Setting */ = {
+			isa = PBXGroup;
+			children = (
+				00F724BE1C901CE60092D9DD /* EditPassWordViewController.h */,
+				00F724BF1C901CE60092D9DD /* EditPassWordViewController.m */,
+				00F724C11C901CF90092D9DD /* AboutUsViewController.h */,
+				00F724C21C901CF90092D9DD /* AboutUsViewController.m */,
+				00F724C41C901D280092D9DD /* ScanCodeViewController.h */,
+				00F724C51C901D280092D9DD /* ScanCodeViewController.m */,
+				00F724C71C901D490092D9DD /* AdviceViewController.h */,
+				00F724C81C901D490092D9DD /* AdviceViewController.m */,
+			);
+			name = Setting;
+			sourceTree = "<group>";
+		};
+		00F724BD1C901C5F0092D9DD /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				00F724CA1C901D730092D9DD /* AddRoleViewController.h */,
+				00F724CB1C901D730092D9DD /* AddRoleViewController.m */,
+			);
+			name = Role;
 			sourceTree = "<group>";
 		};
 		2B101A07212EB3D3B51C3150 /* Pods */ = {
@@ -495,20 +566,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				00F724C01C901CE60092D9DD /* EditPassWordViewController.m in Sources */,
+				00F724AC1C901B510092D9DD /* RoleListViewController.m in Sources */,
+				00F724AF1C901B8C0092D9DD /* MyAddressListViewController.m in Sources */,
+				00F724B21C901BAE0092D9DD /* MyCollectionViewController.m in Sources */,
 				001159571C8FC179001E7CA8 /* LoadingView.m in Sources */,
 				001159531C8FC179001E7CA8 /* Config.m in Sources */,
 				001159541C8FC179001E7CA8 /* GXTNavigationController.m in Sources */,
 				001159641C8FD0EE001E7CA8 /* WoDeViewController.m in Sources */,
 				00F29B101C8FE281004D031D /* LoginViewController.m in Sources */,
 				001159161C8FC147001E7CA8 /* AppDelegate.m in Sources */,
+				00F724B81C901C250092D9DD /* MyProfileViewController.m in Sources */,
+				00F724B51C901BEA0092D9DD /* MyTrendsViewController.m in Sources */,
 				001159611C8FD0E6001E7CA8 /* ZhouBianViewController.m in Sources */,
 				001159131C8FC147001E7CA8 /* main.m in Sources */,
 				0011595E1C8FD0D5001E7CA8 /* XiaoXinViewController.m in Sources */,
 				001159671C8FD0F8001E7CA8 /* ZiYuanViewController.m in Sources */,
 				001159561C8FC179001E7CA8 /* HttpClient.m in Sources */,
 				001159551C8FC179001E7CA8 /* GXTTabBarController.m in Sources */,
+				00F724C31C901CF90092D9DD /* AboutUsViewController.m in Sources */,
 				0011595B1C8FD0BE001E7CA8 /* DongTaiViewController.m in Sources */,
+				00F724C91C901D490092D9DD /* AdviceViewController.m in Sources */,
+				00F724C61C901D280092D9DD /* ScanCodeViewController.m in Sources */,
+				00F724CC1C901D730092D9DD /* AddRoleViewController.m in Sources */,
 				0011596A1C8FD375001E7CA8 /* GXTTabBar.m in Sources */,
+				00F724BB1C901C3D0092D9DD /* SettingViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

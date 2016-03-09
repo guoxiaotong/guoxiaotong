@@ -1,5 +1,5 @@
 //
-//  WoDeViewController.h
+//  ScanCodeViewController.h
 //  guoxiaotong
 //
 //  Created by zxc on 16/3/9.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WoDeViewController : UITableViewController
+@interface ScanCodeViewController : UIViewController
 
 @end

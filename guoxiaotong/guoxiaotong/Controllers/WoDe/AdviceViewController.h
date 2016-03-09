@@ -1,5 +1,5 @@
 //
-//  WoDeViewController.h
+//  AdviceViewController.h
 //  guoxiaotong
 //
 //  Created by zxc on 16/3/9.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WoDeViewController : UITableViewController
+@interface AdviceViewController : UIViewController
 
 @end
