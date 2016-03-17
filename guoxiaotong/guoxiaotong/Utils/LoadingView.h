@@ -11,7 +11,10 @@
 
 @interface LoadingView : NSObject
 
-+ (void)showOnView:(UIView *)view;
-+ (void)hiddenForView:(UIView *)view;
++ (void)showCenterActivity:(UIView *)view;
++ (void)hideCenterActivity:(UIView *)view;
+
++ (void)showBottom:(UIView *)view messages:(NSArray *)messages;
++ (void)showDownCenter:(UIView *)view messages:(NSArray *)messages;
 
 @end

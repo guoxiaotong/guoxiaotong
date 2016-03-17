@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RoleListViewController : UIViewController
+@interface RoleListViewController : UITableViewController
 
 @end

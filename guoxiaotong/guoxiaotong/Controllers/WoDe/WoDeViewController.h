@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface WoDeViewController : UITableViewController
+@interface WoDeViewController : UIViewController
 
 @end

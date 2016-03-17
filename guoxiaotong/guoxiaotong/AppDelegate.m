@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "GXTTabBarController.h"
+#import "GXTNavigationController.h"
 
 @interface AppDelegate ()
 
@@ -19,17 +20,34 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
   
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.window.backgroundColor = DEFAULT_BACKGROUND_COLOR;
     [self.window makeKeyAndVisible];
-  
-    [self enterLoginViewController];
-  
+    
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    
+    [self enterNextViewController];
     return YES;
 }
 
-- (void)enterLoginViewController {
+- (void)enterNextViewController {
+    BOOL isLogin = NO;
+    if (!isLogin) {
+        [self enterLoginViewController];
+    }else {
+        [self login];
+    }
+}
+
+- (void)login {
     GXTTabBarController *tabBarController = [[GXTTabBarController alloc] init];
     self.window.rootViewController = tabBarController;
+}
+
+- (void)enterLoginViewController {
+    UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
+    UIViewController *vc = [loginStoryBoard instantiateViewControllerWithIdentifier:@"LOGIN"];
+    GXTNavigationController *navi = [[GXTNavigationController alloc] initWithRootViewController:vc];
+    self.window.rootViewController = navi;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

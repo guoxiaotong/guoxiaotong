@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseScrollViewController.h"
 
-@interface MyProfileViewController : UIViewController
+@interface MyProfileViewController : BaseScrollViewController
 
 @end

@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title = @"二维码扫描";
     // Do any additional setup after loading the view.
 }
 
