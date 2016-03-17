@@ -7,8 +7,16 @@
 //
 
 #import "LoginViewController.h"
+#import "GXTTabBarController.h"
+#import "UserService.h"
 
-@interface LoginViewController ()
+@interface LoginViewController ()<UITextFieldDelegate>
+@property (weak, nonatomic) IBOutlet UITextField *userNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+@property (weak, nonatomic) IBOutlet UIView *userNameBorder;
+@property (weak, nonatomic) IBOutlet UIView *passwordBorder;
+
+
 
 @end
 
@@ -16,22 +24,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.navigationItem.title = @"登录";
+    [self setUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setUI {
+    [self.userNameTextField setTextFieldLeftPadding:@"textfield_left_user" forWidth:30];
+    self.userNameTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+    [self.userNameTextField becomeFirstResponder];
+    [self.passwordTextField setTextFieldLeftPadding:@"textfield_left_pwd" forWidth:30];
+    self.passwordTextField.contentVerticalAlignment = UIControlContentVerticalAlignmentBottom;
+
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (IBAction)login:(id)sender {
+    __weak typeof (*&self)weakSelf=self;
+    UserService *service = [[UserService alloc] initWithView:self.view];
+    [service loginWithName:self.userNameTextField.text password:self.passwordTextField.text callBack:^(BOOL isSuccess) {
+        if (isSuccess) {
+            GXTTabBarController *tabVC = [[GXTTabBarController alloc] init];
+            weakSelf.view.window.rootViewController = tabVC;
+        }
+    }];
 }
-*/
+
+#pragma mark - TextfieldDelegate
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField == self.userNameTextField) {
+        self.userNameBorder.layer.borderColor = [UIColor blueColor].CGColor;
+        self.passwordBorder.layer.borderColor = [UIColor grayColor].CGColor;
+    }else {
+        self.userNameBorder.layer.borderColor = [UIColor grayColor].CGColor;
+        self.passwordBorder.layer.borderColor = [UIColor blueColor].CGColor;
+    }
+}
 
 @end

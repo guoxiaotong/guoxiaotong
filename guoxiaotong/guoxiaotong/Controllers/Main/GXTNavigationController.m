@@ -13,10 +13,19 @@
 @end
 
 @implementation GXTNavigationController
+//设置返回按钮文字偏移量
++ (void)initialize {
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -100) forBarMetrics:UIBarMetricsDefault];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationBar.barTintColor = [UIColor redColor];
+    self.navigationBar.translucent = NO;
+    self.navigationBar.barTintColor = DEFAULT_NAVIGATIONBAR_COLOR;
+    self.navigationBar.tintColor = [UIColor whiteColor];
+    UIColor * color = [UIColor whiteColor];
+    NSDictionary * dict = [NSDictionary dictionaryWithObject:color forKey:NSForegroundColorAttributeName];
+    self.navigationBar.titleTextAttributes = dict;
 }
 
 - (void)didReceiveMemoryWarning {

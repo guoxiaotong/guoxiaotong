@@ -10,11 +10,8 @@
 #import <AFNetworking.h>
 #import "Config.h"
 
-typedef void(^httpSuccess)(AFHTTPRequestOperation *operation, id responseObject);
-typedef void(^httpFailure)(AFHTTPRequestOperation *operation, NSError *error);
-
 @interface HttpClient : NSObject
 
-- (void)get:(NSString *)url requestParams:(NSDictionary *)requestParams success:(httpSuccess)success failure:(httpFailure)failure;
+- (void)get:(NSString *)url requestParams:(id)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end
