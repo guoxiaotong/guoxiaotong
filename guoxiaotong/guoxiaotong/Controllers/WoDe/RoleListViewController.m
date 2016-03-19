@@ -65,10 +65,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof (*&self)weakSelf = self;
     RoleListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"roleListCell"];
-    cell.ManagerButtonCallBack = ^(NSInteger roleId, NSString *roleName) {
+    cell.ManagerButtonCallBack = ^(UserRoleInfoModel *roleInfo) {
         ManagerViewController *managerVC = [[ManagerViewController alloc] init];
-        managerVC.roleId = roleId;
-        managerVC.roleName = roleName;
+        managerVC.roleInfo = roleInfo;
         [weakSelf.navigationController pushViewController:managerVC animated:YES];
     };
     UserRoleInfoModel *roleInfo = self.dataSourse[indexPath.row];

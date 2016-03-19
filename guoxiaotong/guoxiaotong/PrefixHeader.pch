@@ -27,9 +27,14 @@
 #import "UITextField+CustomStyle.h"
 #import "BaseScrollViewController.h"
 #import "LoadingView.h"
+#import "HttpClient.h"
 #import "SingleUserInfo.h"
+#import <UIImageView+WebCache.h>
+#import "UserRoleInfoModel.h"
 
-
+//字体，字体颜色
+#define TABLE_TITLE_FONT [UIFont systemFontOfSize:14.0]
+#define TABLE_SUBTITLE_FONT [UIFont systemFontOfSize:12.0]
 
 
 

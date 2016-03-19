@@ -7,11 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserRoleInfoModel.h"
 
 @interface ManagerViewController : UIViewController
 
-@property (nonatomic, assign) NSInteger roleId;
-@property (nonatomic, copy) NSString *roleName;
-
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

@@ -9,9 +9,8 @@
 #import "MyAddressListViewController.h"
 #import "ContactTableViewCell.h"
 #import "SectionHeaderView.h"
-#import "GroupModel.h"
 
-@interface MyAddressListViewController ()<UITableViewDataSource, UITableViewDelegate, SectionHeaderViewDelegate>
+@interface MyAddressListViewController ()<UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong)UITableView *tableView;
 @property (nonatomic, strong)UITextField *searchTextField;
@@ -33,12 +32,6 @@
 
 - (void)loadData {
     self.dataSource = [NSMutableArray array];
-    for (NSInteger i = 0; i<10; i++) {
-        GroupModel *group = [[GroupModel alloc] init];
-        group.name = [NSString stringWithFormat:@"分组%ld", i];
-        group.members = @[@"lalala", @"lalala", @"lalala", @"lalala", @"lalala", @"lalala", @"lalala"];
-        [self.dataSource addObject:group];
-    }
 }
 
 - (void)setUI {
@@ -83,23 +76,24 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    GroupModel *group = self.dataSource[section];
-    //在这里进行判断，如果该组收拢，那就返回0行，如果该组打开，就返回实际的行数
-    if (group.isOpen) {
-    // 代表要展开
-    return group.members.count;
-    }else {
-    // 代表要合拢
+//    GroupModel *group = self.dataSource[section];
+//    //在这里进行判断，如果该组收拢，那就返回0行，如果该组打开，就返回实际的行数
+//    if (group.isOpen) {
+//    // 代表要展开
+//    return group.members.count;
+//    }else {
+//    // 代表要合拢
+//    return 0;
+//    }
     return 0;
-    }
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    SectionHeaderView *headerview=[SectionHeaderView headerWithTableView:tableView];
-    headerview.delegate=self;
+    SectionHeaderView *headerview=[[SectionHeaderView alloc] initWithTitle:@"fenzu" isOpen:NO];
     //设置头部视图的数据
-    GroupModel *groupmodel=self.dataSource[section];
-    headerview.group=groupmodel;
+    headerview.SectionBlock = ^(NSInteger index, BOOL isOpen) {
+        //点击操作
+    };
     return headerview;
 }
 

@@ -7,8 +7,11 @@
 //
 
 #import "JZStudentInfoViewController.h"
+#import "ImageHeaderView.h"
 
 @interface JZStudentInfoViewController ()
+
+@property (nonatomic, strong) UIImageView *navBarHairlineImageView;
 
 @end
 
@@ -16,23 +19,65 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"学生信息";
-    // Do any additional setup after loading the view.
+    [self setUI];
+    [self loadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+#pragma mark - 设置导航栏下分割线在本页面不显示
+- (void)viewWillAppear:(BOOL)animated {
+    self.navBarHairlineImageView.hidden = YES;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWillDisappear:(BOOL)animated {
+    self.navBarHairlineImageView.hidden = NO;
 }
-*/
+
+- (UIImageView *)findHairlineImageViewUnder: (UIView *)view {
+    if([view isKindOfClass:UIImageView.class] && view.bounds.size.height<=1.0) {
+        return (UIImageView *)view;
+    }
+    for(UIView *subview in view.subviews) {
+        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
+        if(imageView) {
+            return imageView;
+        }
+    }
+    return nil;
+}
+
+- (void)setUI {
+    ImageHeaderView *header = [[ImageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 150)];
+    header.imageView.image = [UIImage imageNamed:@"manager_role_student_pic"];
+    header.detailLabel.text = _roleInfo.schoolName;
+    [self.view addSubview:header];
+    [self cellWithTitle:@"姓名：" detail:_roleInfo.studentName index:0];
+    [self cellWithTitle:@"班级：" detail:_roleInfo.className index:1];
+    
+}
+
+- (void)cellWithTitle:(NSString *)title detail:(NSString *)detail index:(NSInteger)index {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 150+50*index, WIDTH, 50)];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 30)];
+    titleLabel.text = title;
+    [view addSubview:titleLabel];
+    
+    UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 10, WIDTH-140, 30)];
+    detailLabel.text = detail;
+    [view addSubview:detailLabel];
+    
+    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, WIDTH, 1)];
+    border.backgroundColor = [UIColor lightGrayColor];
+    [view addSubview:border];
+    
+    [self.view addSubview:view];
+}
+
+- (void)loadData {
+    
+}
 
 @end

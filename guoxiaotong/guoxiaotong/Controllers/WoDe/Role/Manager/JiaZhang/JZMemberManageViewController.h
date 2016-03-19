@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JZMemberManageViewController : UIViewController
+@interface JZMemberManageViewController : UITableViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

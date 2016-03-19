@@ -50,7 +50,7 @@
     [LoadingView showCenterActivity:_view];
     //    __weak typeof (*&self)weakSelf = self;
     NSDictionary *params = @{@"userName": name, @"password": password};
-    [_clientManager get:API_LOGIN_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_clientManager post:API_LOGIN_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [LoadingView hideCenterActivity:self.view];
         NSLog(@"%@", responseObject);
         NSDictionary *json = responseObject;
@@ -79,7 +79,7 @@
 - (void)getProfileWithCallBack:(void (^)(BOOL, UserInfoModel *))callBack {
     [LoadingView showCenterActivity:_view];
     SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
-    [_clientManager get:API_ROLELIST_URL requestParams:@{@"userId": shareInfo.userId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_clientManager post:API_ROLELIST_URL requestParams:@{@"userId": shareInfo.userId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [LoadingView hideCenterActivity:self.view];
         NSDictionary *json = responseObject;
         NSDictionary *userInfo = json[@"userBean"];
@@ -101,12 +101,11 @@
 - (void)editProfileWithData:(NSString *)dataFormatter callBack:(void (^)(BOOL))callBack {
     [LoadingView showCenterActivity:_view];
     NSString *requestUrl = [NSString stringWithFormat:@"%@%@", API_EDIT_PROFILE_URL, dataFormatter];
-    [_clientManager get:requestUrl requestParams:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_clientManager post:requestUrl requestParams:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [LoadingView hideCenterActivity:self.view];
         if (callBack) {
             callBack(YES);
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [LoadingView hideCenterActivity:self.view];
         if (callBack) {
@@ -114,13 +113,12 @@
         }
         NSLog(@"%@", error);
     }];
-
 }
 
 #pragma mark - 获取角色列表
 - (void)getRoleListWithUserId:(NSString *)userId callBack:(void (^)(BOOL, NSArray *))requestCallBack {
     [LoadingView showCenterActivity:_view];
-    [_clientManager get:API_ROLELIST_URL requestParams:@{@"userId": userId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [_clientManager post:API_ROLELIST_URL requestParams:@{@"userId": userId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [LoadingView hideCenterActivity:self.view];
         NSDictionary *json = responseObject;
         NSArray *roles = json[@"roleInfo"];

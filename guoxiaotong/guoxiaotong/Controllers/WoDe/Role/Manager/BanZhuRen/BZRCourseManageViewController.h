@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BZRCourseManageViewController : UIViewController
+@interface BZRCourseManageViewController : UITableViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

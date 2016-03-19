@@ -8,9 +8,27 @@
 
 #import "ManagerViewController.h"
 #import "ImageHeaderView.h"
+//xiaozhang
+#import "XZSchoolInfoViewController.h"
+#import "XZCourseManageViewController.h"
+#import "XZClassManageViewController.h"
+#import "XZBZRManageViewController.h"
+#import "XZTeacherManageViewController.h"
+#import "XZXinXiangViewController.h"
+#import "XZSchoolQuanXianViewController.h"
+//banzhuren
+#import "BZRClassInfoViewController.h"
+#import "BZRCourseManageViewController.h"
+#import "BZRStudentManageViewController.h"
+#import "BZRAddStudentViewController.h"
+#import "BZRQuanXianViewController.h"
+//jiazhang
+#import "JZStudentInfoViewController.h"
+#import "JZMemberManageViewController.h"
+#import "JZQuanXianViewController.h"
+
 
 @interface ManagerViewController ()
-
 @property (nonatomic, assign)CGFloat headerHeight;
 @property (nonatomic, strong)UIImageView *navBarHairlineImageView;
 @property (nonatomic, strong)NSArray *managersImage;
@@ -64,13 +82,6 @@
                            @"教师管理",
                            @"校长信箱",
                            @"学校权限设置"];
-    self.managersViewController = @[@"XZSchoolInfoViewController",
-                                    @"XZCourseManageViewController",
-                                    @"XZClassManageViewController",
-                                    @"XZBZRManageViewController",
-                                    @"XZTeacherManageViewController",
-                                    @"XZXinXiangViewController",
-                                    @"XZSchoolQuanXianViewController"];
 }
 
 - (void)banzhurenSet {
@@ -84,11 +95,6 @@
                            @"学生管理",
                            @"添加学生",
                            @"老师权限设置"];
-    self.managersViewController = @[@"BZRClassInfoViewController",
-                                    @"BZRCourseManageViewController",
-                                    @"BZRStudentManageViewController",
-                                    @"BZRAddStudentViewController",
-                                    @"BZRQuanXianViewController"];
 
 }
 
@@ -99,15 +105,12 @@
     self.managersTitle = @[@"学生信息",
                            @"成员管理",
                            @"成员权限设置"];
-    self.managersViewController = @[@"JZStudentInfoViewController",
-                                    @"JZMemberManageViewController",
-                                    @"JZQuanXianViewController"];
 }
 
 - (void)loadData {
-    self.navigationItem.title = [NSString stringWithFormat:@"%@管理", self.roleName];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@管理", _roleInfo.roleName];
     //判断角色
-    switch (_roleId) {
+    switch (_roleInfo.roleId) {
         case 1://校长
             [self xiaozhangSet];
             break;
@@ -140,6 +143,29 @@
 - (void)setHeaderView {
     _headerHeight = 150;
     ImageHeaderView *header = [[ImageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, _headerHeight)];
+    switch (_roleInfo.roleId) {
+        case 1://校长
+        {
+            header.imageView.image = [UIImage imageNamed:@"manager_role_xiaozhang_pic"];
+            header.detailLabel.text = _roleInfo.schoolName;
+        }break;
+        case 2://班主任
+        {
+            header.imageView.image = [UIImage imageNamed:@"manager_role_banzhuren_pic"];
+            header.detailLabel.text = _roleInfo.className;
+        }break;
+        case 3://教师
+            break;
+        case 4://监护人
+        {
+            header.imageView.image = [UIImage imageNamed:@"manager_role_teacher_pic"];
+            header.detailLabel.text = _roleInfo.schoolName;
+        }break;
+        case 5://家长
+        case 6://学生
+        default:
+            break;
+    }
     [self.view addSubview:header];
 }
 
@@ -166,11 +192,159 @@
 
 - (void)selectedManager:(UIButton *)btn {
     NSInteger index = btn.tag - 1001;
-    Class nextVCClass = NSClassFromString(self.managersViewController[index]);
-    UIViewController *nextVC = [[nextVCClass alloc] init];
-    [self.navigationController pushViewController:nextVC animated:YES];
+    //判断角色
+    switch (_roleInfo.roleId) {
+        case 1://校长
+            [self xiaozhangManager:index];
+            break;
+        case 2://班主任
+            [self banzhurenManager:index];
+            break;
+        case 3://教师
+            
+            break;
+        case 4://监护人
+            [self jianhurenManager:index];
+            break;
+        case 5://家长
+        case 6://学生
+        default:
+            break;
+    }
 }
 
+#pragma mark - 管理界面的跳转
+- (void)xiaozhangManager:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            XZSchoolInfoViewController *infoVC = [[XZSchoolInfoViewController alloc] init];
+            infoVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:infoVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            XZCourseManageViewController *courseVC = [[XZCourseManageViewController alloc] init];
+            courseVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:courseVC animated:YES];
+        }
+            break;
+        case 2:
+        {
+            XZClassManageViewController *classVC = [[XZClassManageViewController alloc] init];
+            classVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:classVC animated:YES];
+        }
+            break;
+        case 3:
+        {
+            XZBZRManageViewController *bzrVC = [[XZBZRManageViewController alloc] init];
+            bzrVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:bzrVC animated:YES];
+        }
+            break;
+        case 4:
+        {
+            XZTeacherManageViewController *teacherVC = [[XZTeacherManageViewController alloc] init];
+            teacherVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:teacherVC animated:YES];
+        }
+            break;
+        case 5:
+        {
+            XZXinXiangViewController *xinxiangVC = [[XZXinXiangViewController alloc] init];
+            xinxiangVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:xinxiangVC animated:YES];
+        }
+            break;
+        case 6:
+        {
+            XZSchoolQuanXianViewController *quanxianVC = [[XZSchoolQuanXianViewController alloc] init];
+            quanxianVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:quanxianVC animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+- (void)banzhurenManager:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            BZRClassInfoViewController *classInfoVC = [[BZRClassInfoViewController alloc] init];
+            classInfoVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:classInfoVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            BZRCourseManageViewController *courseManageVC = [[BZRCourseManageViewController alloc] init];
+            courseManageVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:courseManageVC animated:YES];
+        }
+            break;
+        case 2:
+        {
+            BZRStudentManageViewController *studentManageVC = [[BZRStudentManageViewController alloc] init];
+            studentManageVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:studentManageVC animated:YES];
+        }
+            break;
+        case 3:
+        {
+            BZRAddStudentViewController *addStudentVC = [[BZRAddStudentViewController alloc] init];
+            addStudentVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:addStudentVC animated:YES];
+        }
+            break;
+        case 4:
+        {
+            BZRQuanXianViewController *bzrQuanxianVC = [[BZRQuanXianViewController alloc] init];
+            bzrQuanxianVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:bzrQuanxianVC animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+
+}
+
+- (void)jianhurenManager:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            JZStudentInfoViewController *studentInfoVC = [[JZStudentInfoViewController alloc] init];
+            studentInfoVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:studentInfoVC animated:YES];
+        }
+            break;
+        case 1:
+        {
+            JZMemberManageViewController *memberVC = [[JZMemberManageViewController alloc] init];
+            memberVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:memberVC animated:YES];
+        }
+            break;
+        case 2:
+        {
+            JZQuanXianViewController *quanxianVC = [[JZQuanXianViewController alloc] init];
+            quanxianVC.roleInfo = self.roleInfo;
+            [self.navigationController pushViewController:quanxianVC animated:YES];
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark - 设置管理button
 - (UIButton *)buttonWithImage:(NSString *)imageName title:(NSString *)title frame:(CGRect)frame {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = frame;
@@ -194,15 +368,5 @@
     return button;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

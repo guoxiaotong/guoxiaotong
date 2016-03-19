@@ -11,7 +11,6 @@
 @implementation WoDeTableViewCell
 
 - (void)awakeFromNib {
-//    self.selectionStyle = UITableViewCellSelectionStyleNone;
     self.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 }
 

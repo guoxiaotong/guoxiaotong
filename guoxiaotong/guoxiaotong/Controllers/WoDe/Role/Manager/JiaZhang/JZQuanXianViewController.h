@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface JZQuanXianViewController : UIViewController
+@interface JZQuanXianViewController : UITableViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

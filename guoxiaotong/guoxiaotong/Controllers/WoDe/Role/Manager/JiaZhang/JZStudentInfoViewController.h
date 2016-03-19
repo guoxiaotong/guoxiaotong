@@ -10,4 +10,6 @@
 
 @interface JZStudentInfoViewController : UIViewController
 
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
+
 @end

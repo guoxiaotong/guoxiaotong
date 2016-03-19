@@ -11,7 +11,7 @@
 #import "Config.h"
 
 @interface HttpClient : NSObject
-
-- (void)get:(NSString *)url requestParams:(id)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**get:所有的网络请求方法*/
+- (void)post:(NSString *)url requestParams:(id)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

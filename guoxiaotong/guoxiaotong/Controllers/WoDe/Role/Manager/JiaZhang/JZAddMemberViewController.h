@@ -10,4 +10,6 @@
 
 @interface JZAddMemberViewController : UIViewController
 
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
+
 @end

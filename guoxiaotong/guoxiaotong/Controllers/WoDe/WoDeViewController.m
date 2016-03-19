@@ -84,7 +84,7 @@
     _headerHeight = 150;
     ImageHeaderView *header = [[ImageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, _headerHeight)];
     header.detailLabel.text = shareInfo.userName;
-    NSString *picUrl = [NSString stringWithFormat:@"%@user/%@", API_ROOT_URL, shareInfo.picPath];
+    NSString *picUrl = [NSString stringWithFormat:@"%@%@", API_ROOT_IMAGE_URL, shareInfo.picPath];
     [header.imageView sd_setImageWithURL:[NSURL URLWithString:picUrl] placeholderImage:[UIImage imageNamed:@"wode_image_placeHolder"]];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick)];
     [header addGestureRecognizer:tap];
@@ -111,24 +111,24 @@
                        @"myList_tongxunlu",
                        @"myList_shoucang",
                        @"myList_renwu",
-                       @"myList_jifen",
-                       @"myList_jinbi",
+//                       @"myList_jifen",
+//                       @"myList_jinbi",
                        @"myList_dongtai"];
     NSArray *titles = @[@"我的资料",
                         @"我的角色",
                         @"我的通讯录",
                         @"我的收藏",
                         @"我的任务",
-                        @"我的积分",
-                        @"我的金币",
+//                        @"我的积分",
+//                        @"我的金币",
                         @"我的动态",];
     NSArray *viewControllersName = @[@"MyProfileViewController",
                                      @"RoleListViewController",
                                      @"MyAddressListViewController",
                                      @"MyCollectionViewController",
                                      @"Nil",
-                                     @"Nil",
-                                     @"Nil",
+//                                     @"Nil",
+//                                     @"Nil",
                                      @"MyTrendsViewController"];
     
     self.myList = @{@"icons": icons, @"titles": titles, @"vcsName": viewControllersName};

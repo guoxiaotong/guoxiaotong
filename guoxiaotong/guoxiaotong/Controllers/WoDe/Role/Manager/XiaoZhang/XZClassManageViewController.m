@@ -7,10 +7,15 @@
 //
 
 #import "XZClassManageViewController.h"
-#import "GroupModel.h"
 #import "SectionHeaderView.h"
+#import "ManagerService.h"
+#import "ClassModel.h"
+#import "GradeModel.h"
+#import "BZRModel.h"
 
-@interface XZClassManageViewController ()<SectionHeaderViewDelegate>
+#import "XZSetBZRViewController.h"
+
+@interface XZClassManageViewController ()
 
 @property (nonatomic, strong)NSMutableArray *dataSource;
 
@@ -24,7 +29,7 @@
 
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit)];
     [self setUI];
-    // Do any additional setup after loading the view.
+    [self loadData];
 }
 
 - (void)edit {
@@ -37,14 +42,26 @@
     
 }
 
+- (void)loadData {
+    __weak typeof (*&self)weakSelf = self;
+    self.dataSource = [NSMutableArray array];
+    ManagerService *service = [[ManagerService alloc] initWithView:self.view];
+    [service getClassList:_roleInfo.schoolId callBack:^(BOOL isSuccess, NSArray *gradeList) {
+        if (isSuccess) {
+            [weakSelf.dataSource addObjectsFromArray:gradeList];
+            [weakSelf.tableView reloadData];
+        }
+    }];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.dataSource.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    GroupModel *group = self.dataSource[section];
-    if (group.isOpen) {
-        return group.members.count;
+    GradeModel *gradeModel = self.dataSource[section];
+    if (gradeModel.isOpen) {
+        return gradeModel.classNum;
     }else {
         return 0;
     }
@@ -52,14 +69,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    GradeModel *gradeModel = self.dataSource[indexPath.section];
+    ClassModel *classModel = gradeModel.classList[indexPath.row];
+    BZRModel *bzrModel = classModel.bzrInfo;
+    cell.textLabel.text = [NSString stringWithFormat:@"%@   %@",classModel.classesName, bzrModel.userName];
     return cell;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    SectionHeaderView *headerview = [SectionHeaderView headerWithTableView:tableView];
-    headerview.delegate = self;
-    GroupModel *groupmodel = self.dataSource[section];
-    headerview.group = groupmodel;
+    __weak typeof (*&self)weakSelf = self;
+    GradeModel *gradeModel = self.dataSource[section];
+    SectionHeaderView *headerview = [[SectionHeaderView alloc] initWithTitle: gradeModel.gradeName isOpen: gradeModel.isOpen];
+    headerview.SectionBlock = ^(NSInteger index, BOOL isOpen) {
+        gradeModel.open = isOpen;
+        [weakSelf.tableView reloadData];
+    };
     return headerview;
 }
 
@@ -71,24 +95,10 @@
     return 0.0001;
 }
 
-#pragma mark - headerDelegate
-- (void)headerViewDidClickHeaderView:(SectionHeaderView *)headerView {
-    [self.tableView reloadData];
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    XZSetBZRViewController *setBZRVC = [[XZSetBZRViewController alloc] init];
+    setBZRVC.roleInfo = self.roleInfo;
+    [self.navigationController pushViewController:setBZRVC animated:true];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -10,4 +10,6 @@
 
 @interface BZRSetTeacherViewController : UIViewController
 
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
+
 @end
