@@ -11,6 +11,7 @@
 #import "UserService.h"
 #import "RetreveViewController.h"
 #import "RegisterViewController.h"
+#import "Tools.h"
 
 @interface LoginViewController ()<UITextFieldDelegate>
 @property (strong, nonatomic) UITextField *userNameTextField;
@@ -43,13 +44,14 @@
 }
 
 - (void)setUI {
-    CGRect imageFrame = CGRectMake((WIDTH-100)/2, 50, 100, 100);
+    CGFloat wid = [Tools getSizeFromImage:@"login_icon"].width;
+    CGFloat hig = [Tools getSizeFromImage:@"login_icon"].height;
+    CGRect imageFrame = CGRectMake((WIDTH - wid)/2, 50, wid, hig);
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:imageFrame];
-    imageV.image = [UIImage imageNamed:@"login_logo"];
+    imageV.image = [UIImage imageNamed:@"login_icon"];
     [self.scrollView addSubview:imageV];
     
     CGRect frame = CGRectMake(10, 200, WIDTH-20, 40);
-    
     
     _userNameBorder = [[UIView alloc] initWithFrame:frame];
     _userNameBorder.backgroundColor = [UIColor whiteColor];

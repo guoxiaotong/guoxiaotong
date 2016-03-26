@@ -26,8 +26,8 @@
         CGRect frame = self.frame;
         frame.size.width = frame.size.height+20;
         UIView *view = [[UIView alloc] initWithFrame:frame];
-        CGFloat wid = [Tools getSizeFromImage:@"search_icon"].width/2;
-        CGFloat hig = [Tools getSizeFromImage:@"search_icon"].height/2;
+        CGFloat wid = [Tools getSizeFromImage:@"search_icon"].width;
+        CGFloat hig = [Tools getSizeFromImage:@"search_icon"].height;
         frame.origin.x = (frame.size.width-wid)/2;
         frame.origin.y = (frame.size.height-hig)/2;
         frame.size.width = wid;
@@ -51,8 +51,8 @@
         CGRect frame = self.frame;
         frame.size.width = frame.size.height+20;
         UIView *view = [[UIView alloc] initWithFrame:frame];
-        CGFloat wid = [Tools getSizeFromImage:@"isshow_off"].width/2;
-        CGFloat hig = [Tools getSizeFromImage:@"isshow_off"].height/2;
+        CGFloat wid = [Tools getSizeFromImage:@"isshow_off"].width;
+        CGFloat hig = [Tools getSizeFromImage:@"isshow_off"].height;
         frame.origin.x = (frame.size.width-wid)/2;
         frame.origin.y = (frame.size.height-hig)/2;
         frame.size.width = wid;

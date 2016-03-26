@@ -12,6 +12,8 @@
 
 + (CGSize)getSizeFromImage:(NSString *)imageName {
     CGSize size = [UIImage imageNamed:imageName].size;
+    size.width = size.width/2;
+    size.height = size.height/2;
     return size;
 }
 
