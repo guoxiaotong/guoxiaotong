@@ -8,10 +8,11 @@
 
 #import "XZSetBZRViewController.h"
 #import "ManagerService.h"
+#import "TextFieldWithButton.h"
 
 @interface XZSetBZRViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
-@property (nonatomic, strong) UITextField *searchTextField;
+@property (nonatomic, strong) TextFieldWithButton *searchTextField;
 @property (nonatomic, strong) NSMutableArray *dataSource;
 @property (nonatomic, strong) UITableView *tableView;
 
@@ -21,14 +22,17 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor lightGrayColor];
+    self.view.backgroundColor = SEAECH_VIEW_BACK_COLOR;
     self.navigationItem.title = @"设置班主任";
     [self setUI];
     [self loadData];
 }
 
 - (void)setUI {
-    _searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, WIDTH-40, 30)];
+    _searchTextField = [[TextFieldWithButton alloc] initSerachButtonWithFrame:CGRectMake(20, 5, WIDTH-40, 30)];
+    _searchTextField.buttonCallBack = ^() {
+        //点击搜索
+    };
     _searchTextField.delegate = self;
     [self.view addSubview:_searchTextField];
     
@@ -81,6 +85,29 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    TeacherModel *teacherInfo = self.dataSource[indexPath.row];
+    [self setManster:teacherInfo.teacherId];
+}
+
+#pragma mark - 设置班主任
+- (void)setManster:(NSString *)teacherId {
+    
+    __weak typeof (*&self)weakSelf = self;
+    ManagerService *service = [[ManagerService alloc] initWithView:self.view];
+    NSDictionary *params = @{@"classId": [NSNumber numberWithInteger: _classInfo.classId], @"tutorId": teacherId};
+    [service setBZR:params callBack:^(BOOL isSuccess) {
+        if (isSuccess) {
+            [weakSelf.navigationController popViewControllerAnimated:true];
+        }
+    }];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [self.view endEditing:YES];
+}
+
+#pragma mark - searchTextfieldDelegate
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
 #warning 此处搜索需要修改
     NSLog(@"range:loc:%ld,---len:%ld", range.location, range.length);

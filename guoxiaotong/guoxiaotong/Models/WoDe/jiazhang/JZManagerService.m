@@ -86,4 +86,55 @@
     }];
 }
 
+- (void)changeJHR:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_manager post:API_CLASS_CHANGE_JHR_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+        if (callBack) {
+            callBack(-1, @"请求失败");
+        }
+    }];
+}
+
+- (void)deleteJZ:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_manager post:API_CLASS_DEL_JIAZHANG_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+        if (callBack) {
+            callBack(-1, @"请求失败");
+        }
+    }];
+}
+
+- (void)addMember:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_manager post:API_CLASS_ADD_JIAZHANG_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+        if (callBack) {
+            callBack(-1, @"请求失败");
+        }
+    }];
+}
+
 @end

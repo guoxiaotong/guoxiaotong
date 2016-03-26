@@ -34,7 +34,6 @@
     headerView.backgroundColor = [UIColor whiteColor];
     
     _imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, WIDTH-40, _headerHeight-60)];
-    _imageV.backgroundColor = [UIColor redColor];
     [headerView addSubview: _imageV];
     
     _headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, CGRectGetMaxY(_imageV.frame)+10, WIDTH-40, 30)];

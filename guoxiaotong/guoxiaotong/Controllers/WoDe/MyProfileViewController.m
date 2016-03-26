@@ -10,21 +10,24 @@
 #import "DatePicker.h"
 #import "UserService.h"
 #import "SingleUserInfo.h"
+#import "CustomView.h"
 
 @interface MyProfileViewController ()<UIScrollViewDelegate, UITextFieldDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextField *nameTextField;
-@property (weak, nonatomic) IBOutlet UITextField *birthTextField;
-@property (weak, nonatomic) IBOutlet UIView *sexBackView;
-@property (weak, nonatomic) IBOutlet UIButton *manButton;
-@property (weak, nonatomic) IBOutlet UIButton *womanButton;
-@property (weak, nonatomic) IBOutlet UILabel *sexLabel;
-@property (weak, nonatomic) IBOutlet UITextField *phoneTextField;
-@property (weak, nonatomic) IBOutlet UITextField *QQTextField;
-@property (weak, nonatomic) IBOutlet UITextField *weChatTextField;
-@property (weak, nonatomic) IBOutlet UITextField *emailTextField;
-@property (weak, nonatomic) IBOutlet UIButton *submitButton;
-@property (assign, nonatomic) BOOL isMan;
+@property (strong, nonatomic) UITextField *nameTextField;
+@property (strong, nonatomic) UITextField *birthTextField;
+@property (strong, nonatomic) UIView *sexBackView;
+@property (strong, nonatomic) UIButton *manButton;
+@property (strong, nonatomic) UIButton *womanButton;
+@property (strong, nonatomic) UILabel *sexLabel;
+@property (strong, nonatomic) UITextField *phoneTextField;
+@property (strong, nonatomic) UITextField *QQTextField;
+@property (strong, nonatomic) UITextField *weChatTextField;
+@property (strong, nonatomic) UITextField *emailTextField;
+@property (strong, nonatomic) UIButton *submitButton;
+@property (strong, nonatomic) UIFont *titleFont;
+@property (strong, nonatomic) UIFont *textFieldFont;
+@property (copy, nonatomic) NSString *gender;
 
 @end
 
@@ -41,6 +44,119 @@
 
 - (void)setUI {
     //代码布局
+    _titleFont = [UIFont systemFontOfSize:16.0];
+    _textFieldFont = [UIFont systemFontOfSize:14.0];
+    [self viewWithTitle:@"姓名" index:0];
+    [self viewWithTitle:@"生日" index:1];
+    [self viewWithTitle:@"性别" index:2];
+    [self viewWithTitle:@"手机" index:3];
+    [self viewWithTitle:@"QQ" index:4];
+    [self viewWithTitle:@"微信" index:5];
+    [self viewWithTitle:@"邮箱" index:6];
+    
+    _submitButton = [CustomView buttonWithTitle:@"提交" width:150 orginY:400];
+    [_submitButton addTarget:self action:@selector(submitClick) forControlEvents:UIControlEventTouchUpInside];
+    self.submitButton.hidden = YES;
+    [self.scrollView addSubview:_submitButton];
+    if (self.submitButton.frame.origin.y+50 <HEIGHT) {
+        self.scrollView.contentSize = CGSizeMake(WIDTH, HEIGHT);
+    }
+}
+
+- (void)viewWithTitle:(NSString *)title index:(NSInteger)index {
+    CGFloat width = 60;
+    CGRect frame = CGRectMake(0, index*50, WIDTH, 50);
+    UIView *view = [[UIView alloc] initWithFrame:frame];
+    view.backgroundColor = [UIColor whiteColor];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, width, 30)];
+    titleLabel.font = _titleFont;
+    titleLabel.text = title;
+    [view addSubview:titleLabel];
+    
+    if (index == 2) {
+        _sexLabel = [[UILabel alloc] initWithFrame:CGRectMake(width+20, 10, 100, 30)];
+        _sexLabel.font = _textFieldFont;
+        [view addSubview:_sexLabel];
+        
+        _sexBackView = [[UIView alloc] initWithFrame:CGRectMake(width+20, 10, WIDTH-120, 30)];
+        
+        _manButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _manButton.frame = CGRectMake(0, 0, 100, 30);
+        _manButton.backgroundColor = [UIColor clearColor];
+        [_manButton setImage:[UIImage imageNamed:@"button_check_no"] forState:UIControlStateNormal];
+        [_manButton setImage:[UIImage imageNamed:@"button_check_yes"] forState:UIControlStateHighlighted];
+        //button图片的偏移量，距上左下右分别(5, 20, 5, 60)像素点
+        _manButton.imageEdgeInsets = UIEdgeInsetsMake(5, 20, 5, 60);
+        [_manButton setTitle:@"男" forState:UIControlStateNormal];
+        //button标题的偏移量，这个偏移量是相对于图片的
+        _manButton.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
+        [_manButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _manButton.titleLabel.font = _textFieldFont;
+        [_manButton addTarget:self action:@selector(manClick) forControlEvents:UIControlEventTouchUpInside];
+        [_sexBackView addSubview:_manButton];
+        
+        _womanButton = [UIButton buttonWithType:UIButtonTypeCustom];
+        _womanButton.frame = CGRectMake(100, 0, 100, 30);
+        _womanButton.backgroundColor = [UIColor clearColor];
+        [_womanButton setImage:[UIImage imageNamed:@"button_check_no"] forState:UIControlStateNormal];
+        [_womanButton setImage:[UIImage imageNamed:@"button_check_yes"] forState:UIControlStateHighlighted];
+        //button图片的偏移量，距上左下右分别(5, 20, 5, 60)像素点
+        _womanButton.imageEdgeInsets = UIEdgeInsetsMake(5, 20, 5, 60);
+        [_womanButton setTitle:@"女" forState:UIControlStateNormal];
+        //button标题的偏移量，这个偏移量是相对于图片的
+        _womanButton.titleEdgeInsets = UIEdgeInsetsMake(0, -20, 0, 0);
+        [_womanButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        _womanButton.titleLabel.font = _textFieldFont;
+        [_womanButton addTarget:self action:@selector(womanClick) forControlEvents:UIControlEventTouchUpInside];
+        [_sexBackView addSubview:_womanButton];
+        
+        [view addSubview:_sexBackView];
+        _sexBackView.hidden = YES;
+        
+    }else {
+        UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(width+20, 5, WIDTH-width-40, 40)];
+        textField.borderStyle = UITextBorderStyleNone;
+        textField.font = _textFieldFont;
+        textField.delegate = self;
+        textField.enabled = NO;
+        [view addSubview:textField];
+        switch (index) {
+            case 0:
+                _nameTextField = textField;
+                break;
+            case 1:
+                _birthTextField = textField;
+                break;
+            case 2:
+                break;
+            case 3:
+                textField.keyboardType = UIKeyboardTypeNumberPad;
+                _phoneTextField = textField;
+                break;
+            case 4:
+                textField.keyboardType = UIKeyboardTypeNumberPad;
+                _QQTextField = textField;
+                break;
+            case 5:
+                textField.keyboardType = UIKeyboardTypeNumbersAndPunctuation;
+                _weChatTextField = textField;
+                break;
+            case 6:
+                textField.keyboardType = UIKeyboardTypeEmailAddress;
+                _emailTextField = textField;
+                break;
+            default:
+                break;
+        }
+    }
+    
+    UILabel *border = [[UILabel alloc]initWithFrame:CGRectMake(0, 49.5, WIDTH, 0.5)];
+    border.backgroundColor = [UIColor lightGrayColor];
+    [view addSubview:border];
+    
+    [self.scrollView addSubview:view];
+    
 }
 
 - (void)loadData {
@@ -50,13 +166,12 @@
         if (isSuccess) {
             weakSelf.nameTextField.text = userInfo.userName;
             weakSelf.birthTextField.text = userInfo.birthday;
-            if (userInfo.gender == 0) {
+            if ([userInfo.gender isEqualToString:@"0"]) {
                 weakSelf.sexLabel.text = @"女";
-                weakSelf.isMan = NO;
             }else {
                 weakSelf.sexLabel.text = @"男";
-                weakSelf.isMan = YES;
             }
+            weakSelf.gender = userInfo.gender;
             weakSelf.phoneTextField.text = userInfo.phone;
             weakSelf.QQTextField.text = userInfo.qq;
             weakSelf.weChatTextField.text = userInfo.weChat;
@@ -90,31 +205,25 @@
 
 
 #pragma mark - IBAction
-- (IBAction)manClick:(id)sender {
-    [self.manButton setBackgroundImage:[UIImage imageNamed:@"button_check_yes"] forState:UIControlStateNormal];
-    [self.womanButton setBackgroundImage:[UIImage imageNamed:@"button_check_no"] forState:UIControlStateNormal];
-    self.isMan = YES;
+- (void)manClick {
+    [self.manButton setImage:[UIImage imageNamed:@"button_check_yes"] forState:UIControlStateNormal];
+    [self.womanButton setImage:[UIImage imageNamed:@"button_check_no"] forState:UIControlStateNormal];
+    self.gender = @"1";
 }
-- (IBAction)womanClick:(id)sender {
-    [self.manButton setBackgroundImage:[UIImage imageNamed:@"button_check_no"] forState:UIControlStateNormal];
-    [self.womanButton setBackgroundImage:[UIImage imageNamed:@"button_check_yes"] forState:UIControlStateNormal];
-    self.isMan = NO;
+- (void)womanClick {
+    [self.manButton setImage:[UIImage imageNamed:@"button_check_no"] forState:UIControlStateNormal];
+    [self.womanButton setImage:[UIImage imageNamed:@"button_check_yes"] forState:UIControlStateNormal];
+    self.gender = @"0";
 }
 
-- (IBAction)submitClick:(id)sender {
+- (void)submitClick {
     //修改用户信息
     SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
     UserService *service = [[UserService alloc] initWithView:self.view];
-    NSString *gender;
-    if (self.isMan) {
-        gender = @"1";
-    }else {
-        gender = @"0";
-    }
-    NSString *dataFormatter = [NSString stringWithFormat:@"userId=%@&gender=%@&phone=%@&birthday=%@&qq=%@&wechat=%@&email=%@", shareInfo.userId, gender, self.phoneTextField.text, self.birthTextField.text, self.QQTextField.text, self.weChatTextField.text, self.emailTextField.text];
     __weak typeof (*&self)weakSelf = self;
     
-    [service editProfileWithData:dataFormatter callBack:^(BOOL isSuccess) {
+    NSDictionary *params = @{@"userId": shareInfo.userId, @"gender": _gender, @"phone": _phoneTextField.text, @"birthday": _birthTextField.text, @"qq": _QQTextField.text, @"wechat": _weChatTextField.text, @"email": _emailTextField.text};
+    [service editProfileWithParams:params callBack:^(BOOL isSuccess) {
         if (isSuccess) {
             [weakSelf.navigationController popViewControllerAnimated:YES];
         }

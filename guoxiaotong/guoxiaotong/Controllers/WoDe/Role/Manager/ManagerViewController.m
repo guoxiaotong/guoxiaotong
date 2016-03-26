@@ -7,7 +7,6 @@
 //
 
 #import "ManagerViewController.h"
-#import "ImageHeaderView.h"
 //xiaozhang
 #import "XZSchoolInfoViewController.h"
 #import "XZCourseManageViewController.h"
@@ -29,8 +28,6 @@
 
 
 @interface ManagerViewController ()
-@property (nonatomic, assign)CGFloat headerHeight;
-@property (nonatomic, strong)UIImageView *navBarHairlineImageView;
 @property (nonatomic, strong)NSArray *managersImage;
 @property (nonatomic, strong)NSArray *managersTitle;
 @property (nonatomic, strong)NSArray *managersViewController;
@@ -42,29 +39,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self loadData];
-    self.navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
     [self setUI];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    self.navBarHairlineImageView.hidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.navBarHairlineImageView.hidden = NO;
-}
-
-- (UIImageView *)findHairlineImageViewUnder: (UIView *)view {
-    if([view isKindOfClass:UIImageView.class] && view.bounds.size.height<=1.0) {
-        return (UIImageView *)view;
-    }
-    for(UIView *subview in view.subviews) {
-        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
-        if(imageView) {
-            return imageView;
-        }
-    }
-    return nil;
 }
 
 - (void)xiaozhangSet {
@@ -141,41 +116,38 @@
 }
 
 - (void)setHeaderView {
-    _headerHeight = 150;
-    ImageHeaderView *header = [[ImageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, _headerHeight)];
     switch (_roleInfo.roleId) {
         case 1://校长
         {
-            header.imageView.image = [UIImage imageNamed:@"manager_role_xiaozhang_pic"];
-            header.detailLabel.text = _roleInfo.schoolName;
+            self.header.imageView.image = [UIImage imageNamed:@"manager_role_xiaozhang_pic"];
+            self.header.detailLabel.text = _roleInfo.schoolName;
         }break;
         case 2://班主任
         {
-            header.imageView.image = [UIImage imageNamed:@"manager_role_banzhuren_pic"];
-            header.detailLabel.text = _roleInfo.className;
+            self.header.imageView.image = [UIImage imageNamed:@"manager_role_banzhuren_pic"];
+            self.header.detailLabel.text = _roleInfo.className;
         }break;
         case 3://教师
             break;
         case 4://监护人
         {
-            header.imageView.image = [UIImage imageNamed:@"manager_role_teacher_pic"];
-            header.detailLabel.text = _roleInfo.schoolName;
+            self.header.imageView.image = [UIImage imageNamed:@"manager_role_teacher_pic"];
+            self.header.detailLabel.text = _roleInfo.schoolName;
         }break;
         case 5://家长
         case 6://学生
         default:
             break;
     }
-    [self.view addSubview:header];
 }
 
 - (void)setManagerList {
-    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, WIDTH+2)];
-    CGFloat width = (WIDTH - 2)/3;
+    UIView *backView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, WIDTH+1)];
+    CGFloat width = (WIDTH - 1)/3;
     backView.backgroundColor = [UIColor lightGrayColor];
     for (NSInteger index = 0; index < 9; index++) {
         UIButton *managerButton;
-        CGRect frame = CGRectMake((index%3)*(width+1), index/3 * (width + 1)+1, width, width);
+        CGRect frame = CGRectMake((index%3)*(width+0.5), index/3 * (width + 0.5)+0.5, width, width);
         if (self.managersImage.count > index) {
             managerButton = [self buttonWithImage:self.managersImage[index] title:self.managersTitle[index] frame:frame];
             managerButton.tag = 1001+index;
@@ -363,6 +335,7 @@
     label.textColor = [UIColor blackColor];
     label.textAlignment = NSTextAlignmentCenter;
     label.text = title;
+    label.font = [UIFont systemFontOfSize:15.0];
     [button addSubview:label];
     
     return button;

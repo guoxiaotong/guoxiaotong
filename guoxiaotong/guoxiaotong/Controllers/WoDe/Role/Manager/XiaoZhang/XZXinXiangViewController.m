@@ -23,6 +23,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"校长信箱";
+    _dataSource = [NSMutableArray array];
+
     [self setUI];
     [self loadData];
 }
@@ -34,11 +36,12 @@
 
 - (void)loadData {
     __weak typeof (*&self)weakSelf = self;
-    self.dataSource = [NSMutableArray array];
     SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
     ManagerService *service = [[ManagerService alloc] initWithView:self.view];
     [service getEmailListWithUserId:shareInfo.userId page:1 callBack:^(BOOL isSuccess, NSArray *emailList) {
         if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSource addObjectsFromArray:emailList];
             [weakSelf.tableView reloadData];
         }

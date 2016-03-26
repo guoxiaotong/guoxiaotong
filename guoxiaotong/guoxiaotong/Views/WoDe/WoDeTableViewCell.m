@@ -21,7 +21,6 @@
 - (void)setImage:(NSString *)imageName text:(NSString *)text {
     self.imageV.image = [UIImage imageNamed:imageName];
     self.titleLabel.text = text;
-    
 }
 
 @end

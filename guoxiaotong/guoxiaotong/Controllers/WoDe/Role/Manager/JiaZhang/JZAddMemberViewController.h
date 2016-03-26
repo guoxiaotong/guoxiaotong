@@ -6,9 +6,9 @@
 //  Copyright © 2016年 StenpChou. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HeaderViewController.h"
 
-@interface JZAddMemberViewController : UIViewController
+@interface JZAddMemberViewController : HeaderViewController
 
 @property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 

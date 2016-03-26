@@ -14,6 +14,9 @@ extern const NSString *API_ROOT_URL;
 /**图片及其他根URL*/
 static NSString * const API_ROOT_IMAGE_URL = @"http://www.ketangzhiwai.com/";
 
+static NSString * const API_DO_TASK_URL = @"task/doTask.page";
+static NSString * const API_DID_TASKS_URL = @"task/myTask.page";
+
 /**验证码*/
 static NSString * const API_GETCODE_URL = @"getCode.page?";
 static NSString * const API_CHECKCODE_URL = @"checkCode.page?";
@@ -25,14 +28,18 @@ static NSString * const API_EDIT_PWD_URL = @"user/updatePassword.page?";
 //获得及修改资料
 static NSString * const API_PROFILE_URL = @"user/userinfo.page?";
 static NSString * const API_EDIT_PROFILE_URL = @"user/editInfo.page?";
-//修改头像
+/**上传图片，修改图像*/
 static NSString * const API_UPDATE_ICON_URL = @"user/upload.page?";
 //获取角色列表
 static NSString * const API_ROLELIST_URL = @"user/userinfo.page?";
+static NSString * const API_EDIT_ROLENAME_URL = @"user/editRoleInfo.page";
 //地址接口
 static NSString * const API_BASIC_PROVINCE_URL = @"basic/province.page";
 static NSString * const API_BASIC_CITY_URL = @"basic/city.page?";
 static NSString * const API_BASIC_COUNTY_URL = @"basic/county.page?";
+
+static NSString * const API_COLLECT_TREND_URL = @"dynamic/dynamic.page";
+static NSString * const API_COLLECT_IMAGE_URL = @"dynamic/collectList.page";
 
 static NSString * const API_CONTACTLIST_URL = @"dynamic/contact.page?";
 /**校长信箱接口（参数：userId，page）*/
@@ -78,6 +85,11 @@ static NSString * const API_ROLE_PERMISSION_URL = @"role/rolePermission.page?";
 static NSString * const API_CLASS_DEL_JIANHUREN_URL = @"classes/delGuardian.page?";
 static NSString * const API_CLASS_GET_QUANXIAN_URL = @"classes/oldTutorSetting.page?";
 static NSString * const API_CLASS_SET_QUANXIAN_URL = @"classes/tutorSetting.page?";
-
+static NSString * const API_CLASS_SET_TEACHER_URL = @"classes/addTeacher.page";
+static NSString * const API_CLASS_ADD_JIANHUREN_URL = @"classes/addGuardian.page";
+static NSString * const API_CLASS_ADD_STUDENT_URL = @"classes/addStudent.page";
+static NSString * const API_CLASS_ADD_JIAZHANG_URL = @"classes/addManager.page";
+static NSString * const API_CLASS_CHANGE_JHR_URL = @"classes/changeGuardian.page";
+static NSString * const API_CLASS_DEL_JIAZHANG_URL = @"classes /deleteManager.page";
 
 #endif /* Config_h */

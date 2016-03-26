@@ -22,11 +22,17 @@
 
 @implementation XZBZRManageViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"班主任管理";
+    _dataSource = [NSMutableArray array];
+
     [self setUI];
-    [self loadData];
 }
 
 - (void)setUI {
@@ -37,10 +43,11 @@
 
 - (void)loadData {
     __weak typeof (*&self)weakSelf = self;
-    self.dataSource = [NSMutableArray array];
     ManagerService *service = [[ManagerService alloc] initWithView:self.view];
     [service getClassList:_roleInfo.schoolId callBack:^(BOOL isSuccess, NSArray *gradeList) {
         if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSource addObjectsFromArray:gradeList];
             [weakSelf.tableView reloadData];
         }
@@ -62,10 +69,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    cell.backgroundColor = SEAECH_VIEW_BACK_COLOR;
     GradeModel *gradeModel = self.dataSource[indexPath.section];
     ClassModel *classModel = gradeModel.classList[indexPath.row];
     BZRModel *bzrModel = classModel.bzrInfo;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@   %@",classModel.classesName, bzrModel.userName];
+    cell.backgroundColor = SEAECH_VIEW_BACK_COLOR;
+    if (bzrModel.userName) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@     %@",classModel.classesName, bzrModel.userName];
+    }else {
+        cell.textLabel.text = classModel.classesName;
+    }
     return cell;
 }
 
@@ -91,6 +104,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     XZSetBZRViewController *setBZRVC = [[XZSetBZRViewController alloc] init];
     setBZRVC.roleInfo = self.roleInfo;
+    GradeModel *grade = self.dataSource[indexPath.section];
+    ClassModel *classInfo = grade.classList[indexPath.row];
+    setBZRVC.classInfo = classInfo;
     [self.navigationController pushViewController:setBZRVC animated:true];
 }
 

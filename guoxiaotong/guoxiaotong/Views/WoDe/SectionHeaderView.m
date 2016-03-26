@@ -26,7 +26,7 @@
         _sectionButton.backgroundColor = [UIColor whiteColor];
         [_sectionButton addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
         
-        _img = [[UIImageView alloc] initWithFrame:CGRectMake(10, _sectionButton.center.y-6, 22, 12)];
+        _img = [[UIImageView alloc] initWithFrame:CGRectMake(10, _sectionButton.center.y-10, 20, 20)];
         if (_open) {
             _img.image = [UIImage imageNamed:@"section_opened"];
         }else {

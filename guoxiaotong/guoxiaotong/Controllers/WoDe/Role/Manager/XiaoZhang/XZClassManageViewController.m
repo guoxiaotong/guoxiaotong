@@ -14,6 +14,7 @@
 #import "BZRModel.h"
 
 #import "XZSetBZRViewController.h"
+#import "XZEditClassViewController.h"
 
 @interface XZClassManageViewController ()
 
@@ -23,17 +24,26 @@
 
 @implementation XZClassManageViewController
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    self.navigationItem.title = @"班级管理";
-
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit)];
-    [self setUI];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     [self loadData];
 }
 
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    self.navigationItem.title = @"班级管理";
+    _dataSource = [NSMutableArray array];
+
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"编辑" style:UIBarButtonItemStylePlain target:self action:@selector(edit)];
+    [self setUI];
+}
+
 - (void)edit {
-    
+    XZEditClassViewController *editVC = [[XZEditClassViewController alloc] init];
+#warning 传入参数
+    editVC.roleInfo = self.roleInfo;
+    editVC.gradeList = self.dataSource;
+    [self.navigationController pushViewController:editVC animated:YES];
 }
 
 - (void)setUI {
@@ -44,10 +54,11 @@
 
 - (void)loadData {
     __weak typeof (*&self)weakSelf = self;
-    self.dataSource = [NSMutableArray array];
     ManagerService *service = [[ManagerService alloc] initWithView:self.view];
     [service getClassList:_roleInfo.schoolId callBack:^(BOOL isSuccess, NSArray *gradeList) {
         if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSource addObjectsFromArray:gradeList];
             [weakSelf.tableView reloadData];
         }
@@ -72,7 +83,12 @@
     GradeModel *gradeModel = self.dataSource[indexPath.section];
     ClassModel *classModel = gradeModel.classList[indexPath.row];
     BZRModel *bzrModel = classModel.bzrInfo;
-    cell.textLabel.text = [NSString stringWithFormat:@"%@   %@",classModel.classesName, bzrModel.userName];
+    cell.backgroundColor = SEAECH_VIEW_BACK_COLOR;
+    if (bzrModel.userName) {
+        cell.textLabel.text = [NSString stringWithFormat:@"%@     %@",classModel.classesName, bzrModel.userName];
+    }else {
+        cell.textLabel.text = classModel.classesName;
+    }
     return cell;
 }
 
@@ -98,6 +114,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     XZSetBZRViewController *setBZRVC = [[XZSetBZRViewController alloc] init];
     setBZRVC.roleInfo = self.roleInfo;
+    GradeModel *grade = self.dataSource[indexPath.section];
+    ClassModel *classInfo = grade.classList[indexPath.row];
+    setBZRVC.classInfo = classInfo;
     [self.navigationController pushViewController:setBZRVC animated:true];
 }
 

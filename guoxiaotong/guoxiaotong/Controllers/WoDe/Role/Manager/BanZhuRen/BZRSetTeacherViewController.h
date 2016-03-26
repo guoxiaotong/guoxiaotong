@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BZRCourseModel.h"
 
 @interface BZRSetTeacherViewController : UIViewController
 
 @property (nonatomic, strong) UserRoleInfoModel *roleInfo;
+@property (nonatomic, strong) BZRCourseModel *courseInfo;
 
 @end

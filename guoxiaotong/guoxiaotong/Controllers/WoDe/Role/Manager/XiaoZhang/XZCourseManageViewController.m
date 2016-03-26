@@ -29,6 +29,7 @@
     [super viewDidLoad];
     self.navigationItem.title = @"课程管理";
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addCourse)];
+    _dataSource = [NSMutableArray array];
     [self setUI];
 }
 
@@ -39,10 +40,11 @@
 
 - (void)loadData {
     __weak typeof (*&self)weakSelf = self;
-    self.dataSource = [NSMutableArray array];
     ManagerService *service = [[ManagerService alloc] initWithView:self.view];
     [service getCourseList:_roleInfo.schoolId page:1 callBack:^(BOOL isSuccess, NSArray *courseList) {
         if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSource addObjectsFromArray:courseList];
             [weakSelf.tableView reloadData];
         }

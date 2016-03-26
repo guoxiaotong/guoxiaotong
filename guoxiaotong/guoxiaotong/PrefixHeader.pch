@@ -20,7 +20,8 @@
 #define HEIGHT [UIScreen mainScreen].bounds.size.height
 
 #define DEFAULT_BACKGROUND_COLOR [UIColor whiteColor]
-#define DEFAULT_NAVIGATIONBAR_COLOR [UIColor colorWithRed:213/225.0 green:39/225.0 blue:49/225.0 alpha:1.0]
+#define DEFAULT_NAVIGATIONBAR_COLOR [UIColor colorWithRed:223.0f/225.0 green:62.0f/225.0 blue:63.0f/225.0 alpha:1.0]
+#define SEAECH_VIEW_BACK_COLOR [UIColor colorWithRed:200/225.0 green:200/225.0 blue:200/225.0 alpha:1.0]
 
 
 //大部分要用到的头文件
@@ -35,6 +36,6 @@
 //字体，字体颜色
 #define TABLE_TITLE_FONT [UIFont systemFontOfSize:14.0]
 #define TABLE_SUBTITLE_FONT [UIFont systemFontOfSize:12.0]
-
+#define BUTTON_TEXTCOLOR_NORMAL [UIColor colorWithRed:100/225.0 green:56/225.0 blue:32/225.0 alpha:1.0]
 
 

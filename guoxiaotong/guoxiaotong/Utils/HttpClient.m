@@ -19,4 +19,19 @@
     [manager POST:requestUrl parameters:parameters success:success failure:failure];
 }
 
+- (void)post:(NSString *)url requestParams:(id)parameters constructingBodyWithBlock:(void (^)(id<AFMultipartFormData>))block success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain", nil];
+    NSString *requestUrl = [NSString stringWithFormat:@"%@%@", API_ROOT_URL, url];
+    [manager POST:requestUrl parameters:parameters constructingBodyWithBlock:block success:success failure:failure ];
+}
+
+- (void)postSingleUrl:(NSString *)url requestParams:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure {
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer.acceptableContentTypes = [NSSet setWithObjects:@"application/json", @"text/html", @"text/json", @"text/javascript", @"text/plain", nil];
+    [manager POST:url parameters:parameters success:success failure:failure ];
+}
+
 @end

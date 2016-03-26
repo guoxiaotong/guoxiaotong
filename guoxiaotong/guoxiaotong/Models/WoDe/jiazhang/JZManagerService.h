@@ -21,4 +21,13 @@
 /**家长 设置权限（classId，userId，设置）*/
 - (void)setPermission:(NSDictionary *)params callBack:(void (^)(BOOL isSuccess))callBack;
 
+/**设置监护人*/
+- (void)changeJHR:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+
+/**删除家长*/
+- (void)deleteJZ:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+
+/**添加家庭成员*/
+- (void)addMember:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+
 @end

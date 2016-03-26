@@ -7,11 +7,8 @@
 //
 
 #import "JZStudentInfoViewController.h"
-#import "ImageHeaderView.h"
 
 @interface JZStudentInfoViewController ()
-
-@property (nonatomic, strong) UIImageView *navBarHairlineImageView;
 
 @end
 
@@ -19,40 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"学生信息";
     [self setUI];
     [self loadData];
 }
 
-#pragma mark - 设置导航栏下分割线在本页面不显示
-- (void)viewWillAppear:(BOOL)animated {
-    self.navBarHairlineImageView.hidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.navBarHairlineImageView.hidden = NO;
-}
-
-- (UIImageView *)findHairlineImageViewUnder: (UIView *)view {
-    if([view isKindOfClass:UIImageView.class] && view.bounds.size.height<=1.0) {
-        return (UIImageView *)view;
-    }
-    for(UIView *subview in view.subviews) {
-        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
-        if(imageView) {
-            return imageView;
-        }
-    }
-    return nil;
-}
 
 - (void)setUI {
-    ImageHeaderView *header = [[ImageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 150)];
-    header.imageView.image = [UIImage imageNamed:@"manager_role_student_pic"];
-    header.detailLabel.text = _roleInfo.schoolName;
-    [self.view addSubview:header];
+    self.header.imageView.image = [UIImage imageNamed:@"manager_role_student_pic"];
+    self.header.detailLabel.text = _roleInfo.schoolName;
     [self cellWithTitle:@"姓名：" detail:_roleInfo.studentName index:0];
     [self cellWithTitle:@"班级：" detail:_roleInfo.className index:1];
     

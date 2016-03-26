@@ -9,6 +9,8 @@
 #import "BZRStudentManageViewController.h"
 #import "BZRManagerService.h"
 #import "BZRJianhurenModel.h"
+#import "BZRAddJianhurenViewController.h"
+#import "BZRStudentTableViewCell.h"
 
 @interface BZRStudentManageViewController ()<UIAlertViewDelegate>
 
@@ -19,29 +21,36 @@
 
 @implementation BZRStudentManageViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self loadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"学生管理";
+    _dataSource = [NSMutableArray array];
+
     [self setUI];
-    [self loadData];
 }
 
 - (void)setUI {
     UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
     [self.tableView addGestureRecognizer:longPress];
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[BZRStudentTableViewCell class] forCellReuseIdentifier:@"StudentCell"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
 - (void)loadData {
-    _dataSource = [NSMutableArray array];
     BZRManagerService *service = [[BZRManagerService alloc] initWithView:self.view];
     SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
     NSDictionary *params = @{@"classId": _roleInfo.classId, @"userId": shareInfo.userId};
     __weak typeof (*&self)weakSelf = self;
     [service getStudentList:params callBack:^(BOOL isSuccess, NSArray *studentList) {
         if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSource addObjectsFromArray:studentList];
             [weakSelf.tableView reloadData];
         }
@@ -53,15 +62,23 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
+    BZRStudentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"StudentCell"];
     BZRJianhurenModel *jianhurenModel = self.dataSource[indexPath.row];
-    cell.textLabel.text = jianhurenModel.studentName;
+    [cell setUIWith:jianhurenModel];
     
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 #warning 判断有没有监护人
+    BZRJianhurenModel *jianhuren = self.dataSource[indexPath.row];
+    if (jianhuren.parentName) {
+        [self performSelector:@selector(deselect) withObject:nil afterDelay:0.1f];
+    }else {
+        BZRAddJianhurenViewController *addJHR = [[BZRAddJianhurenViewController alloc] init];
+        addJHR.jianhurenInfo = jianhuren;
+        [self.navigationController pushViewController:addJHR animated:YES];
+    }
 
 }
 
@@ -71,10 +88,12 @@
         NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
         if(indexPath) {
             BZRJianhurenModel *jianhurenModel = self.dataSource[indexPath.row];
-            _index = indexPath.row;
+            if (jianhurenModel.parentName) {
+                _index = indexPath.row;
 #warning 判断有没有监护人
-//            有
-            [self showAlert:jianhurenModel.parentName];
+                //            有
+                [self showAlert:jianhurenModel.parentName];
+            }
         }
     }
 }
@@ -108,6 +127,8 @@
     }];
 }
 
-
+- (void)deselect {
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
 
 @end

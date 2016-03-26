@@ -53,13 +53,13 @@
         
         _picker = [[UIDatePicker alloc] initWithFrame:CGRectMake(0, 60, WIDTH, 216)];
         _picker.datePickerMode = UIDatePickerModeDate;
-        if (dateString) {
+        if (!dateString || [dateString isEqualToString:@""]) {
+            _picker.date = [NSDate date];
+        }else {
             NSDateFormatter *dateformatter = [[NSDateFormatter alloc] init];
             //设置格式
             dateformatter.dateFormat = @"yyyy-MM-dd";
             _picker.date = [dateformatter dateFromString:dateString];
-        }else {
-            _picker.date = [NSDate date];
         }
         [_backView addSubview:_picker];
         [self show];

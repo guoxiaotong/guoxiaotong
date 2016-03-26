@@ -9,6 +9,8 @@
 #import "BZRCourseManageViewController.h"
 #import "BZRCourseModel.h"
 #import "BZRManagerService.h"
+#import "BZRSetTeacherViewController.h"
+#import "BZRCourseTableViewCell.h"
 
 @interface BZRCourseManageViewController ()
 
@@ -27,6 +29,8 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"课程管理";
+    _dataSource = [NSMutableArray array];
+
     [self setUI];
 }
 
@@ -40,15 +44,16 @@
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
+    [self.tableView registerClass:[BZRCourseTableViewCell class] forCellReuseIdentifier:@"CourseCell"];
 }
 
 - (void)loadData {
-    _dataSource = [NSMutableArray array];
     __weak typeof (*&self)weakSelf = self;
     BZRManagerService *service = [[BZRManagerService alloc] initWithView:self.view];
     [service getCourseList:_roleInfo.classId page:1 callBack:^(BOOL isSuccess, NSArray *courseList) {
         if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSource addObjectsFromArray:courseList];
             [weakSelf.tableView reloadData];
         }
@@ -64,15 +69,18 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
-    BZRCourseModel *coursrModel = self.dataSource[indexPath.row];
-    cell.textLabel.text = coursrModel.courseName;
+    BZRCourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CourseCell"];
+    BZRCourseModel *coursreModel = self.dataSource[indexPath.row];
+    [cell setUIWith:coursreModel];
     return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //设置老师
-    
+    BZRSetTeacherViewController *setTeacher = [[BZRSetTeacherViewController alloc] init];
+    setTeacher.roleInfo = self.roleInfo;
+    setTeacher.courseInfo = self.dataSource[indexPath.row];
+    [self.navigationController pushViewController:setTeacher animated:YES];
 }
 
 @end

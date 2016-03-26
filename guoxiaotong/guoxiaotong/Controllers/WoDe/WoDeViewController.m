@@ -8,72 +8,72 @@
 
 #import "WoDeViewController.h"
 #import "WoDeTableViewCell.h"
-#import "SettingViewController.h"
-#import "SingleUserInfo.h"
-#import "Config.h"
 #import <UIImageView+WebCache.h>
-#import "LoadingView.h"
-#import "ImageHeaderView.h"
+
+#import "SettingViewController.h"
+#import "MyProfileViewController.h"
+#import "RoleListViewController.h"
+#import "MyAddressListViewController.h"
+#import "MyCollectionViewController.h"
+#import "MyIntergrationViewController.h"
+#import "MyTrendsViewController.h"
+#import "MyAppsViewController.h"
+
+#import "BasicService.h"
+#import "UserService.h"
 
 @interface WoDeViewController ()<UITableViewDataSource, UITableViewDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSDictionary *myList;
-@property (nonatomic, weak) UIImageView *imageView;
-@property (nonatomic, weak) UILabel *nameLabel;
-@property (nonatomic, assign) CGFloat headerHeight;
-@property (nonatomic, strong) UIImageView *navBarHairlineImageView;
+@property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, strong) UIActionSheet *sheet;
 @property (nonatomic, strong) UIImagePickerController *imagePicker ;
+@property (nonatomic, strong) UIFont *font;
 
 @end
 
 @implementation WoDeViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    if (!self.header.detailLabel.text) {
+        SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
+        self.header.detailLabel.text = shareInfo.userName;
+    }
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
     [self setUpUI];
-    [self setUpDataSourse];
 }
 
-#pragma mark - 设置导航栏下分割线在本页面不显示
-- (void)viewWillAppear:(BOOL)animated {
-    self.navBarHairlineImageView.hidden = YES;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.navBarHairlineImageView.hidden = NO;
-}
-
-- (UIImageView *)findHairlineImageViewUnder: (UIView *)view {
-    if([view isKindOfClass:UIImageView.class] && view.bounds.size.height<=1.0) {
-        return (UIImageView *)view;
-    }
-    for(UIView *subview in view.subviews) {
-        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
-        if(imageView) {
-            return imageView;
-        }
-    }
-    return nil;
-}
-
-- (UIImagePickerController *)imagePicker {
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
     if (!_imagePicker) {
         _imagePicker = [[UIImagePickerController alloc] init];
         _imagePicker.delegate = self;
     }
-    return _imagePicker;
 }
+
+//- (UIImagePickerController *)imagePicker {
+//    if (!_imagePicker) {
+//        _imagePicker = [[UIImagePickerController alloc] init];
+//        _imagePicker.delegate = self;
+//    }
+//    return _imagePicker;
+//}
 
 #pragma mark - UI及固定数据设置
 - (void)setUpUI {
+//右上角设置按钮
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 30, 30);
-    [button setImage:[[UIImage imageNamed:@"manager_quanxian_bzr"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"manager_quanxian_bzr"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(setting) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
+//    基础设置
+//    _headerHeight = 150;
+    _font = [UIFont systemFontOfSize:14.0];
     
     [self setUpHeaderView];
     [self setUpTableView];
@@ -81,57 +81,32 @@
 
 - (void)setUpHeaderView {
     SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
-    _headerHeight = 150;
-    ImageHeaderView *header = [[ImageHeaderView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, _headerHeight)];
-    header.detailLabel.text = shareInfo.userName;
     NSString *picUrl = [NSString stringWithFormat:@"%@%@", API_ROOT_IMAGE_URL, shareInfo.picPath];
-    [header.imageView sd_setImageWithURL:[NSURL URLWithString:picUrl] placeholderImage:[UIImage imageNamed:@"wode_image_placeHolder"]];
+    [self.header.imageView sd_setImageWithURL:[NSURL URLWithString:picUrl] placeholderImage:[UIImage imageNamed:@"default_user_icon"]];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(imageClick)];
-    [header addGestureRecognizer:tap];
-    self.imageView = header.imageView;
-    [self.view addSubview:header];
-
+    self.header.imageView.userInteractionEnabled = YES;
+    [self.header.imageView addGestureRecognizer:tap];
+    
+    UIButton *singInButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    singInButton.frame = CGRectMake(CGRectGetMaxX(self.header.detailLabel.frame)-120, self.header.detailLabel.frame.origin.y, 100, 30);
+    singInButton.backgroundColor = [UIColor colorWithRed:229/225.0 green:99/225.0 blue:99/225.0 alpha:1.0];
+    singInButton.layer.cornerRadius = 5;
+    [singInButton setTitle:@"我要签到" forState:UIControlStateNormal];
+    singInButton.titleLabel.font = _font;
+    [singInButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [singInButton addTarget:self action:@selector(singInClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.header addSubview:singInButton];
     
 }
 
 - (void)setUpTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.headerHeight, self.view.frame.size.width, self.view.frame.size.height - 128 - self.headerHeight) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.headerHeight, self.view.frame.size.width, HEIGHT - 112 - self.headerHeight) style:UITableViewStylePlain];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.view addSubview:self.tableView];
     self.tableView.showsVerticalScrollIndicator = YES;
     [self.tableView registerNib:[UINib nibWithNibName:@"WoDeTableViewCell" bundle:nil] forCellReuseIdentifier:@"wodeCell"];
-}
-
-- (void)setUpDataSourse {
-    
-    NSArray *icons = @[@"myList_ziliao",
-                       @"myList_jiaose",
-                       @"myList_tongxunlu",
-                       @"myList_shoucang",
-                       @"myList_renwu",
-//                       @"myList_jifen",
-//                       @"myList_jinbi",
-                       @"myList_dongtai"];
-    NSArray *titles = @[@"我的资料",
-                        @"我的角色",
-                        @"我的通讯录",
-                        @"我的收藏",
-                        @"我的任务",
-//                        @"我的积分",
-//                        @"我的金币",
-                        @"我的动态",];
-    NSArray *viewControllersName = @[@"MyProfileViewController",
-                                     @"RoleListViewController",
-                                     @"MyAddressListViewController",
-                                     @"MyCollectionViewController",
-                                     @"Nil",
-//                                     @"Nil",
-//                                     @"Nil",
-                                     @"MyTrendsViewController"];
-    
-    self.myList = @{@"icons": icons, @"titles": titles, @"vcsName": viewControllersName};
 }
 
 - (void)imageClick {
@@ -143,6 +118,19 @@
     [self.sheet showInView:self.view];
 }
 
+- (void)singInClick {
+    ////
+    BasicService *service = [[BasicService alloc] initWithView:self.view];
+    __weak typeof (*&self)weakSelf = self;
+    [service doTask:@"sign" callBack:^(NSInteger code, NSString *msg, NSString *reward, NSString *totalPoint, NSString *lastDay) {
+        if (code == 0) {
+            [LoadingView showDownCenter:weakSelf.view messages:@[[NSString stringWithFormat:@"签到成功，积分+%@", reward]]];
+        }else {
+            [LoadingView showDownCenter:weakSelf.view messages:@[msg]];
+        }
+    }];
+}
+
 - (void)setting {
     SettingViewController *set = [[SettingViewController alloc] init];
     set.hidesBottomBarWhenPushed = YES;
@@ -151,26 +139,73 @@
 
 #pragma mark - 从相机或相册获取图片
 - (void)getPhotoFromCamera {
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypeCamera;
-    [self presentViewController:self.imagePicker animated:YES completion:^{
-        
-    }];
+    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+    if ([UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]){
+        //设置拍照后的图片可被编辑
+        _imagePicker.allowsEditing = YES;
+        _imagePicker.sourceType = sourceType;
+        [self presentViewController:_imagePicker animated:YES completion:nil];
+    }else{
+        NSLog(@"模拟其中无法打开照相机,请在真机中使用");
+    }
 }
 
 - (void)getPhotoFromAlbum {
-    self.imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-    [self presentViewController:self.imagePicker animated:YES completion:^{
-        
-    }];
+    _imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    _imagePicker.delegate = self;
+    _imagePicker.allowsEditing = YES;
+    [self presentViewController:_imagePicker animated:YES completion:nil];
 }
 
 #pragma mark - imagePickerDelegate
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    UIImage * image = info[@"UIImagePickerControllerOriginalImage"];
-    self.imageView.image = image ;
-    [self.imagePicker dismissViewControllerAnimated:YES completion:^{
-        //上传图片
-    }];
+    NSString *type = [info objectForKey:UIImagePickerControllerMediaType];
+    //当选择的类型是图片
+    if ([type isEqualToString:@"public.image"]){
+        //先把图片转成NSData
+        UIImage* image = [info objectForKey:@"UIImagePickerControllerEditedImage"];
+        NSData *data;
+        if (UIImagePNGRepresentation(image) == nil){
+            data = UIImageJPEGRepresentation(image, 0.3);
+        }else{
+            data = UIImagePNGRepresentation(image);
+        }
+        __weak typeof (*&self)weakSelf = self;
+        BasicService *service = [[BasicService alloc] initWithView:self.view];
+        [service uploadImage:data callBack:^(BOOL isSuccess, NSString *picPath) {
+            if (isSuccess) {
+                SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
+                weakSelf.header.imageView.image = [weakSelf cutImage:image];
+                shareInfo.picPath = picPath;
+                UserService *manager = [[UserService alloc] initWithView:weakSelf.view];
+                NSDictionary *params = @{@"userId": shareInfo.userId, @"picPath": picPath};
+                [manager editIconWithParams:params callBack:^(BOOL isSuccess) {
+                    //修改成功
+                }];
+            }
+        }];
+        //关闭相册界面
+        [picker dismissViewControllerAnimated:YES completion:nil];
+    }
+}
+
+//裁剪图片
+- (UIImage *)cutImage:(UIImage*)image
+{
+    //压缩图片
+    CGSize newSize;
+    CGImageRef imageRef = nil;
+    if ((image.size.width / image.size.height) < (_imageView.frame.size.width / _imageView.frame.size.height)) {
+        newSize.width = image.size.width;
+        newSize.height = image.size.width * _imageView.frame.size.height / _imageView.frame.size.width;
+        imageRef = CGImageCreateWithImageInRect([image CGImage], CGRectMake(0, fabs(image.size.height - newSize.height) / 2, newSize.width, newSize.height));
+    } else {
+        newSize.height = image.size.height;
+        newSize.width = image.size.height * _imageView.frame.size.width / _imageView.frame.size.height;
+        
+        imageRef = CGImageCreateWithImageInRect([image CGImage], CGRectMake(fabs(image.size.width - newSize.width) / 2, 0, newSize.width, newSize.height));
+    }
+    return [UIImage imageWithCGImage:imageRef];
 }
 
 #pragma mark - SheetDelegate
@@ -188,22 +223,45 @@
 }
 
 #pragma mark - tableViewDelegate
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSArray *icons = self.myList[@"icons"];
-    return  icons.count;
+    return  7;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *icons = self.myList[@"icons"];
-    NSArray *titles = self.myList[@"titles"];
-
     WoDeTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:(@"wodeCell")];
-    [cell setImage: icons[indexPath.row] text: titles[indexPath.row]];
-
+    switch (indexPath.row) {
+        case 0:
+            cell.imageV.image = [UIImage imageNamed:@"myList_ziliao"];
+            cell.titleLabel.text = @"我的资料";
+            break;
+        case 1:
+            cell.imageV.image = [UIImage imageNamed:@"myList_jiaose"];
+            cell.titleLabel.text = @"我的角色";
+            break;
+        case 2:
+            cell.imageV.image = [UIImage imageNamed:@"myList_tongxunlu"];
+            cell.titleLabel.text = @"我的通讯录";
+            break;
+        case 3:
+            cell.imageV.image = [UIImage imageNamed:@"myList_shoucang"];
+            cell.titleLabel.text = @"我的收藏";
+            break;
+        case 4:
+            cell.imageV.image = [UIImage imageNamed:@"myList_jifen"];
+            cell.titleLabel.text = @"我的积分";
+            break;
+        case 5:
+            cell.imageV.image = [UIImage imageNamed:@"myList_dongtai"];
+            cell.titleLabel.text = @"我的动态";
+            break;
+        case 6:
+            cell.imageV.image = [UIImage imageNamed:@"myList_apps"];
+            cell.titleLabel.text = @"我的应用";
+            break;
+            
+        default:
+            break;
+    }
     return cell;
 }
 
@@ -212,27 +270,42 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *viewControllersName = self.myList[@"vcsName"];
-    NSString *vcName = viewControllersName[indexPath.row];
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.1f];
-    if (![vcName isEqualToString:@"Nil"]) {
-        //跳转到相应页面
-        UIViewController *nextVC;
-        UIStoryboard *profile = [UIStoryboard storyboardWithName:@"Profile" bundle:nil];
-        if ([vcName isEqualToString:@"MyProfileViewController"]) {
-            nextVC = [profile instantiateViewControllerWithIdentifier:@"MYPROFILE"];
-        }else if ([vcName isEqualToString:@"MyTrendsViewController"]) {
-            nextVC = [profile instantiateViewControllerWithIdentifier:@"MYTRENDS"];
-        }else {
-            Class vcClass = NSClassFromString(vcName);
-            nextVC = [[vcClass alloc] init];
-        }
-        nextVC.hidesBottomBarWhenPushed = YES;
-        [self.navigationController pushViewController:nextVC animated:true];
-    }else {
-        [LoadingView showDownCenter:self.view messages:@[@"敬请期待！"]];
-        NSLog(@"敬请期待！");
+    UIViewController *nextVC;
+    switch (indexPath.row) {
+        case 0:
+        {
+            nextVC = [[MyProfileViewController alloc] init];
+        }break;
+        case 1:
+        {
+            nextVC = [[RoleListViewController alloc] init];
+        }break;
+        case 2:
+        {
+            nextVC = [[MyAddressListViewController alloc] init];
+        }break;
+        case 3:
+        {
+            nextVC = [[MyCollectionViewController alloc] init];
+        }break;
+        case 4:
+        {
+            nextVC = [[MyIntergrationViewController alloc] init];
+        }break;
+        case 5:
+        {
+            nextVC = [[MyTrendsViewController alloc] init];
+        }break;
+        case 6:
+        {
+            nextVC = [[MyAppsViewController alloc] init];
+        }break;
+        default:
+            break;
     }
+    nextVC.hidesBottomBarWhenPushed = YES;
+    [self.navigationController pushViewController:nextVC animated:YES];
 }
 
 - (void)deselect {
