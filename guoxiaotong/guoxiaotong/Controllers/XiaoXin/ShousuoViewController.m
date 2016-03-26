@@ -39,7 +39,7 @@
 
 -(void)creatTextFile{
     
-    UITextField *shouSuoTextFild=[[UITextField alloc]initWithFrame:CGRectMake(25, 70,screen_Width-50, 30)];
+    UITextField *shouSuoTextFild=[[UITextField alloc]initWithFrame:CGRectMake(25, 5,screen_Width-50, 30)];
     
     shouSuoTextFild.borderStyle=UITextBorderStyleRoundedRect;
     
@@ -55,7 +55,7 @@
     
     UIButton *shouShuoBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    shouShuoBtn.frame=CGRectMake(screen_Width-50,72, 25, 25);
+    shouShuoBtn.frame=CGRectMake(screen_Width-50,7, 25, 25);
     
     [shouShuoBtn setImage:[UIImage imageNamed:@"iconfont-sousuo.png"] forState:UIControlStateNormal];
     

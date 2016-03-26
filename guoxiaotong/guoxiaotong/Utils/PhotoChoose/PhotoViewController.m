@@ -81,7 +81,7 @@
 
 }
 -(void)creatBarview{
-    _barView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-44, screen_Width, 44)];
+    _barView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-44-64, screen_Width, 44)];
     _barView.backgroundColor=RGBA(41, 36, 33, 0.9);
     [self.view addSubview:_barView];
     
