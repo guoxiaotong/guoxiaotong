@@ -27,6 +27,8 @@
     NSMutableArray *_mImageArry;
     
     UIView *_imView;//用于展示选中图片的UIview
+    
+    UILabel * _tisileabel;//用于提示只能选中9张
 
 }
 
@@ -108,8 +110,7 @@
                 [imgbtn setImage:_mImageArry[i] forState:UIControlStateNormal];
             }else{
                 [imgbtn setImage:[UIImage imageNamed:@"iconfont-dongtai-副本"] forState:UIControlStateNormal];
-                
-                            }
+                }
             [_imView addSubview:imgbtn];
             
             imgbtn.tag=1550+i;
@@ -117,7 +118,9 @@
             [imgbtn addTarget:self action:@selector(imgBtnClick:) forControlEvents:UIControlEventTouchUpInside];
             
         }
-        
+        [_textView removeFromSuperview];
+        _textView=nil;
+        [self creatText:2];
         [self.view addSubview:_imView];
     }
    
@@ -151,7 +154,11 @@
     _textView.userInteractionEnabled=YES;
     _textView.editable=YES;
     if (gao==1) {
+        
         _textView.frame=CGRectMake(0, 0, screen_Width, screen_Height-100);
+    }if (gao==2) {
+        
+        _textView.frame=CGRectMake(0, 0, screen_Width, 192);
     }
     
     UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
@@ -210,14 +217,14 @@
     [_button removeFromSuperview];
     [_butnView removeFromSuperview];
     _button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    _button.frame=CGRectMake(10, screen_Height-_height-60, 60, 20);
+    _button.frame=CGRectMake(10, screen_Height-_height-64-60, 60, 20);
     
     
-    _butnView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-_height-30, screen_Width, 30)];
+    _butnView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-_height-64-30, screen_Width, 30)];
     if (height==1) {
         [UIView animateWithDuration:0.1 animations:^{
-            _butnView.center=CGPointMake(screen_Width/2, screen_Height-15);
-            _button.center=CGPointMake(40, screen_Height-50);
+            _butnView.center=CGPointMake(screen_Width/2, screen_Height-15-64);
+            _button.center=CGPointMake(40, screen_Height-50-64);
             
         }];
     }
@@ -282,18 +289,42 @@
 //打开照相机拍照
 -(void)takePhoto{
 
-    UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
-    if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
-        [[[UIAlertView alloc]initWithTitle:@"逗我呢" message:@"你有摄像头么" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
-        return;
-    }
-    UIImagePickerController *picker = [[UIImagePickerController alloc] init];    picker.delegate = self;
-    picker.allowsEditing = YES;
-    picker.sourceType = sourceType;
-    [self presentViewController:picker animated:YES completion:^{
-        
-    }];
+    if (_mImageArry.count<9) {
+        UIImagePickerControllerSourceType sourceType = UIImagePickerControllerSourceTypeCamera;
+        if (![UIImagePickerController isSourceTypeAvailable: UIImagePickerControllerSourceTypeCamera]) {
+            [[[UIAlertView alloc]initWithTitle:@"逗我呢" message:@"你有摄像头么" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+            return;
+        }
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];    picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = sourceType;
+        [self presentViewController:picker animated:YES completion:^{
+            
+        }];
 
+    }else{
+        
+        [_tisileabel removeFromSuperview];
+        _tisileabel=[[UILabel alloc]initWithFrame:CGRectMake((screen_Width-150)/2, 300, 150, 50)];
+        _tisileabel.backgroundColor=RGBA(41, 36, 33, 1);
+        _tisileabel.text=@"最多只能选择9张";
+        _tisileabel.textAlignment=NSTextAlignmentCenter;
+        CALayer *layer=[_tisileabel layer];
+        [layer setMasksToBounds:YES];
+        [layer setCornerRadius:5];
+        
+        [self.view addSubview:_tisileabel];
+        [UIView animateWithDuration:3 animations:^{
+            _tisileabel.alpha=0;
+            
+        }];
+
+    
+    
+    
+    
+    }
+   
 }
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info{
     [picker dismissViewControllerAnimated:YES completion:nil];
