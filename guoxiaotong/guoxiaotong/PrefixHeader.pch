@@ -23,6 +23,9 @@
 #define DEFAULT_NAVIGATIONBAR_COLOR [UIColor colorWithRed:223.0f/225.0 green:62.0f/225.0 blue:63.0f/225.0 alpha:1.0]
 #define SEAECH_VIEW_BACK_COLOR [UIColor colorWithRed:200/225.0 green:200/225.0 blue:200/225.0 alpha:1.0]
 
+//环信
+#import <EaseMobSDKFull/EaseMob.h>
+#import <EaseUI.h>
 
 //大部分要用到的头文件
 #import "UITextField+CustomStyle.h"

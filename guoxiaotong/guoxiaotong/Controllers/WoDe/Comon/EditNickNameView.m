@@ -21,6 +21,7 @@
 
 - (instancetype)init {
     if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldEditChanged:) name:UITextFieldTextDidChangeNotification object:_textField];
         self.frame = [UIScreen mainScreen].bounds;
         UIView *backView = [[UIView alloc] initWithFrame:self.bounds];
         backView.backgroundColor = [UIColor blackColor];
@@ -90,11 +91,24 @@
     }
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (range.location>5) {
-        return NO;
+- (void)textFieldEditChanged:(NSNotification *)noti {
+    UITextField *textField = noti.object;
+    NSString *toBeString = textField.text;
+    NSString *lang = self.textInputMode.primaryLanguage;//键盘输入模式
+    if ([lang isEqualToString:@"zh-Hans"]) {
+        UITextRange *selectedRang = [textField markedTextRange];
+        if (!selectedRang) {
+            if (toBeString.length > 5) {
+                textField.text = [toBeString substringToIndex:5];
+            }
+        }
     }else {
-        return YES;
+        if (toBeString.length > 5) {
+            textField.text = [toBeString substringToIndex:5];
+        }
+        else {
+            
+        }
     }
 }
 

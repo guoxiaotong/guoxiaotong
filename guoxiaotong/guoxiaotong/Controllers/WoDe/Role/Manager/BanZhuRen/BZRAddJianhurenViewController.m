@@ -12,6 +12,7 @@
 #import "ListPickerView.h"
 #import "BasicService.h"
 #import "RelationModel.h"
+#import "CustomView.h"
 
 @interface BZRAddJianhurenViewController ()<UITextFieldDelegate>
 
@@ -41,11 +42,7 @@
     _nameTextField.text = _jianhurenInfo.studentName;
     _nameTextField.enabled = NO;
     
-    UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sureButton.frame = CGRectMake((WIDTH-120)/2, 300, 120, 30);
-    sureButton.backgroundColor = [UIColor greenColor];
-    [sureButton setTitle:@"确定添加" forState:UIControlStateNormal];
-    [sureButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    UIButton *sureButton = [ CustomView buttonWithTitle:@"确定添加" width:120 orginY:300];
     [sureButton addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sureButton];
     

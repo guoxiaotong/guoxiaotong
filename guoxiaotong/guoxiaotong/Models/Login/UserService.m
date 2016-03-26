@@ -168,7 +168,6 @@
         if (callBack) {
             callBack([json[@"code"] integerValue], json[@"msg"]);
         }
-        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [LoadingView hideCenterActivity:self.view];
         NSLog(@"%@", error);

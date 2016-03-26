@@ -79,9 +79,11 @@
                     NSDictionary *params = @{@"nickName": name, @"roleId":[NSNumber numberWithInteger: roleInfo.roleId], @"typeId": roleInfo.typeId};
                     UserService *service = [[UserService alloc] initWithView:weakSelf.view];
                     [service editRoleName:params callBack:^(NSInteger code, NSString *msg) {
-                        [LoadingView showBottom:weakSelf.view messages:@[msg]];
                         if (code == 0) {
+                            [LoadingView showBottom:weakSelf.view messages:@[msg]];
                             [weakSelf loadData];
+                        }else {
+                            [LoadingView showBottom:weakSelf.view messages:@[@"数据异常"]];
                         }
                     }];
                 }

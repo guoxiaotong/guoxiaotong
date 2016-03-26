@@ -27,8 +27,14 @@
     
 //    //registerSDKWithAppKey:注册的appKey，详细见下面注释。
 //    //apnsCertName:推送证书名(不需要加后缀)，详细见下面注释。
-//    [[EaseMob sharedInstance] registerSDKWithAppKey:@"douser#istore" apnsCertName:@"istore_dev"];
-//    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    [[EaseMob sharedInstance] registerSDKWithAppKey:@"douser#istore" apnsCertName:@"istore_dev"];
+    [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+    
+    [[EaseSDKHelper shareHelper] easemobApplication:application
+                      didFinishLaunchingWithOptions:launchOptions
+                                             appkey:@"douser#istore"
+                                       apnsCertName:@"istore_dev"
+                                        otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
@@ -64,12 +70,12 @@
 - (void)applicationDidEnterBackground:(UIApplication *)application {
   // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
   // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-//    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
+    [[EaseMob sharedInstance] applicationDidEnterBackground:application];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
   // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-//    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
+    [[EaseMob sharedInstance] applicationWillEnterForeground:application];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -78,7 +84,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
   // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-//     [[EaseMob sharedInstance] applicationWillTerminate:application];
+     [[EaseMob sharedInstance] applicationWillTerminate:application];
 }
 
 @end

@@ -55,7 +55,7 @@
             weakSelf.headerLabel.text = schoolInfo.name;
             [weakSelf.dataSource addObject:[NSString stringWithFormat:@"简称：%@", schoolInfo.subname]];
             [weakSelf.dataSource addObject:[NSString stringWithFormat:@"学校性质：%@", schoolInfo.attribute]];
-            [weakSelf.dataSource addObject:[NSString stringWithFormat:@"校长：%@", schoolInfo.attribute]];
+            [weakSelf.dataSource addObject:[NSString stringWithFormat:@"校长：%@", schoolInfo.owner]];
             [weakSelf.dataSource addObject:[NSString stringWithFormat:@"联系人：%@", schoolInfo.attribute]];
             [weakSelf.dataSource addObject:[NSString stringWithFormat:@"联系电话：%@", schoolInfo.attribute]];
             [weakSelf.tableView reloadData];
@@ -75,6 +75,14 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
     cell.textLabel.text = self.dataSource[indexPath.row];
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSelector:@selector(deselect) withObject:nil afterDelay:0.1f];
+}
+
+- (void)deselect {
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 

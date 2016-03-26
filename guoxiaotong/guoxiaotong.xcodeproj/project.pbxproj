@@ -1400,6 +1400,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/guoxiaotong/PrefixHeader.pch";
 				INFOPLIST_FILE = guoxiaotong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
@@ -1418,6 +1419,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				GCC_PREFIX_HEADER = "$(SRCROOT)/guoxiaotong/PrefixHeader.pch";
 				INFOPLIST_FILE = guoxiaotong/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

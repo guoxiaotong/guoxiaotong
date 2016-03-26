@@ -81,6 +81,9 @@
 
 - (void)serverClick {
     NSLog(@"联系客服");
+    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
+    easeMessageVC.title = @"国校通客服";
+    [self.navigationController pushViewController:easeMessageVC animated:YES];
 }
 
 
@@ -124,6 +127,14 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0.0001;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ContectRoleModel *roleModel = self.dataSource[indexPath.section];
+    ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
+    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
+    easeMessageVC.title = memberModel.userName;
+    [self.navigationController pushViewController:easeMessageVC animated:YES];
 }
 
 

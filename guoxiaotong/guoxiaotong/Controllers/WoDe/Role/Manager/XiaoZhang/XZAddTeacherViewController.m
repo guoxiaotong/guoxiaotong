@@ -8,6 +8,7 @@
 
 #import "XZAddTeacherViewController.h"
 #import "ManagerService.h"
+#import "CustomView.h"
 
 @interface XZAddTeacherViewController ()
 
@@ -29,11 +30,7 @@
     [self viewWithTitle:@"姓名：" textField:_nameTextField index:0];
     [self viewWithTitle:@"手机：" textField:_phoneTextField index:1];
     
-    UIButton *sureButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    sureButton.frame = CGRectMake((WIDTH-120)/2, 200, 120, 30);
-    sureButton.backgroundColor = [UIColor greenColor];
-    [sureButton setTitle:@"确定添加" forState:UIControlStateNormal];
-    [sureButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    UIButton *sureButton = [CustomView buttonWithTitle:@"确定添加" width:120 orginY:200];
     [sureButton addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:sureButton];
     
