@@ -398,7 +398,7 @@ self.tabBarController.tabBar.hidden=NO;
     
     _tabView.dataSource=self;
     
-    _tabView.bounces=NO;
+//    _tabView.bounces=NO;
     
     [self.view addSubview:_tabView];
     
