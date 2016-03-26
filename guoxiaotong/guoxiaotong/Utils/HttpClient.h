@@ -10,11 +10,13 @@
 #import <AFNetworking.h>
 #import "Config.h"
 
-typedef void(^httpSuccess)(AFHTTPRequestOperation *operation, id responseObject);
-typedef void(^httpFailure)(AFHTTPRequestOperation *operation, NSError *error);
-
 @interface HttpClient : NSObject
+/**get:所有的基于http://121.42.27.199:8888/csCampus/的网络请求方法*/
+- (void)post:(NSString *)url requestParams:(id)parameters success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)get:(NSString *)url requestParams:(NSDictionary *)requestParams success:(httpSuccess)success failure:(httpFailure)failure;
+/**上传方法*/
+- (void)post:(NSString *)url requestParams:(id)parameters constructingBodyWithBlock:(void (^)(id <AFMultipartFormData> formData))block success:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+/**独立网址的网络请求*/
+- (void)postSingleUrl:(NSString *)url requestParams:(id)parameters success:(void (^)(AFHTTPRequestOperation *, id))success failure:(void (^)(AFHTTPRequestOperation *, NSError *))failure;
 
 @end
