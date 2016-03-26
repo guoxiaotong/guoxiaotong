@@ -48,6 +48,7 @@
     CGFloat hig = [Tools getSizeFromImage:@"login_icon"].height;
     CGRect imageFrame = CGRectMake((WIDTH - wid)/2, 50, wid, hig);
     UIImageView *imageV = [[UIImageView alloc] initWithFrame:imageFrame];
+    imageV.image = [UIImage imageNamed:@"login_icon"];
     [self.scrollView addSubview:imageV];
     
     CGRect frame = CGRectMake(10, 200, WIDTH-20, 40);
