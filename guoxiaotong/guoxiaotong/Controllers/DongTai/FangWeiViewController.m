@@ -43,7 +43,7 @@
   //提供选择的列表
 -(void)creatTabView{
     
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, screen_Width, screen_Height-100) style:UITableViewStylePlain];
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 35, screen_Width, screen_Height-100) style:UITableViewStylePlain];
    
     _tabView.dataSource=self;
     _tabView.delegate=self;
@@ -51,7 +51,7 @@
 
 }
 -(void)craetBatBtn{
-    UIView *barBttonview=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-44, screen_Width, 44)];
+    UIView *barBttonview=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-44-64, screen_Width, 44)];
     barBttonview.backgroundColor=RGBA(220, 220, 220, 0.9);
     [self.view addSubview:barBttonview];
     
@@ -84,7 +84,7 @@
 -(void)creatJuSheview{
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    UIScrollView *juSheScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, screen_Width, 30)];
+    UIScrollView *juSheScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, 30)];
     
     juSheScroll.backgroundColor=[UIColor redColor];
     

@@ -121,7 +121,7 @@
 
 -(void)creattabBar{
 
-    UIView *tabBarView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-44, screen_Width, screen_Height)];
+    UIView *tabBarView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-44-64, screen_Width, screen_Height)];
     
     tabBarView.backgroundColor=[UIColor whiteColor];
     
@@ -250,7 +250,7 @@
 
 -(void)creatTabView{
 
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, screen_Height) style:UITableViewStylePlain];;
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, screen_Height-108) style:UITableViewStylePlain];;
     
     _tabView.delegate=self;
     
