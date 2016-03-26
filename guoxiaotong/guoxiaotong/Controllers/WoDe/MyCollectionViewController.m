@@ -8,12 +8,14 @@
 
 #import "MyCollectionViewController.h"
 #import "ImageCollectionCell.h"
+#import "BasicService.h"
+#import "TrendsTableViewCell.h"
 
 @interface MyCollectionViewController ()<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
-@property (nonatomic, strong) UIButton * trendsButton;
-@property (nonatomic, strong) UIButton * imageButton;
-@property (nonatomic, strong) UITableView * tableView;
+@property (nonatomic, strong) UIButton *trendsButton;
+@property (nonatomic, strong) UIButton *imageButton;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UICollectionView *collectionView;
 @property (nonatomic, strong) NSMutableArray *trendsDataSource;
 @property (nonatomic, strong) NSMutableArray *imageDataSource;
@@ -24,9 +26,17 @@
 
 @implementation MyCollectionViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"我的收藏";
+    _imageDataSource = [NSMutableArray array];
+    _trendsDataSource = [NSMutableArray array];
     [self setUI];
 }
 
@@ -37,28 +47,56 @@
     [self setCollectionView];
 }
 
+- (void)loadData {
+    SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
+    __weak typeof (*&self)weakSelf = self;
+    if (_selectedIndex == 0) {
+        //加载动态
+        BasicService *service = [[BasicService alloc] initWithView:self.view];
+        NSDictionary *params = @{@"userId": shareInfo.userId, @"userRoleId": [NSNumber numberWithInteger:538], @"mine": @"myCollection",@"sendType": @"2", @"type": @"1", @"page": @"1"};
+        [service getCollectTrendList:params callBack:^(BOOL isSuccess, NSArray *trendList) {
+            [weakSelf.trendsDataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
+            [weakSelf.trendsDataSource addObjectsFromArray:trendList];
+            [weakSelf.tableView reloadData];
+        }];
+    }else {
+        //加载图片
+        BasicService *service = [[BasicService alloc] initWithView:self.view];
+        NSDictionary *params = @{@"userId": shareInfo.userId};
+        [service getCollectImageList:params callBack:^(BOOL isSuccess, NSArray *imageList) {
+            [weakSelf.imageDataSource removeAllObjects];
+            [weakSelf.collectionView reloadData];
+            [weakSelf.imageDataSource addObjectsFromArray:imageList];
+            [weakSelf.collectionView reloadData];
+        }];
+    }
+}
+
 - (void)setChangeButtons {
-    self.buttonHeight = 50;
+    _buttonHeight = 40;
     CGFloat height = self.buttonHeight;
     CGFloat width = (WIDTH - 12)/2;
     UIView *headerBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, height)];
-    headerBackView.backgroundColor = [UIColor lightGrayColor];
+    headerBackView.backgroundColor = SEAECH_VIEW_BACK_COLOR;
     
-    self.trendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.trendsButton.frame = CGRectMake(5, 5, width, height - 10);
-    [self.trendsButton setTitle:@"动态收藏" forState:UIControlStateNormal];
-    [self.trendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    self.trendsButton.backgroundColor = DEFAULT_NAVIGATIONBAR_COLOR;
-    [self.trendsButton addTarget:self action:@selector(clickOn:) forControlEvents:UIControlEventTouchDown];
-    [headerBackView addSubview:self.trendsButton];
+    _trendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _trendsButton.frame = CGRectMake(5, 5, width, height - 10);
+    _trendsButton.layer.cornerRadius = 5;
+    [_trendsButton setTitle:@"动态收藏" forState:UIControlStateNormal];
+    [_trendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    _trendsButton.backgroundColor = DEFAULT_NAVIGATIONBAR_COLOR;
+    [_trendsButton addTarget:self action:@selector(clickOn:) forControlEvents:UIControlEventTouchDown];
+    [headerBackView addSubview:_trendsButton];
     
-    self.imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    self.imageButton.frame = CGRectMake(WIDTH-5-width, 5, width, height - 10);
-    [self.imageButton setTitle:@"图片收藏" forState:UIControlStateNormal];
-    [self.imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    self.imageButton.backgroundColor = [UIColor whiteColor];
-    [self.imageButton addTarget:self action:@selector(clickOn:) forControlEvents:UIControlEventTouchDown];
-    [headerBackView addSubview:self.imageButton];
+    _imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    _imageButton.frame = CGRectMake(WIDTH-5-width, 5, width, height - 10);
+    _imageButton.layer.cornerRadius = 5;
+    [_imageButton setTitle:@"图片收藏" forState:UIControlStateNormal];
+    [_imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    _imageButton.backgroundColor = [UIColor whiteColor];
+    [_imageButton addTarget:self action:@selector(clickOn:) forControlEvents:UIControlEventTouchDown];
+    [headerBackView addSubview:_imageButton];
     [self.view addSubview:headerBackView];
 }
 
@@ -69,7 +107,7 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
     
-    [self.tableView registerNib:[UINib nibWithNibName:@"TrendsTableViewCell" bundle:nil] forCellReuseIdentifier:@"TrendsCell"];
+    [self.tableView registerClass:[TrendsTableViewCell class] forCellReuseIdentifier:@"TrendsCell"];
 }
 
 - (void)setCollectionView {
@@ -91,6 +129,7 @@
     }else {
         self.selectedIndex = 1;
     }
+    [self loadData];
 }
 
 - (void)setSelectedIndex:(NSInteger)selectedIndex {
@@ -120,39 +159,25 @@
 
 #pragma mark - tableView
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.trendsDataSource.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrendsCell"];
-    
+    TrendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrendsCell"];
+    ///////////////
     return cell;
 }
 
 
 #pragma mark - collectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 10;
+    return self.imageDataSource.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
+    ////////
     return cell;
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

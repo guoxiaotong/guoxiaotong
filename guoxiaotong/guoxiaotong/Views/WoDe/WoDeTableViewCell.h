@@ -14,5 +14,4 @@
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 
 - (void)setImage:(NSString *)imageName text:(NSString *)text;
-
 @end

@@ -6,12 +6,11 @@
 //  Copyright © 2016年 StenpChou. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HeaderViewController.h"
+#import "UserRoleInfoModel.h"
 
-@interface ManagerViewController : UIViewController
+@interface ManagerViewController : HeaderViewController
 
-@property (nonatomic, assign) NSInteger roleId;
-@property (nonatomic, copy) NSString *roleName;
-
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

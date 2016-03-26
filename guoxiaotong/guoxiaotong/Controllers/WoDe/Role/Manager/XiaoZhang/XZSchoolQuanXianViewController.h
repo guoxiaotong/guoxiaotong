@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserRoleInfoModel.h"
 
-@interface XZSchoolQuanXianViewController : UIViewController
+@interface XZSchoolQuanXianViewController : UITableViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

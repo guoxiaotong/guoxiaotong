@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserRoleInfoModel.h"
+#import "ClassModel.h"
 
 @interface XZSetBZRViewController : UIViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
+@property (nonatomic, strong) ClassModel *classInfo;
 
 @end

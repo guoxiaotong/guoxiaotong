@@ -8,20 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class SectionHeaderView, GroupModel;
-
-@protocol SectionHeaderViewDelegate <NSObject>
-
--(void)headerViewDidClickHeaderView:(SectionHeaderView *)headerView;
-
-@end
-
 @interface SectionHeaderView : UITableViewHeaderFooterView
 
-@property (nonatomic, strong)GroupModel *group;
-@property (nonatomic, weak)id<SectionHeaderViewDelegate> delegate;
+@property (nonatomic, assign) NSInteger index;
+@property (nonatomic, assign) BOOL open;
 
-+ (instancetype)headerWithTableView:(UITableView *)tableView;
+@property (nonatomic, copy) void (^SectionBlock)(NSInteger index, BOOL isOpen);
 
+- (instancetype)initWithTitle:(NSString *)title isOpen:(BOOL)isOpen;
 
 @end
