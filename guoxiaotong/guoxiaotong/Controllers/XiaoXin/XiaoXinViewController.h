@@ -1,9 +1,9 @@
 //
 //  XiaoXinViewController.h
-//  guoxiaotong
+//  CountryAndSchool
 //
-//  Created by zxc on 16/3/9.
-//  Copyright © 2016年 StenpChou. All rights reserved.
+//  Created by 刘晓娜 on 16/3/9.
+//  Copyright © 2016年 刘晓娜. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
