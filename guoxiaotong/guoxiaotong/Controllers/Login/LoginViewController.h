@@ -6,8 +6,8 @@
 //  Copyright © 2016年 StenpChou. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "BaseScrollViewController.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : BaseScrollViewController
 
 @end

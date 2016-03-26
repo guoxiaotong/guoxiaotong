@@ -24,7 +24,7 @@
 
 - (void)setUpUI {
   
-    NSArray *itemsTitles = @[@"校信", @"动态", @"资源", @"周边", @"我的"];
+    NSArray *itemsTitles = @[@"校信", @"动态", @"学库", @"课外", @"我的"];
     NSArray *itemsImagesNomal = @[@"tab_xiaoxin_nomal",
                                   @"tab_dongtai_nomal",
                                   @"tab_ziyuan_nomal",

@@ -7,6 +7,8 @@
 //
 
 #import "BZRClassInfoViewController.h"
+#import "BZRCourseModel.h"
+#import "BZRManagerService.h"
 
 @interface BZRClassInfoViewController ()
 
@@ -16,23 +18,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"班级信息";
-    // Do any additional setup after loading the view.
+    [self setUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setUI {
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 30)];
+    titleLabel.text = @"班级";
+    [self.view addSubview:titleLabel];
+    
+    UILabel *classLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 10, WIDTH-140, 30)];
+    classLabel.textAlignment = NSTextAlignmentCenter;
+    classLabel.text = _roleInfo.className;
+    [self.view addSubview:classLabel];
+    
+    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, WIDTH, 1)];
+    border.backgroundColor = [UIColor lightGrayColor];
+    [self.view addSubview:border];
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

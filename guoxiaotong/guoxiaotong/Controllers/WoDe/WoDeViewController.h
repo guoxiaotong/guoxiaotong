@@ -6,8 +6,8 @@
 //  Copyright © 2016年 StenpChou. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "HeaderViewController.h"
 
-@interface WoDeViewController : UIViewController
+@interface WoDeViewController : HeaderViewController
 
 @end

@@ -13,6 +13,7 @@
 #import "UserService.h"
 #import "UserModel.h"
 #import "UserRoleInfoModel.h"
+#import "EditNickNameView.h"
 
 @interface RoleListViewController ()
 
@@ -22,15 +23,21 @@
 
 @implementation RoleListViewController
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self loadData];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor whiteColor];
     [self setNavigationItems];
-    self.dataSourse = [NSMutableArray array];
+    _dataSourse = [NSMutableArray array];
     
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.tableView registerNib:[UINib nibWithNibName:@"RoleListTableViewCell" bundle:nil] forCellReuseIdentifier:@"roleListCell"];
-    [self loadData];
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)];
+    [self.tableView addGestureRecognizer:longPress];
 }
 
 - (void)setNavigationItems {
@@ -39,9 +46,8 @@
 }
 
 - (void)addRoleClick {
-    UIStoryboard *wode = [UIStoryboard storyboardWithName:@"AddRole" bundle:nil];
-    UIViewController *addVC = [wode instantiateViewControllerWithIdentifier:@"ADDROLE"];
-    [self.navigationController pushViewController:addVC animated:true];
+    AddRoleViewController *addRoleVC = [[AddRoleViewController alloc] init];
+    [self.navigationController pushViewController: addRoleVC animated:true];
 }
 
 - (void)loadData {
@@ -50,12 +56,41 @@
     UserService *userService = [[UserService alloc] initWithView:self.view];
     [userService getRoleListWithUserId:shareInfo.userId callBack:^(BOOL isSuccessed, NSArray *roleList) {
         if (isSuccessed) {
+            [weakSelf.dataSourse removeAllObjects];
+            [weakSelf.tableView reloadData];
             [weakSelf.dataSourse addObjectsFromArray:roleList];
             [weakSelf.tableView reloadData];
         }
     }];
 }
 
+- (void)longPress:(UIGestureRecognizer *)recognizer {
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        CGPoint point = [recognizer locationInView:self.tableView];
+        NSIndexPath * indexPath = [self.tableView indexPathForRowAtPoint:point];
+        if(indexPath) {
+            //弹出添加昵称（4个字）
+            EditNickNameView *edit = [[EditNickNameView alloc] init];
+            __weak typeof (*&self)weakSelf = self;
+            edit.sureCallBack = ^(NSString *name) {
+                if (name.length) {
+                    ////////
+                    UserRoleInfoModel *roleInfo = weakSelf.dataSourse[indexPath.row];
+                    NSDictionary *params = @{@"nickName": name, @"roleId":[NSNumber numberWithInteger: roleInfo.roleId], @"typeId": roleInfo.typeId};
+                    UserService *service = [[UserService alloc] initWithView:weakSelf.view];
+                    [service editRoleName:params callBack:^(NSInteger code, NSString *msg) {
+                        if (code == 0) {
+                            [LoadingView showBottom:weakSelf.view messages:@[msg]];
+                            [weakSelf loadData];
+                        }else {
+                            [LoadingView showBottom:weakSelf.view messages:@[@"数据异常"]];
+                        }
+                    }];
+                }
+            };
+        }
+    }
+}
 
 #pragma mark - tableViewDelegate
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -65,10 +100,9 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     __weak typeof (*&self)weakSelf = self;
     RoleListTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"roleListCell"];
-    cell.ManagerButtonCallBack = ^(NSInteger roleId, NSString *roleName) {
+    cell.ManagerButtonCallBack = ^(UserRoleInfoModel *roleInfo) {
         ManagerViewController *managerVC = [[ManagerViewController alloc] init];
-        managerVC.roleId = roleId;
-        managerVC.roleName = roleName;
+        managerVC.roleInfo = roleInfo;
         [weakSelf.navigationController pushViewController:managerVC animated:YES];
     };
     UserRoleInfoModel *roleInfo = self.dataSourse[indexPath.row];
@@ -81,7 +115,12 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //修改昵称
+    //
+    [self performSelector:@selector(deselect) withObject:nil afterDelay:0.1f];
+}
+
+- (void)deselect {
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
 
 

@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserRoleInfoModel.h"
 
 @interface XZClassManageViewController : UITableViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface BZRStudentManageViewController : UIViewController
+@interface BZRStudentManageViewController : UITableViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end

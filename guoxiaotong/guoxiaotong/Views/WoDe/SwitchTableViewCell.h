@@ -16,6 +16,6 @@
 @property (assign, nonatomic) NSInteger index;
 @property (copy, nonatomic) void (^SwitchBlock) (NSInteger index, BOOL open);
 
-- (void)switchNotifictionState;
+- (void)setState:(NSString *)permission index:(NSInteger)index;
 
 @end

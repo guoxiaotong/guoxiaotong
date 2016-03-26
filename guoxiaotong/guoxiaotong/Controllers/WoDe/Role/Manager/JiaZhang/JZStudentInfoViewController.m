@@ -17,22 +17,39 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"学生信息";
-    // Do any additional setup after loading the view.
+    [self setUI];
+    [self loadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+
+- (void)setUI {
+    self.header.imageView.image = [UIImage imageNamed:@"manager_role_student_pic"];
+    self.header.detailLabel.text = _roleInfo.schoolName;
+    [self cellWithTitle:@"姓名：" detail:_roleInfo.studentName index:0];
+    [self cellWithTitle:@"班级：" detail:_roleInfo.className index:1];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)cellWithTitle:(NSString *)title detail:(NSString *)detail index:(NSInteger)index {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 150+50*index, WIDTH, 50)];
+    
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 30)];
+    titleLabel.text = title;
+    [view addSubview:titleLabel];
+    
+    UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(120, 10, WIDTH-140, 30)];
+    detailLabel.text = detail;
+    [view addSubview:detailLabel];
+    
+    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, WIDTH, 1)];
+    border.backgroundColor = [UIColor lightGrayColor];
+    [view addSubview:border];
+    
+    [self.view addSubview:view];
 }
-*/
+
+- (void)loadData {
+    
+}
 
 @end
