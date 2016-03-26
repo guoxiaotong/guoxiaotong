@@ -204,6 +204,7 @@
 		001159271C8FC147001E7CA8 /* guoxiaotongUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = guoxiaotongUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0011592B1C8FC147001E7CA8 /* guoxiaotongUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = guoxiaotongUITests.m; sourceTree = "<group>"; };
 		0011592D1C8FC147001E7CA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0074E69A1CA6A00B00CE078A /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		008D61E91CA1177300E35FDC /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		008D61EB1CA1177C00E35FDC /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		008D61ED1CA117A200E35FDC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -368,30 +369,30 @@
 		00BDE2F81CA686C6007BF575 /* UserLoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginModel.m; sourceTree = "<group>"; };
 		00BDE2F91CA686C6007BF575 /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
 		00BDE2FA1CA686C6007BF575 /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
-		00BDE2FC1CA686C6007BF575 /* ADModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADModel.h; sourceTree = "<group>"; };
-		00BDE2FD1CA686C6007BF575 /* ADModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModel.m; sourceTree = "<group>"; };
-		00BDE2FE1CA686C6007BF575 /* commenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commenData.h; sourceTree = "<group>"; };
-		00BDE2FF1CA686C6007BF575 /* commenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commenData.m; sourceTree = "<group>"; };
-		00BDE3001CA686C6007BF575 /* commenListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commenListData.h; sourceTree = "<group>"; };
-		00BDE3011CA686C6007BF575 /* commenListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commenListData.m; sourceTree = "<group>"; };
-		00BDE3021CA686C6007BF575 /* DongTaiList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongTaiList.h; sourceTree = "<group>"; };
-		00BDE3031CA686C6007BF575 /* DongTaiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongTaiList.m; sourceTree = "<group>"; };
-		00BDE3041CA686C6007BF575 /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
-		00BDE3051CA686C6007BF575 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
-		00BDE3061CA686C6007BF575 /* HttpDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpDataModel.h; sourceTree = "<group>"; };
-		00BDE3071CA686C6007BF575 /* HttpDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpDataModel.m; sourceTree = "<group>"; };
-		00BDE3081CA686C6007BF575 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
-		00BDE3091CA686C6007BF575 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
-		00BDE30A1CA686C6007BF575 /* RoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleModel.h; sourceTree = "<group>"; };
-		00BDE30B1CA686C6007BF575 /* RoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleModel.m; sourceTree = "<group>"; };
-		00BDE30C1CA686C6007BF575 /* ShousuoMOdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShousuoMOdel.h; sourceTree = "<group>"; };
-		00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShousuoMOdel.m; sourceTree = "<group>"; };
-		00BDE30E1CA686C6007BF575 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
-		00BDE30F1CA686C6007BF575 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
-		00BDE3101CA686C6007BF575 /* TongXunmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongXunmodel.h; sourceTree = "<group>"; };
-		00BDE3111CA686C6007BF575 /* TongXunmodel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongXunmodel.m; sourceTree = "<group>"; };
-		00BDE3121CA686C6007BF575 /* ZhiYuanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiYuanModel.h; sourceTree = "<group>"; };
-		00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiYuanModel.m; sourceTree = "<group>"; };
+		00BDE2FC1CA686C6007BF575 /* ADModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADModel.h; path = ../mode/ADModel.h; sourceTree = "<group>"; };
+		00BDE2FD1CA686C6007BF575 /* ADModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADModel.m; path = ../mode/ADModel.m; sourceTree = "<group>"; };
+		00BDE2FE1CA686C6007BF575 /* commenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commenData.h; path = ../mode/commenData.h; sourceTree = "<group>"; };
+		00BDE2FF1CA686C6007BF575 /* commenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = commenData.m; path = ../mode/commenData.m; sourceTree = "<group>"; };
+		00BDE3001CA686C6007BF575 /* commenListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commenListData.h; path = ../mode/commenListData.h; sourceTree = "<group>"; };
+		00BDE3011CA686C6007BF575 /* commenListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = commenListData.m; path = ../mode/commenListData.m; sourceTree = "<group>"; };
+		00BDE3021CA686C6007BF575 /* DongTaiList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DongTaiList.h; path = ../mode/DongTaiList.h; sourceTree = "<group>"; };
+		00BDE3031CA686C6007BF575 /* DongTaiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DongTaiList.m; path = ../mode/DongTaiList.m; sourceTree = "<group>"; };
+		00BDE3041CA686C6007BF575 /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupModel.h; path = ../mode/GroupModel.h; sourceTree = "<group>"; };
+		00BDE3051CA686C6007BF575 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupModel.m; path = ../mode/GroupModel.m; sourceTree = "<group>"; };
+		00BDE3061CA686C6007BF575 /* HttpDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpDataModel.h; path = ../mode/HttpDataModel.h; sourceTree = "<group>"; };
+		00BDE3071CA686C6007BF575 /* HttpDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpDataModel.m; path = ../mode/HttpDataModel.m; sourceTree = "<group>"; };
+		00BDE3081CA686C6007BF575 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginModel.h; path = ../mode/LoginModel.h; sourceTree = "<group>"; };
+		00BDE3091CA686C6007BF575 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginModel.m; path = ../mode/LoginModel.m; sourceTree = "<group>"; };
+		00BDE30A1CA686C6007BF575 /* RoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoleModel.h; path = ../mode/RoleModel.h; sourceTree = "<group>"; };
+		00BDE30B1CA686C6007BF575 /* RoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoleModel.m; path = ../mode/RoleModel.m; sourceTree = "<group>"; };
+		00BDE30C1CA686C6007BF575 /* ShousuoMOdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShousuoMOdel.h; path = ../mode/ShousuoMOdel.h; sourceTree = "<group>"; };
+		00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShousuoMOdel.m; path = ../mode/ShousuoMOdel.m; sourceTree = "<group>"; };
+		00BDE30E1CA686C6007BF575 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../mode/Singleton.h; sourceTree = "<group>"; };
+		00BDE30F1CA686C6007BF575 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Singleton.m; path = ../mode/Singleton.m; sourceTree = "<group>"; };
+		00BDE3101CA686C6007BF575 /* TongXunmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TongXunmodel.h; path = ../mode/TongXunmodel.h; sourceTree = "<group>"; };
+		00BDE3111CA686C6007BF575 /* TongXunmodel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TongXunmodel.m; path = ../mode/TongXunmodel.m; sourceTree = "<group>"; };
+		00BDE3121CA686C6007BF575 /* ZhiYuanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZhiYuanModel.h; path = ../mode/ZhiYuanModel.h; sourceTree = "<group>"; };
+		00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZhiYuanModel.m; path = ../mode/ZhiYuanModel.m; sourceTree = "<group>"; };
 		00BDE3151CA686C6007BF575 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
 		00BDE3161CA686C6007BF575 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
 		00BDE3191CA686C6007BF575 /* RolePermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RolePermissionModel.h; sourceTree = "<group>"; };
@@ -824,23 +825,23 @@
 		00BDE2D61CA686C6007BF575 /* XiaoXin */ = {
 			isa = PBXGroup;
 			children = (
+				00BDE2E51CA686C6007BF575 /* XiaoXinViewController.h */,
+				00BDE2E61CA686C6007BF575 /* XiaoXinViewController.m */,
+				00BDE2E71CA686C6007BF575 /* XiaoXinViewController.xib */,
+				00BDE2DD1CA686C6007BF575 /* ShousuoViewController.h */,
+				00BDE2DE1CA686C6007BF575 /* ShousuoViewController.m */,
+				00BDE2DF1CA686C6007BF575 /* ShousuoViewController.xib */,
 				00BDE2D71CA686C6007BF575 /* AddViewController.h */,
 				00BDE2D81CA686C6007BF575 /* AddViewController.m */,
 				00BDE2D91CA686C6007BF575 /* AddViewController.xib */,
 				00BDE2DA1CA686C6007BF575 /* ChooseMemberViewController.h */,
 				00BDE2DB1CA686C6007BF575 /* ChooseMemberViewController.m */,
 				00BDE2DC1CA686C6007BF575 /* ChooseMemberViewController.xib */,
-				00BDE2DD1CA686C6007BF575 /* ShousuoViewController.h */,
-				00BDE2DE1CA686C6007BF575 /* ShousuoViewController.m */,
-				00BDE2DF1CA686C6007BF575 /* ShousuoViewController.xib */,
 				00BDE2E01CA686C6007BF575 /* TongXingLuViewController.h */,
 				00BDE2E11CA686C6007BF575 /* TongXingLuViewController.m */,
 				00BDE2E21CA686C6007BF575 /* TongXingLuViewController.xib */,
 				00BDE2E31CA686C6007BF575 /* UrlViewController.h */,
 				00BDE2E41CA686C6007BF575 /* UrlViewController.m */,
-				00BDE2E51CA686C6007BF575 /* XiaoXinViewController.h */,
-				00BDE2E61CA686C6007BF575 /* XiaoXinViewController.m */,
-				00BDE2E71CA686C6007BF575 /* XiaoXinViewController.xib */,
 				00BDE2E81CA686C6007BF575 /* XuanzZheQunViewContr.h */,
 				00BDE2E91CA686C6007BF575 /* XuanzZheQunViewContr.m */,
 				00BDE2EA1CA686C6007BF575 /* XuanzZheQunViewContr.xib */,
@@ -869,6 +870,9 @@
 		00BDE2F31CA686C6007BF575 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BA4F37111CA68DF80028ECCF /* DongTai */,
+				BA4F37101CA68D8D0028ECCF /* XiaoXin */,
+				BA4F370F1CA68D380028ECCF /* ZiYuan */,
 				00BDE2F41CA686C6007BF575 /* Login */,
 				00BDE2FB1CA686C6007BF575 /* mode */,
 				00BDE3141CA686C6007BF575 /* User */,
@@ -893,30 +897,6 @@
 		00BDE2FB1CA686C6007BF575 /* mode */ = {
 			isa = PBXGroup;
 			children = (
-				00BDE2FC1CA686C6007BF575 /* ADModel.h */,
-				00BDE2FD1CA686C6007BF575 /* ADModel.m */,
-				00BDE2FE1CA686C6007BF575 /* commenData.h */,
-				00BDE2FF1CA686C6007BF575 /* commenData.m */,
-				00BDE3001CA686C6007BF575 /* commenListData.h */,
-				00BDE3011CA686C6007BF575 /* commenListData.m */,
-				00BDE3021CA686C6007BF575 /* DongTaiList.h */,
-				00BDE3031CA686C6007BF575 /* DongTaiList.m */,
-				00BDE3041CA686C6007BF575 /* GroupModel.h */,
-				00BDE3051CA686C6007BF575 /* GroupModel.m */,
-				00BDE3061CA686C6007BF575 /* HttpDataModel.h */,
-				00BDE3071CA686C6007BF575 /* HttpDataModel.m */,
-				00BDE3081CA686C6007BF575 /* LoginModel.h */,
-				00BDE3091CA686C6007BF575 /* LoginModel.m */,
-				00BDE30A1CA686C6007BF575 /* RoleModel.h */,
-				00BDE30B1CA686C6007BF575 /* RoleModel.m */,
-				00BDE30C1CA686C6007BF575 /* ShousuoMOdel.h */,
-				00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */,
-				00BDE30E1CA686C6007BF575 /* Singleton.h */,
-				00BDE30F1CA686C6007BF575 /* Singleton.m */,
-				00BDE3101CA686C6007BF575 /* TongXunmodel.h */,
-				00BDE3111CA686C6007BF575 /* TongXunmodel.m */,
-				00BDE3121CA686C6007BF575 /* ZhiYuanModel.h */,
-				00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */,
 			);
 			path = mode;
 			sourceTree = "<group>";
@@ -1233,6 +1213,51 @@
 				080692A9D1B36040A8466472 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BA4F370F1CA68D380028ECCF /* ZiYuan */ = {
+			isa = PBXGroup;
+			children = (
+				00BDE3121CA686C6007BF575 /* ZhiYuanModel.h */,
+				00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */,
+				00BDE30A1CA686C6007BF575 /* RoleModel.h */,
+				00BDE30B1CA686C6007BF575 /* RoleModel.m */,
+				00BDE2FC1CA686C6007BF575 /* ADModel.h */,
+				00BDE2FD1CA686C6007BF575 /* ADModel.m */,
+			);
+			path = ZiYuan;
+			sourceTree = "<group>";
+		};
+		BA4F37101CA68D8D0028ECCF /* XiaoXin */ = {
+			isa = PBXGroup;
+			children = (
+				00BDE3061CA686C6007BF575 /* HttpDataModel.h */,
+				00BDE3071CA686C6007BF575 /* HttpDataModel.m */,
+				00BDE3101CA686C6007BF575 /* TongXunmodel.h */,
+				00BDE3111CA686C6007BF575 /* TongXunmodel.m */,
+				00BDE3041CA686C6007BF575 /* GroupModel.h */,
+				00BDE3051CA686C6007BF575 /* GroupModel.m */,
+				00BDE30E1CA686C6007BF575 /* Singleton.h */,
+				00BDE30F1CA686C6007BF575 /* Singleton.m */,
+				00BDE30C1CA686C6007BF575 /* ShousuoMOdel.h */,
+				00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */,
+				00BDE3081CA686C6007BF575 /* LoginModel.h */,
+				00BDE3091CA686C6007BF575 /* LoginModel.m */,
+			);
+			path = XiaoXin;
+			sourceTree = "<group>";
+		};
+		BA4F37111CA68DF80028ECCF /* DongTai */ = {
+			isa = PBXGroup;
+			children = (
+				00BDE3021CA686C6007BF575 /* DongTaiList.h */,
+				00BDE3031CA686C6007BF575 /* DongTaiList.m */,
+				00BDE2FE1CA686C6007BF575 /* commenData.h */,
+				00BDE2FF1CA686C6007BF575 /* commenData.m */,
+				00BDE3001CA686C6007BF575 /* commenListData.h */,
+				00BDE3011CA686C6007BF575 /* commenListData.m */,
+			);
+			path = DongTai;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1588,6 +1613,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				00BDE2531CA686C6007BF575 /* Base */,
+				0074E69A1CA6A00B00CE078A /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";

@@ -137,7 +137,7 @@
 
     UIButton *btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnleft.frame=CGRectMake(5, 110, screen_Width/2-10, 40);
+    btnleft.frame=CGRectMake(5, 45, screen_Width/2-10, 40);
     
     btnleft.backgroundColor=[UIColor whiteColor];
     
@@ -152,7 +152,7 @@
     
     UIButton *btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnRit.frame=CGRectMake(screen_Width/2+5, 110, screen_Width/2-10, 40);
+    btnRit.frame=CGRectMake(screen_Width/2+5, 45, screen_Width/2-10, 40);
     
     btnRit.backgroundColor=[UIColor whiteColor];
     
@@ -188,7 +188,7 @@
     
     shouShuoBtn.layer.cornerRadius=5;
     
-    shouShuoBtn.frame=CGRectMake(25, 70,screen_Width-50, 30);
+    shouShuoBtn.frame=CGRectMake(25, 5,screen_Width-50, 30);
     
     [self.view addSubview:shouShuoBtn];
     
@@ -204,7 +204,7 @@
 //创建选择群对话
 -(void)creatXuanZheTabView{
 
-    _xuanZheTabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 155, screen_Width, screen_Height-155) style:UITableViewStyleGrouped];
+    _xuanZheTabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 90, screen_Width, screen_Height-90-64) style:UITableViewStyleGrouped];
     
     _xuanZheTabView.dataSource=self;
     

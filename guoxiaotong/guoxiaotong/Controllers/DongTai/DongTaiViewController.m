@@ -211,7 +211,7 @@
     
     self.automaticallyAdjustsScrollViewInsets = NO;
     
-    UIScrollView *findScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 64, screen_Width, 30)];
+    UIScrollView *findScroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, 30)];
     
     findScroll.backgroundColor=[UIColor redColor];
     
@@ -301,7 +301,7 @@
 
 -(void)creatTabView{
 
-    _dongTaiTabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 100, screen_Width, screen_Height-144) style:UITableViewStylePlain];
+    _dongTaiTabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 35, screen_Width, screen_Height-35-108) style:UITableViewStylePlain];
     
     _dongTaiTabView.delegate=self;
     

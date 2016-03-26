@@ -326,7 +326,7 @@ self.tabBarController.tabBar.hidden=NO;
 
 //创建scrollView下的标题栏
 -(void)creatLabel{
-    _label=[[UILabel alloc]initWithFrame:CGRectMake(0, screen_Width/2+75, screen_Width, 30)];
+    _label=[[UILabel alloc]initWithFrame:CGRectMake(0, screen_Width/2+10, screen_Width, 30)];
     
     _label.backgroundColor=RGBA(41, 36, 33, 0.6);
     
@@ -343,7 +343,7 @@ self.tabBarController.tabBar.hidden=NO;
     
     shouShuoBtn.layer.cornerRadius=5;
     
-    shouShuoBtn.frame=CGRectMake(25, 70,screen_Width-50, 30);
+    shouShuoBtn.frame=CGRectMake(25, 5,screen_Width-50, 30);
     
     [self.view addSubview:shouShuoBtn];
     
@@ -368,7 +368,7 @@ self.tabBarController.tabBar.hidden=NO;
  //创建导航点
 -(void)creatPageControl{
 
-    _contrl = [[UIPageControl alloc] initWithFrame:CGRectMake(screen_Width/2-20, screen_Width/2+105, 40, 20)];
+    _contrl = [[UIPageControl alloc] initWithFrame:CGRectMake(screen_Width/2-20, screen_Width/2+40, 40, 20)];
     //一共有多少个点
     _contrl.numberOfPages = 3;
     //设置没有被点亮的所有点的颜色
@@ -392,7 +392,7 @@ self.tabBarController.tabBar.hidden=NO;
 //创建tabView
 -(void)creatTabView{
     
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, screen_Width/2+125, screen_Width, self.view.frame.size.height-100) style:UITableViewStylePlain];
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, screen_Width/2+60, screen_Width, self.view.frame.size.height-100) style:UITableViewStylePlain];
     
     _tabView.delegate=self;
     
@@ -407,7 +407,7 @@ self.tabBarController.tabBar.hidden=NO;
 
 -(void)creaScrollView{
     
-    _scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 105, screen_Width, screen_Width/2)
+    _scroll=[[UIScrollView alloc]initWithFrame:CGRectMake(0, 40, screen_Width, screen_Width/2)
                           ];
     _scroll.backgroundColor=[UIColor blueColor];
     

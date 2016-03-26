@@ -74,7 +74,7 @@
     
     UIButton *btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnleft.frame=CGRectMake(5, 70, screen_Width/2-10, 40);
+    btnleft.frame=CGRectMake(5, 5, screen_Width/2-10, 40);
     
     btnleft.backgroundColor=[UIColor whiteColor];
     
@@ -88,7 +88,7 @@
     
     UIButton *btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnRit.frame=CGRectMake(screen_Width/2+5, 70, screen_Width/2-10, 40);
+    btnRit.frame=CGRectMake(screen_Width/2+5, 5, screen_Width/2-10, 40);
     
     btnRit.backgroundColor=[UIColor whiteColor];
     
@@ -105,7 +105,7 @@
 //创建tabView
 -(void)creatTabView{
     
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 115, screen_Width, screen_Height-115) style:UITableViewStyleGrouped];
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 50, screen_Width, screen_Height-115) style:UITableViewStyleGrouped];
     
     _tabView.backgroundColor=[UIColor clearColor];
     

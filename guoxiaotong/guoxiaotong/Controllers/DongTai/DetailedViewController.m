@@ -62,6 +62,7 @@
 
 }
 -(void)loadData{
+    
        _dianZhangMarry=(NSMutableArray *)[self.dtModel.praise componentsSeparatedByString:@","];
     
     NSArray *array=self.dtModel.commentBean;
