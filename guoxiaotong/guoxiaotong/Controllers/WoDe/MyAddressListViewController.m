@@ -132,7 +132,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ContectRoleModel *roleModel = self.dataSource[indexPath.section];
     ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
-    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
+    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] initWithConversationChatter:@"xxxx" conversationType:eConversationTypeChat];
     easeMessageVC.title = memberModel.userName;
     [self.navigationController pushViewController:easeMessageVC animated:YES];
 }
