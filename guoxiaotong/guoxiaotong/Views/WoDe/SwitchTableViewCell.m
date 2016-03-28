@@ -10,9 +10,17 @@
 
 @implementation SwitchTableViewCell
 
-- (void)awakeFromNib {
-    self.open = YES;
+- (void)setState:(NSString *)permission index:(NSInteger)index {
+    _index = index;
+    if ([permission isEqualToString:@"0"]) {
+        _open = NO;
+    }else {
+        _open = YES;
+    }
     [self switchImage];
+}
+
+- (void)awakeFromNib {
     [self.switchButton addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
 }
 

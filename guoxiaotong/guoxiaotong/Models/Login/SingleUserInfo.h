@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserRoleInfoModel.h"
 
 @interface SingleUserInfo : NSObject
 
@@ -14,6 +15,10 @@
 @property (nonatomic, copy) NSString *userId;
 @property (nonatomic, copy) NSString *picPath;
 @property (nonatomic, copy) NSString *userName;
+@property (nonatomic, copy) NSString *loginName;
+
+@property (nonatomic, strong) NSMutableArray *roleList;
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 + (SingleUserInfo *)shareUserInfo;
 

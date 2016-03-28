@@ -7,8 +7,13 @@
 //
 
 #import "XZAddTeacherViewController.h"
+#import "ManagerService.h"
+#import "CustomView.h"
 
 @interface XZAddTeacherViewController ()
+
+@property (nonatomic, strong) UITextField *nameTextField;
+@property (nonatomic, strong) UITextField *phoneTextField;
 
 @end
 
@@ -16,24 +21,64 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"添加老师";
-
-    // Do any additional setup after loading the view.
+    [self setUI];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setUI {
+    [self viewWithTitle:@"姓名：" textField:_nameTextField index:0];
+    [self viewWithTitle:@"手机：" textField:_phoneTextField index:1];
+    
+    UIButton *sureButton = [CustomView buttonWithTitle:@"确定添加" width:120 orginY:200];
+    [sureButton addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:sureButton];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)viewWithTitle:(NSString *)title textField:(UITextField *)textfield index:(NSInteger)index {
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 50*index, WIDTH, 50)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 10, 100, 30)];
+    titleLabel.text = title;
+    [view addSubview:titleLabel];
+    
+    textfield = [[UITextField alloc] initWithFrame:CGRectMake(120, 10, WIDTH-140, 30)];
+    textfield.borderStyle = UITextBorderStyleRoundedRect;
+    [view addSubview:textfield];
+    switch (index) {
+        case 0:
+            _nameTextField = textfield;
+            break;
+        case 1:
+            _phoneTextField = textfield;
+            break;
+        default:
+            break;
+    }
+    
+    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH, 0.5)];
+    border.backgroundColor = [UIColor lightGrayColor];
+    [view addSubview:border];
+    
+    [self.view addSubview:view];
 }
-*/
+
+- (void)sureClick {
+    ManagerService *service = [[ManagerService alloc] initWithView:self.view];
+    __weak typeof (*&self)wewakSelf = self;
+    SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
+    NSDictionary *params = @{@"userId": shareInfo.userId, @"userName": self.nameTextField.text, @"loginName": self.phoneTextField.text};
+    [service addTeacher:params callBack:^(BOOL isSuccess) {
+        if (isSuccess) {
+            [wewakSelf.navigationController popViewControllerAnimated:true];
+        }else {
+            NSLog(@"添加失败！");
+        }
+    }];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
+}
 
 @end

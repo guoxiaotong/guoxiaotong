@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AboutUsViewController : BaseScrollViewController
+@interface AboutUsViewController : UIViewController
 
 @end

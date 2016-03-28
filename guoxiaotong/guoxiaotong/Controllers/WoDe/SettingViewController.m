@@ -18,6 +18,9 @@
 #import "ScanCodeViewController.h"
 #import "AdviceViewController.h"
 
+#import "LoginViewController.h"
+#import "CustomView.h"
+
 @interface SettingViewController ()
 
 @property (nonatomic, strong) NSMutableArray *dataSource;
@@ -79,18 +82,8 @@
     [self.tableView registerNib:[UINib nibWithNibName:@"SwitchTableViewCell" bundle:nil] forCellReuseIdentifier:@"SwitchCell"];
     
     CGFloat width = 100;
-    
-    UIColor *buttonColor = [UIColor colorWithRed:143/225.0 green:233/225.0 blue:63/225.0 alpha:1.0];
-    
     UIView *footer = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, 100)];
-    UIButton *exitButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    exitButton.frame = CGRectMake((WIDTH-width)/2, 50, width, 30);
-    exitButton.layer.borderWidth = 0.25;
-    exitButton.layer.cornerRadius = 5;
-    exitButton.layer.borderColor = buttonColor.CGColor;
-    exitButton.backgroundColor = buttonColor;
-    [exitButton setTitle:@"退出登录" forState:UIControlStateNormal];
-    [exitButton setTitleColor:[UIColor orangeColor] forState:UIControlStateNormal];
+    UIButton *exitButton = [CustomView buttonWithTitle:@"退出登录" width:width orginY:50];
     [exitButton addTarget:self action:@selector(logout) forControlEvents:UIControlEventTouchUpInside];
     
     [footer addSubview:exitButton];
@@ -100,8 +93,7 @@
 - (void)logout {
     SingleUserInfo *userInfo = [SingleUserInfo shareUserInfo];
     userInfo = nil;
-    UIStoryboard *loginStoryBoard = [UIStoryboard storyboardWithName:@"Login" bundle:nil];
-    UIViewController *loginVC = [loginStoryBoard instantiateViewControllerWithIdentifier:@"LOGIN"];
+    LoginViewController *loginVC = [[LoginViewController alloc] init];
     GXTNavigationController *navi = [[GXTNavigationController alloc] initWithRootViewController:loginVC];
     self.view.window.rootViewController = navi;
 }
@@ -116,12 +108,13 @@
         cell.titleLabel.text = self.dataSource[indexPath.row];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         cell.versionLabel.text = @"当前版本1.0";
+        cell.titleLabel.font = [UIFont systemFontOfSize:14.0];
         return cell;
     }else if (indexPath.row == 5 || indexPath.row == 6 || indexPath.row == 7) {
         if (self.isOpenNoti) {
             SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
             __weak typeof (*&self)weakSelf = self;
-            cell.index = indexPath.row;
+            [cell setState:@"1" index:indexPath.row];
             cell.SwitchBlock = ^(NSInteger index, BOOL open) {
                 if (index == 5) {
                     [weakSelf switchNotifitionState:open];
@@ -137,7 +130,7 @@
             if (indexPath.row == 5) {
                 SwitchTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"SwitchCell"];
                 __weak typeof (*&self)weakSelf = self;
-                cell.index = indexPath.row;
+                [cell setState:@"0" index:indexPath.row];
                 cell.SwitchBlock = ^(NSInteger index, BOOL open){
                     [weakSelf switchNotifitionState:open];
                 };
@@ -146,6 +139,7 @@
             }else {
                 UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
                 cell.textLabel.text = self.dataSource[indexPath.row];
+                cell.textLabel.font = [UIFont systemFontOfSize:14.0];
                 cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
                 return cell;
             }
@@ -154,6 +148,7 @@
     }else {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell"];
         cell.textLabel.text = self.dataSource[indexPath.row];
+        cell.textLabel.font = [UIFont systemFontOfSize:14.0];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
         return cell;
     }
@@ -161,32 +156,52 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSelector:@selector(deselect) withObject:nil afterDelay:0.1f];
-    UIStoryboard *setting = [UIStoryboard storyboardWithName:@"Setting" bundle:nil];
     UIViewController *nextVC;
-    if (indexPath.row == 0) {
-        nextVC = [setting instantiateViewControllerWithIdentifier:@"EDITPWD"];
-    }else if (indexPath.row == 1) {
-        nextVC = [[AboutUsViewController alloc] init];
-    }else if (indexPath.row == 2) {
-        nextVC = [[ScanCodeViewController alloc] init];
-    }else if (indexPath.row == 3) {
-        nextVC = [setting instantiateViewControllerWithIdentifier:@"ADVICE"];
-    }else if (indexPath.row == 4) {
-        //版本更新
-    }else if (indexPath.row == 5) {
-        
-    }else if (indexPath.row == 6) {
-        if (self.isOpenNoti) {
-            //
-        }else {
-            //清除缓存
-        }
-    }else if (indexPath.row == 7) {
-        
-    }else if (indexPath.row == 8) {
-        //清除缓存
-    }else {
-        
+    switch (indexPath.row) {
+        case 0:
+        {
+            nextVC = [[EditPassWordViewController alloc] init];
+        }break;
+        case 1:
+        {
+            nextVC = [[AboutUsViewController alloc] init];
+        }break;
+        case 2:
+        {
+            nextVC = [[ScanCodeViewController alloc] init];
+        }break;
+        case 3:
+        {
+            nextVC = [[AdviceViewController alloc] init];
+        }break;
+        case 4:
+        {
+            //版本更新
+        }break;
+        case 5:
+        {
+            //不操作
+        }break;
+        case 6:
+        {
+            //判断
+            if (_isOpenNoti) {
+                //不操作
+            }else {
+                //清缓存
+            }
+        }break;
+        case 7:
+        {
+            //不操作
+        }break;
+        case 8:
+        {
+            //清缓存
+        }break;
+            
+        default:
+            break;
     }
     if (nextVC) {
         [self.navigationController pushViewController:nextVC animated:YES];
@@ -196,19 +211,5 @@
 - (void)deselect {
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

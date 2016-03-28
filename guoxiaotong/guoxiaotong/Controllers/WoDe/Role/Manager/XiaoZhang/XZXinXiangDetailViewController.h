@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "XZEmailModel.h"
 
 @interface XZXinXiangDetailViewController : UIViewController
+
+@property (nonatomic, strong) XZEmailModel *emailModel;
 
 @end

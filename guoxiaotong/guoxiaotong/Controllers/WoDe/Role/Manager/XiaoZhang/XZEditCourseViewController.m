@@ -7,6 +7,7 @@
 //
 
 #import "XZEditCourseViewController.h"
+#import "ManagerService.h"
 
 @interface XZEditCourseViewController ()
 
@@ -17,23 +18,34 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title = @"修改课程";
-
-    // Do any additional setup after loading the view.
+    self.view.backgroundColor = [UIColor whiteColor];
+    [self setUI];
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"删除" style:UIBarButtonItemStylePlain target:self action:@selector(delete)];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)setUI {
+    UIImageView *imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 20, 40, 40)];
+    imageV.image = [UIImage imageNamed:[NSString stringWithFormat:@"icon_course_%@", _courseModel.memo]];
+    [self.view addSubview:imageV];
+    
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(80, 20, 120, 30)];
+    nameLabel.text = _courseModel.courseName;
+    [self.view addSubview:nameLabel];
+    
+    UILabel *detailLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 100, WIDTH-20, 21)];
+    detailLabel.text = @"科目详细信息";
+    [self.view addSubview:detailLabel];
+    
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)delete {
+    ManagerService *service = [[ManagerService alloc] initWithView:self.view];
+    __weak typeof (*&self)weakSelf = self;
+    [service deleteCourseWithCourseId:[NSString stringWithFormat:@"%ld", _courseModel.courseId] callBack:^(BOOL isSuccess) {
+        if (isSuccess) {
+            [weakSelf.navigationController popViewControllerAnimated:true];
+        }
+    }];
 }
-*/
 
 @end

@@ -25,6 +25,8 @@
 @property (nonatomic, copy) NSString *schoolName;
 @property (nonatomic, copy) NSString *classId;
 @property (nonatomic, copy) NSString *studentId;
+@property (nonatomic, copy) NSString *typeId;
+
 @property (nonatomic, strong) NSArray<UserRoleSettingModel *> *settings;
 
 @end

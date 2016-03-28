@@ -9,12 +9,15 @@
 #import "MyAddressListViewController.h"
 #import "ContactTableViewCell.h"
 #import "SectionHeaderView.h"
-#import "GroupModel.h"
+#import "BasicService.h"
+#import "ContectRoleModel.h"
+#import "ContectMemberModel.h"
+#import "TextFieldWithButton.h"
 
-@interface MyAddressListViewController ()<UITableViewDataSource, UITableViewDelegate, SectionHeaderViewDelegate>
+@interface MyAddressListViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
 @property (nonatomic, strong)UITableView *tableView;
-@property (nonatomic, strong)UITextField *searchTextField;
+@property (nonatomic, strong)TextFieldWithButton *searchTextField;
 @property (nonatomic, assign)CGFloat bottomHeight;
 @property (nonatomic, assign)CGFloat searchHeight;
 @property (nonatomic, strong)NSMutableArray *dataSource;
@@ -27,28 +30,36 @@
     [super viewDidLoad];
     self.view.backgroundColor = [UIColor colorWithRed:200/225.0 green:200/225.0 blue:200/225.0 alpha:1.0];
     self.navigationItem.title = @"我的通讯录";
+    _dataSource = [NSMutableArray array];
     [self setUI];
     [self loadData];
 }
 
 - (void)loadData {
-    self.dataSource = [NSMutableArray array];
-    for (NSInteger i = 0; i<10; i++) {
-        GroupModel *group = [[GroupModel alloc] init];
-        group.name = [NSString stringWithFormat:@"分组%ld", i];
-        group.members = @[@"lalala", @"lalala", @"lalala", @"lalala", @"lalala", @"lalala", @"lalala"];
-        [self.dataSource addObject:group];
-    }
+    __weak typeof (*&self)weakSelf = self;
+    BasicService *service = [[BasicService alloc] initWithView:self.view];
+    SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
+    NSDictionary *params = @{@"userId": shareInfo.userId, @"roleId": [NSNumber numberWithInteger: shareInfo.roleId]};
+    [service getContect:params callBack:^(BOOL isSuccess, NSArray *roleList) {
+        if (isSuccess) {
+            [weakSelf.dataSource removeAllObjects];
+            [weakSelf.tableView reloadData];
+            [weakSelf.dataSource addObjectsFromArray:roleList];
+            [weakSelf.tableView reloadData];
+        }
+    }];
 }
 
 - (void)setUI {
-    self.bottomHeight = 64;
-    self.searchHeight = 40;
+    _bottomHeight = 64;
+    _searchHeight = 40;
 
-    self.searchTextField = [[UITextField alloc] initWithFrame:CGRectMake(20, 5, WIDTH-40, 30)];
-    self.searchTextField.backgroundColor = [UIColor whiteColor];
-    self.searchTextField.placeholder = @"sosuo";
-    [self.view addSubview:self.searchTextField];
+    _searchTextField = [[TextFieldWithButton alloc] initSerachButtonWithFrame:CGRectMake(20, 5, WIDTH-40, 30)];
+    _searchTextField.buttonCallBack = ^() {
+        //点击搜索
+    };
+    _searchTextField.delegate = self;
+    [self.view addSubview:_searchTextField];
     
     self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.searchHeight, WIDTH, HEIGHT-64-self.bottomHeight-self.searchHeight) style:UITableViewStyleGrouped];
     self.tableView.backgroundColor = [UIColor colorWithRed:200/225.0 green:200/225.0 blue:200/225.0 alpha:1.0];
@@ -70,12 +81,11 @@
 
 - (void)serverClick {
     NSLog(@"联系客服");
+    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
+    easeMessageVC.title = @"国校通客服";
+    [self.navigationController pushViewController:easeMessageVC animated:YES];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 #pragma mark - tableViewDelegate
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -83,23 +93,31 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    GroupModel *group = self.dataSource[section];
-    //在这里进行判断，如果该组收拢，那就返回0行，如果该组打开，就返回实际的行数
-    if (group.isOpen) {
-    // 代表要展开
-    return group.members.count;
+    ContectRoleModel *roleModel = self.dataSource[section];
+    if (roleModel.open) {
+        return roleModel.memberList.count;
     }else {
-    // 代表要合拢
-    return 0;
+        return 0;
     }
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
+    ContectRoleModel *roleModel = self.dataSource[indexPath.section];
+    ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
+    cell.nameLabel.text = memberModel.userName;
+    cell.detailLabel.text = memberModel.desc;
+    return cell;
+}
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    SectionHeaderView *headerview=[SectionHeaderView headerWithTableView:tableView];
-    headerview.delegate=self;
-    //设置头部视图的数据
-    GroupModel *groupmodel=self.dataSource[section];
-    headerview.group=groupmodel;
+    __weak typeof (*&self)weakSelf = self;
+    ContectRoleModel *roleModel = self.dataSource[section];
+    SectionHeaderView *headerview = [[SectionHeaderView alloc] initWithTitle: roleModel.roleName isOpen: roleModel.open];
+    headerview.SectionBlock = ^(NSInteger index, BOOL isOpen) {
+        roleModel.open = isOpen;
+        [weakSelf.tableView reloadData];
+    };
     return headerview;
 }
 
@@ -111,15 +129,14 @@
     return 0.0001;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
-    return cell;
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    ContectRoleModel *roleModel = self.dataSource[indexPath.section];
+    ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
+    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] initWithConversationChatter:@"xxxx" conversationType:eConversationTypeChat];
+    easeMessageVC.title = memberModel.userName;
+    [self.navigationController pushViewController:easeMessageVC animated:YES];
 }
 
-#pragma mark - headerDelegate
-- (void)headerViewDidClickHeaderView:(SectionHeaderView *)headerView {
-    [self.tableView reloadData];
-}
 
 
 @end

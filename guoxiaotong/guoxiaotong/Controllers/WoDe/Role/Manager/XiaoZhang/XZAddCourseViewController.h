@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseScrollViewController.h"
+#import "UserRoleInfoModel.h"
 
-@interface XZAddCourseViewController : UIViewController
+@interface XZAddCourseViewController : BaseScrollViewController
+
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 @end
