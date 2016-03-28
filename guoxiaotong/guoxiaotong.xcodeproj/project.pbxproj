@@ -186,6 +186,8 @@
 		00BDE46D1CA686C7007BF575 /* QunTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00BDE3B91CA686C7007BF575 /* QunTableViewCell.xib */; };
 		00BDE46E1CA686C7007BF575 /* ZhiYuanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3BB1CA686C7007BF575 /* ZhiYuanTableViewCell.m */; };
 		00BDE46F1CA686C7007BF575 /* ZhiYuanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00BDE3BC1CA686C7007BF575 /* ZhiYuanTableViewCell.xib */; };
+		BA0559431CA8F83A000EE65D /* TongZhiTiXinMdel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0559421CA8F83A000EE65D /* TongZhiTiXinMdel.m */; };
+		BA0559461CA91621000EE65D /* TiXingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0559451CA91621000EE65D /* TiXingViewController.m */; };
 		CF7646CE18E6D047D4C99CE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080692A9D1B36040A8466472 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -544,6 +546,10 @@
 		00BDE3BC1CA686C7007BF575 /* ZhiYuanTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZhiYuanTableViewCell.xib; sourceTree = "<group>"; };
 		080692A9D1B36040A8466472 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DDC6AA5720949B57EB60EF6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		BA0559411CA8F83A000EE65D /* TongZhiTiXinMdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongZhiTiXinMdel.h; sourceTree = "<group>"; };
+		BA0559421CA8F83A000EE65D /* TongZhiTiXinMdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongZhiTiXinMdel.m; sourceTree = "<group>"; };
+		BA0559441CA91621000EE65D /* TiXingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiXingViewController.h; sourceTree = "<group>"; };
+		BA0559451CA91621000EE65D /* TiXingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiXingViewController.m; sourceTree = "<group>"; };
 		CAF997D8BA6E1F22D842A922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -845,6 +851,8 @@
 				00BDE2E81CA686C6007BF575 /* XuanzZheQunViewContr.h */,
 				00BDE2E91CA686C6007BF575 /* XuanzZheQunViewContr.m */,
 				00BDE2EA1CA686C6007BF575 /* XuanzZheQunViewContr.xib */,
+				BA0559441CA91621000EE65D /* TiXingViewController.h */,
+				BA0559451CA91621000EE65D /* TiXingViewController.m */,
 			);
 			path = XiaoXin;
 			sourceTree = "<group>";
@@ -1243,6 +1251,8 @@
 				00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */,
 				00BDE3081CA686C6007BF575 /* LoginModel.h */,
 				00BDE3091CA686C6007BF575 /* LoginModel.m */,
+				BA0559411CA8F83A000EE65D /* TongZhiTiXinMdel.h */,
+				BA0559421CA8F83A000EE65D /* TongZhiTiXinMdel.m */,
 			);
 			path = XiaoXin;
 			sourceTree = "<group>";
@@ -1513,6 +1523,7 @@
 				00BDE42C1CA686C7007BF575 /* JZMemberModel.m in Sources */,
 				00BDE3E41CA686C7007BF575 /* BZRSetTeacherViewController.m in Sources */,
 				00BDE43E1CA686C7007BF575 /* LoadAlassetData.m in Sources */,
+				BA0559431CA8F83A000EE65D /* TongZhiTiXinMdel.m in Sources */,
 				00BDE3E31CA686C7007BF575 /* BZRQuanXianViewController.m in Sources */,
 				00BDE40C1CA686C7007BF575 /* main.m in Sources */,
 				00BDE3DC1CA686C7007BF575 /* MyTrendsViewController.m in Sources */,
@@ -1535,6 +1546,7 @@
 				00BDE4421CA686C7007BF575 /* Tools.m in Sources */,
 				00BDE40F1CA686C7007BF575 /* UserService.m in Sources */,
 				00BDE4541CA686C7007BF575 /* ImageCollectionCell.m in Sources */,
+				BA0559461CA91621000EE65D /* TiXingViewController.m in Sources */,
 				00BDE4381CA686C7007BF575 /* TeacherModel.m in Sources */,
 				00BDE3D31CA686C7007BF575 /* ImageHeaderView.m in Sources */,
 				00BDE3EB1CA686C7007BF575 /* XZAddCourseViewController.m in Sources */,

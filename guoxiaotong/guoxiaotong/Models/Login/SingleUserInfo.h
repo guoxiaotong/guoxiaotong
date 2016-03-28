@@ -16,6 +16,11 @@
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *loginName;
 
+//ch
+@property(nonatomic,copy)NSMutableArray *roleArry;//所有角色
+@property(nonatomic,copy)NSString *roleName;
+@property(nonatomic,copy)NSString *userRoleId;
+
 + (SingleUserInfo *)shareUserInfo;
 
 @end

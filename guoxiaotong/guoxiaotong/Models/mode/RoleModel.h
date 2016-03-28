@@ -12,7 +12,7 @@
 
 //用于获取角色
 
-@property(nonatomic,assign)int roleId;//角色Id
+@property(nonatomic,assign)NSInteger roleId;//角色Id
 proStr(roleName);//角色名
 proStr(issueTime);//创建时间
 proStr(roleType);//角色类型

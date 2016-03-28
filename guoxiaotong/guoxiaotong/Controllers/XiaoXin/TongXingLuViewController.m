@@ -14,6 +14,7 @@
 #import "XuanZheQunLiaoTableViewCell.h"
 #import "HttpDataModel.h"
 #import "TongXunmodel.h"
+#import "RoleModel.h"
 
 #import "Singleton.h"
 
@@ -28,9 +29,17 @@
     
     UITableView *_xuanZheTabView;
     
+    UITableView *_roleTabView;
+    
     NSMutableArray *_titleDataArr;
     
     NSMutableArray *_userDataArr;
+    
+    NSMutableArray *_roleDataArry;//用于全部角色；
+    
+    UIButton *_btnleft;//全部角色按钮
+    
+    UIButton *_btnRit;//添加群聊
 
 }
 
@@ -56,19 +65,19 @@
     self.navigationItem.title=@"通讯录";
     
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
-    
     //去掉返回按钮后的文字
     [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
     self.view.backgroundColor=RGB(220, 220, 220);
+       _roleDataArry=[[NSMutableArray alloc]init];
     
     _titleDataArr=[[NSMutableArray alloc]init];
     
     _userDataArr=[[NSMutableArray alloc]init];
     
-    Singleton *sin=[Singleton shareUser];
+    SingleUserInfo *sigUser=[SingleUserInfo shareUserInfo];
     
-    NSLog(@"%@",sin.SingleMarry);
+    _roleDataArry=sigUser.roleArry;
     
     //请求数据
     [self relodData];
@@ -82,13 +91,21 @@
     //创建选择群对话
     [self creatXuanZheTabView];
     
+    
+    //创建角色tabView
+    [self creatRoleTabView];
+    
 }
 -(void)relodData{
-
+    [_userDataArr removeAllObjects];
+    [_titleDataArr removeAllObjects];
     
+    SingleUserInfo *singleUsel=[SingleUserInfo shareUserInfo];
+    
+
     NSString *urlStr = @"http://121.42.27.199:8888/csCampus/dynamic/contact.page";
 
-    NSDictionary *bodyDict = @{@"roleId":@2,@"userId":@1046};
+    NSDictionary *bodyDict = @{@"roleId":@(singleUsel.roleId),@"userId":singleUsel.userId};
 
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
  
@@ -127,46 +144,85 @@
     }];
     
 
-    
-
 
 }
 
 //创建两个按钮
 -(void)creatBut{
+    SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
 
-    UIButton *btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnleft.frame=CGRectMake(5, 45, screen_Width/2-10, 40);
+    _btnleft.frame=CGRectMake(5, 45, screen_Width/2-10, 40);
     
-    btnleft.backgroundColor=[UIColor whiteColor];
+    _btnleft.backgroundColor=[UIColor whiteColor];
     
-    btnleft.layer.cornerRadius=5;
+    _btnleft.layer.cornerRadius=5;
     
-    [btnleft setTitle:@"全部角色" forState:UIControlStateNormal];
+    [_btnleft setTitle:singUser.roleName forState:UIControlStateNormal];
     
-    [btnleft setTintColor:[UIColor blackColor]];
+    [_btnleft setTintColor:[UIColor blackColor]];
     
-    [self.view addSubview:btnleft];
+    [_btnleft addTarget:self action:@selector(btnleftClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_btnleft];
+    UIImageView *iamView=[[UIImageView alloc]initWithFrame:CGRectMake(screen_Width/2-30, 15, 15, 15)];
+    iamView.image=[UIImage imageNamed:@"iconfont-control-arr.png"];
+    [_btnleft addSubview:iamView];
     
     
-    UIButton *btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnRit.frame=CGRectMake(screen_Width/2+5, 45, screen_Width/2-10, 40);
+    _btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnRit.backgroundColor=[UIColor whiteColor];
+    _btnRit.frame=CGRectMake(screen_Width/2+5, 45, screen_Width/2-10, 40);
     
-    btnRit.layer.cornerRadius=5;
+    _btnRit.backgroundColor=[UIColor whiteColor];
     
-    [btnRit setTitle:@"添加群聊" forState:UIControlStateNormal];
+    _btnRit.layer.cornerRadius=5;
     
-     [btnRit setTintColor:[UIColor blackColor]];
+    [_btnRit setTitle:@"添加群聊" forState:UIControlStateNormal];
     
-    [btnRit addTarget:self action:@selector(btnRitClick) forControlEvents:UIControlEventTouchUpInside];
+     [_btnRit setTintColor:[UIColor blackColor]];
     
-    [self.view addSubview:btnRit];
+    [_btnRit addTarget:self action:@selector(btnRitClick) forControlEvents:UIControlEventTouchUpInside];
+    
+    [self.view addSubview:_btnRit];
 
                    
+}
+//点击全部角色
+-(void)btnleftClick{
+    
+    UIView *allImageView=[[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    [self.tabBarController.view addSubview:allImageView];
+    
+    UITapGestureRecognizer *tapGes=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesClick:)];
+    
+    tapGes.cancelsTouchesInView=NO;
+    
+    [allImageView addGestureRecognizer:tapGes];
+    
+    allImageView.userInteractionEnabled=YES;
+    
+    [UIView animateWithDuration:3 animations:^{
+        
+        [allImageView addSubview:_roleTabView];
+    }];
+
+    
+}
+
+-(void)tapGesClick:(UITapGestureRecognizer *)tap{
+    
+    UIImageView *imageView=(UIImageView *)tap.view;
+    
+    NSLog(@"23333");
+    
+    [imageView removeFromSuperview];
+    imageView=nil;
+    
+    
 }
 
 //添加群聊按钮的点击事件
@@ -175,6 +231,34 @@
     AddViewController *addVC=[[AddViewController alloc]init];
     
     [self.navigationController pushViewController:addVC animated:YES];
+
+
+}
+
+-(void)creatRoleTabView{
+    
+    _roleTabView=[[UITableView alloc]initWithFrame:CGRectMake(10, 80+64, screen_Width/2-20, 30*(_roleDataArry.count+1)) style:UITableViewStylePlain];
+
+    _roleTabView.delegate=self;
+    
+    _roleTabView.dataSource=self;
+    
+    _roleTabView.separatorStyle=UITableViewCellSeparatorStyleSingleLineEtched;
+    
+//
+//    __roleTabView.backgroundColor=RGB(41, 36,33);
+    
+  
+    CALayer *layer=[_roleTabView layer];
+
+    [layer setMasksToBounds:YES];
+
+    [layer setCornerRadius:5];
+
+    [layer setBorderWidth:1];
+
+    [layer setBorderColor:[RGBA(41, 36, 33, 0.5) CGColor]];
+    
 
 
 }
@@ -228,45 +312,96 @@
 
 #pragma mark UITableViewDataSource
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (tableView==_roleTabView) {
+        return 1;
+    }else{
+        
+        return _titleDataArr.count+1;
+    
+    }
 
-  return _titleDataArr.count+1;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section==0) {
-        return 0;
-    }else{
-     return isOpen[section]?[_userDataArr[section-1] count]:0;
-    }
+    if (tableView==_roleTabView) {
+        return _roleDataArry.count+1;
+    } else {
+        
+        if (section==0) {
+            return 0;
+        }else{
+            return isOpen[section]?[_userDataArr[section-1] count]:0;
+        }
 
+    }
+    
+    
+   
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
    static NSString *cellName=@"cellId";
-
-    XuanZheQunLiaoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellName];
-    if (cell==nil) {
-        cell=[[[NSBundle mainBundle]loadNibNamed:@"XuanZheQunLiaoTableViewCell" owner:self options:nil]firstObject];
-    }
+    
+    if (tableView==_roleTabView) {
+       
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellName];
+        if (cell==nil) {
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellName];
+        }
+    
+        if (indexPath.row==0) {
+            cell.textLabel.text=@"全部角色";
+        }else{
+            
+            RoleModel *roleModel=_roleDataArry[indexPath.row-1];
+            
+            cell.textLabel.text=roleModel.roleName;
+            
+        }
         
-    //设置layer
-    CALayer *layer=[cell.contentView layer];
+        cell.textLabel.font=[UIFont systemFontOfSize:14];
+        
+        cell.selectionStyle=NO;
+        
+        cell.backgroundColor=[UIColor whiteColor];
+        CALayer *layer=[cell.contentView layer];
+        [layer setMasksToBounds:YES];
+        [layer setBorderWidth:1];
+        [layer setBorderColor:[RGBA(41, 36, 33, 0.5) CGColor]];
+        
+        return cell;
 
-    [layer setMasksToBounds:YES];
-    //        [layer setCornerRadius:5];
-  
-    //
-    [layer setBorderWidth:2];
-    //设置边框线的颜色
-    [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
+        
+        
+    }else{
+        
+        XuanZheQunLiaoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellName];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"XuanZheQunLiaoTableViewCell" owner:self options:nil]firstObject];
+        }
+        
+        //设置layer
+        CALayer *layer=[cell.contentView layer];
+        
+        [layer setMasksToBounds:YES];
+        //        [layer setCornerRadius:5];
+        
+        //
+        [layer setBorderWidth:2];
+        //设置边框线的颜色
+        [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
+        
+        
+        cell.backgroundColor=RGBA(245, 245, 245, 1);
+        
+        TongXunmodel *model=_userDataArr[indexPath.section-1][indexPath.row];
+        cell.tongXunModel=model;
+        
+        return cell;
+    
+    }
 
-    
-    cell.backgroundColor=RGBA(245, 245, 245, 1);
-    
-    TongXunmodel *model=_userDataArr[indexPath.section-1][indexPath.row];
-    cell.tongXunModel=model;
-    
-    return cell;
+    return nil;
     
 
 }
@@ -274,65 +409,68 @@
 //tableView头
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
     
-    
-     UIButton *butn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, screen_Width, 40)];
-    
-    butn.backgroundColor=[UIColor whiteColor];
-    
-    UILabel *qunLabel=[[UILabel alloc]init];
-    
-    if (section==0) {
+    if (tableView==_xuanZheTabView) {
+        UIButton *butn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, screen_Width, 40)];
         
-        qunLabel.frame=CGRectMake(10, 10, 100, 20);
+        butn.backgroundColor=[UIColor whiteColor];
         
-        _imagView.frame=CGRectMake(screen_Width-30, 10, 20, 20);
+        UILabel *qunLabel=[[UILabel alloc]init];
         
-        _imagView.image=[UIImage imageNamed:@"arrows_down.png"];
-        
-        qunLabel.text=@"选择群对话";
-        
-        
-    }else{
-    
-        qunLabel.frame=CGRectMake(30, 10, 100, 20);
-        
-        if (isOpen[section]?1:0) {
+        if (section==0) {
             
-            _imagView=[[UIImageView alloc]init];
+            qunLabel.frame=CGRectMake(10, 10, 100, 20);
             
-            _imagView.frame=CGRectMake(10, 10, 20, 20);
-            
-            _imagView.image=[UIImage imageNamed:@"arrows_up.png"];
-            
-            [butn addSubview:_imagView];
-            
-        }else{
-            
-            _imagView=[[UIImageView alloc]init];
-            
-            _imagView.frame=CGRectMake(10, 10, 20, 20);
+            _imagView.frame=CGRectMake(screen_Width-30, 10, 20, 20);
             
             _imagView.image=[UIImage imageNamed:@"arrows_down.png"];
             
-            [butn addSubview:_imagView];
+            qunLabel.text=@"选择群对话";
+            
+            
+        }else{
+            
+            qunLabel.frame=CGRectMake(30, 10, 100, 20);
+            
+            if (isOpen[section]?1:0) {
+                
+                _imagView=[[UIImageView alloc]init];
+                
+                _imagView.frame=CGRectMake(10, 10, 20, 20);
+                
+                _imagView.image=[UIImage imageNamed:@"arrows_up.png"];
+                
+                [butn addSubview:_imagView];
+                
+            }else{
+                
+                _imagView=[[UIImageView alloc]init];
+                
+                _imagView.frame=CGRectMake(10, 10, 20, 20);
+                
+                _imagView.image=[UIImage imageNamed:@"arrows_down.png"];
+                
+                [butn addSubview:_imagView];
+                
+            }
+            
+            qunLabel.text=[_titleDataArr[section-1] roleName];
             
         }
         
-        qunLabel.text=[_titleDataArr[section-1] roleName];
+        [butn addSubview:_imagView];
+        
+        [butn addSubview:qunLabel];
+        
+        butn.tag=section+1000;
+        
+        [butn addTarget:self action:@selector(butnCliuck:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return butn;
+
+    }else{
     
+        return nil;
     }
-    
-    
-    
-    [butn addSubview:_imagView];
-    
-    [butn addSubview:qunLabel];
-    
-    butn.tag=section+1000;
-    
-    [butn addTarget:self action:@selector(butnCliuck:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return butn;
 }
 
 -(void)butnCliuck:(UIButton *)but{
@@ -362,17 +500,49 @@
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
-    
-    return 40;
+    if (tableView==_xuanZheTabView) {
+        return 40;
 
+    }else{
+        return 0;
+    
+    }
+   
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     
+    if (tableView==_roleTabView) {
+        
+        SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
+        if (indexPath.row==0) {
+            singUser.roleId=0;
+            singUser.roleName=@"全部角色";
+            
+        }else{
+            RoleModel *model=_roleDataArry[indexPath.row-1];
+            singUser.roleId=model.roleId;
+            singUser.roleName=model.roleName;
+        
+        }
+        [_btnleft removeFromSuperview];
+        [_btnRit removeFromSuperview];
+        _btnRit=nil;
+        _btnleft=nil;
+        [self creatBut];
+        
+        [self relodData];
+      
+    }
+    
+//    if (indexPath.section!=0) {
+//        
+//        EaseMessageViewController *chatController = [[EaseMessageViewController alloc] initWithConversationChatter:@"8001" conversationType:eConversationTypeChat];
+//        
+//        [self.navigationController pushViewController:chatController animated:YES];
+//        
+//    }
+    
       }
-
-
-
-
 
 //tableView组尾
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
@@ -381,7 +551,14 @@
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    
+    if (tableView==_roleTabView) {
+        return 30;
+    }else{
+     return 60;
+    
+    }
+   
 
 }
 

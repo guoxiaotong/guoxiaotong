@@ -13,6 +13,7 @@
 #import "TongXingLuViewController.h"
 #import"AFNetworking.h"
 #import "DongTaiViewController.h"
+#import "TiXingViewController.h"
 
 #import "ADModel.h"
 #import "RoleModel.h"
@@ -20,7 +21,9 @@
 #import "Singleton.h"
 #import "LoginModel.h"
 #import "HttpClient.h"
+#import "TongZhiTiXinMdel.h"
 
+#import "SingleUserInfo.h"
 #import "Singleton.h"
 
 
@@ -52,6 +55,13 @@
     NSMutableArray *_loginDataArry;
     
     HttpClient *_httpClient;
+    
+    
+    UIButton *_ritBtn;//navicontiomBar右边用于展示角色的butoon;
+    
+    UIView *_headView;//tabView的头视图
+    
+    TongZhiTiXinMdel *_model;//通知，提醒里的数据模型
     
     }
 
@@ -89,16 +99,19 @@ self.tabBarController.tabBar.hidden=NO;
     _loginDataArry=[[NSMutableArray alloc]init];
     
     //解析登录数据
-    [self lodeLoginData];
+//    [self lodeLoginData];
     
     //解析广告栏数据
    [self lodeADData];
     
-    //创建搜索栏
-    [self creatSouSuo];
+    //通知，提醒数据
+    [self lodeTongData];
     
-        //创建导航点
-    [self creatPageControl];
+//    //创建搜索栏
+//    [self creatSouSuo];
+//    
+//        //创建导航点
+//    [self creatPageControl];
     
     //创建tabView
     [self creatTabView];
@@ -115,7 +128,6 @@ self.tabBarController.tabBar.hidden=NO;
     
     sing.SingleMarry=[[NSMutableArray alloc]init];
 
-    
     //登录返回的数据
     NSString *str=@"http://121.42.27.199:8888/csCampus/user/login.page";
     NSDictionary *Dict=@{@"userName":@13600002000,@"password":@123456};
@@ -154,8 +166,34 @@ self.tabBarController.tabBar.hidden=NO;
 //         NSLog(@"%@", error);
 //    }];
 
+
+}
+
+-(void)lodeTongData{
+
+    SingleUserInfo *singleUser=[SingleUserInfo shareUserInfo];
     
-   
+    NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/unReadNum.page";
+    NSDictionary *Dict=@{@"userId":singleUser.userId,@"userRoleId":singleUser.userRoleId};
+    
+    AFHTTPRequestOperationManager *requst = [AFHTTPRequestOperationManager manager];
+    //设置响应格式为NSData
+    requst.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [requst  POST:str parameters:Dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        
+        _model=[[TongZhiTiXinMdel alloc]init];
+        [_model setValuesForKeysWithDictionary:dict];
+        
+        [_tabView reloadData];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+    }];
+
+
+
 }
 
 - (void)nextPhoto{
@@ -169,10 +207,10 @@ self.tabBarController.tabBar.hidden=NO;
             _scroll.contentOffset = CGPointMake(_scroll.frame.size.width, 0);
         }
     }];
-   int  a=_scroll.contentOffset.x / _scroll.frame.size.width ;
+    int  a=_scroll.contentOffset.x / _scroll.frame.size.width ;
     
     _label.text=[_adDataArry[a] title];
-}
+   }
 
 
 -(void)lodeADData{
@@ -202,11 +240,8 @@ self.tabBarController.tabBar.hidden=NO;
             [_adDataArry addObject:[_adDataArry firstObject]];
             //0 1 2 3 4
             [_adDataArry insertObject:_adDataArry[_adDataArry.count - 2] atIndex:0];
-            //创建滚动视图
-            [self creaScrollView];
             
-            //创建scrollView下的标题栏
-            [self creatLabel];
+           
             
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -215,10 +250,12 @@ self.tabBarController.tabBar.hidden=NO;
     
 
    // 请求全部角色数据
+    
+    SingleUserInfo *singeleUsel=[SingleUserInfo shareUserInfo];
 
     NSString *httpStr = @"http://121.42.27.199:8888/csCampus/role/role.page";
     
-    NSDictionary *Dict = @{@"userId":@891};
+    NSDictionary *Dict = @{@"userId":singeleUsel.userId};
     
     AFHTTPRequestOperationManager *mana = [AFHTTPRequestOperationManager manager];
     
@@ -242,23 +279,23 @@ self.tabBarController.tabBar.hidden=NO;
                 }
         [self creatQuBuTabView];
         
+        SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
+        singUser.roleArry=_roleData;
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
     }];
 
 
-
-
 }
 -(void)creatQuBuTabView{
     
-    _quanBuJueTab=[[UITableView alloc]initWithFrame:CGRectMake(screen_Width-100, 55, 80, 30*_roleData.count) style:UITableViewStylePlain];
+    _quanBuJueTab=[[UITableView alloc]initWithFrame:CGRectMake(screen_Width-100, 55, 80, 30*(_roleData.count+1)) style:UITableViewStylePlain];
     
     _quanBuJueTab.delegate=self;
     
     _quanBuJueTab.dataSource=self;
     
-
     _quanBuJueTab.backgroundColor=RGB(41, 36,33);
     
     //设置layer
@@ -277,11 +314,18 @@ self.tabBarController.tabBar.hidden=NO;
 //添加导航栏右边的全部角色按钮
 -(void)creatRightBtn{
     
+    SingleUserInfo *singel=[SingleUserInfo shareUserInfo];
+    
     UIButton *ritBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
     ritBtn.frame=CGRectMake(screen_Width-25, 0, 80, 50);
+    if (singel.roleId==nil) {
+        [ritBtn setTitle:@"全部角色" forState:UIControlStateNormal];
+
+    }else{
     
-    [ritBtn setTitle:@"全部角色" forState:UIControlStateNormal];
+        [ritBtn setTitle:singel.roleName forState:UIControlStateNormal];
+    }
     
     [ritBtn addTarget:self action:@selector(ritBtnClik:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -320,7 +364,7 @@ self.tabBarController.tabBar.hidden=NO;
     NSLog(@"23333");
 
     [imageView removeFromSuperview];
-
+    imageView=nil;
 
 }
 
@@ -328,9 +372,10 @@ self.tabBarController.tabBar.hidden=NO;
 -(void)creatLabel{
     _label=[[UILabel alloc]initWithFrame:CGRectMake(0, screen_Width/2+10, screen_Width, 30)];
     
+    
     _label.backgroundColor=RGBA(41, 36, 33, 0.6);
     
-    [self.view addSubview:_label];
+    [_headView addSubview:_label];
 
 
 }
@@ -345,7 +390,7 @@ self.tabBarController.tabBar.hidden=NO;
     
     shouShuoBtn.frame=CGRectMake(25, 5,screen_Width-50, 30);
     
-    [self.view addSubview:shouShuoBtn];
+    [_headView addSubview:shouShuoBtn];
     
     UIImageView *shouImageView=[[UIImageView alloc]initWithFrame:CGRectMake(screen_Width-75,2, 25, 25)];
     
@@ -376,27 +421,25 @@ self.tabBarController.tabBar.hidden=NO;
     //设置当前被点亮的点的颜色
     _contrl.currentPageIndicatorTintColor = [UIColor redColor];
     
-    _contrl.backgroundColor=[UIColor redColor];
-    
+
     //    contrl.currentPage = 5;q
     _contrl.tag = 100;
     _contrl.userInteractionEnabled = NO;
-    [self.view addSubview:_contrl];
-    
-    
+    [_headView addSubview:_contrl];
     
     
 }
 
-
 //创建tabView
 -(void)creatTabView{
     
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, screen_Width/2+60, screen_Width, self.view.frame.size.height-100) style:UITableViewStylePlain];
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, self.view.frame.size.height-44) style:UITableViewStylePlain];
     
     _tabView.delegate=self;
     
     _tabView.dataSource=self;
+    
+    _tabView.separatorStyle=UITableViewCellSeparatorStyleNone;
     
 //    _tabView.bounces=NO;
     
@@ -413,7 +456,7 @@ self.tabBarController.tabBar.hidden=NO;
     
     _scroll.delegate=self;
     
-    [self.view addSubview:_scroll];
+    [_headView addSubview:_scroll];
     
     for (int i=0; i<_adDataArry.count; i++) {
         
@@ -460,13 +503,12 @@ self.tabBarController.tabBar.hidden=NO;
     
     return 1;
 
-
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     
     if (tableView==_quanBuJueTab) {
-        return [_roleData count];
+        return [_roleData count]+1;
     }else{
         return 3;
     }
@@ -474,8 +516,6 @@ self.tabBarController.tabBar.hidden=NO;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
-    
     
     if (tableView==_quanBuJueTab) {
         
@@ -486,11 +526,17 @@ self.tabBarController.tabBar.hidden=NO;
             cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
         }
         
-        RoleModel *roleModel=_roleData[indexPath.row];
-       
-        cell.textLabel.text=roleModel.roleName;
+        if (indexPath.row==0) {
+             cell.textLabel.text=@"全部角色";
+        }else{
+            
+            RoleModel *roleModel=_roleData[indexPath.row-1];
+            
+            cell.textLabel.text=roleModel.roleName;
         
-        cell.textLabel.font=[UIFont systemFontOfSize:14];
+        }
+        
+        cell.textLabel.font=[UIFont systemFontOfSize:12];
     
         cell.selectionStyle=NO;
         
@@ -509,17 +555,65 @@ self.tabBarController.tabBar.hidden=NO;
     if (!cell) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"XiaoXinTableViewCell" owner:self options:nil]firstObject];
     }
-    
+        CALayer *layer=[cell.contentView layer];
+        [layer setMasksToBounds:YES];
+        [layer setBorderWidth:1];
+        [layer setBorderColor:[RGBA(220, 220, 220, 1) CGColor]];
 
+        if (indexPath.row==0) {
+            cell.xiangQingLabel.text=[NSString stringWithFormat:@"%@在通知中提到了您",_model.lastUser];
+            cell.timeLabel.text=_model.time;
+            cell.titleLabel.text=@"通知";
+            cell.biaoZhiTu.image=[UIImage imageNamed:@"组-2_5.png"];
+        }else if (indexPath.row==1){
+            cell.xiangQingLabel.text=[NSString stringWithFormat:@"%@在动态中提提到了你",_model.lastUser2];
+            cell.timeLabel.text=_model.time2;
+            cell.titleLabel.text=@"提醒";
+            cell.biaoZhiTu.image=[UIImage imageNamed:@"组-2_7.png"];
+        }else{
+        
+         cell.titleLabel.text=@"国搜新闻";
+            cell.biaoZhiTu.image=[UIImage imageNamed:@"news.png"];
+        }
+        
+        cell.selectionStyle=NO;
         return cell;
     }
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if (tableView==_quanBuJueTab) {
-        NSLog(@"_quanBuJueCell");
+        SingleUserInfo *singUserl=[SingleUserInfo shareUserInfo];
         
-        NSLog(@"%ld",_roleData.count);
+//        NSMutableArray *mRoleArry=[[NSMutableArray alloc]init];
+//        
+//        for (int i=0; i<_roleData.count; i++) {
+//            RoleModel *model=_roleData[i];
+//            NSLog(@"%ld",model.roleId);
+//            
+//            
+//        }
+        
+        if (indexPath.row==0) {
+            //点击全部角色
+            singUserl.roleId=0;
+            singUserl.roleName=@"全部角色";
+            
+        }else{
+            
+            RoleModel *roleModel=_roleData[indexPath.row-1];
+            singUserl.roleId=roleModel.roleId;
+            singUserl.roleName=roleModel.roleName;
+
+        }
+        
+        [_ritBtn removeFromSuperview];
+        _ritBtn=nil;
+        [self creatRightBtn];
+        
+        NSLog(@"%ld",singUserl.roleId);
+        NSLog(@"%@",singUserl.roleName);
+        
         
     }else{
         
@@ -532,7 +626,9 @@ self.tabBarController.tabBar.hidden=NO;
             [self.navigationController pushViewController:donVc animated:YES];
         }else if (indexPath.row==1){
         
-        
+            TiXingViewController *tiXinVC=[[TiXingViewController alloc]init];
+            
+            [self.navigationController pushViewController:tiXinVC animated:YES];
         
         
         }else{
@@ -571,8 +667,48 @@ self.tabBarController.tabBar.hidden=NO;
         
     }else{
 
-        return 70;
+        return 65;
     }
+
+}
+-(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+    
+    if (tableView==_tabView) {
+        _headView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, screen_Width/2+60)];
+        
+        _headView.backgroundColor=RGBA(220, 220, 220, 1);
+        
+        //创建搜索栏
+        [self creatSouSuo];
+        
+        //创建滚动视图
+        [self creaScrollView];
+        
+        //创建scrollView下的标题栏
+        [self creatLabel];
+
+
+        //创建导航点
+        [self creatPageControl];
+        
+        return _headView;
+
+    }else{
+        return nil;
+    
+    }
+    
+   
+ 
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView==_tabView) {
+         return screen_Width/2+60;
+    }else{
+    
+        return 0;
+    }
+   
 
 }
 

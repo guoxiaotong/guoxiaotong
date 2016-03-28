@@ -65,6 +65,8 @@
                 SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
                 shareInfo.userId = loginModel.userId;
                 shareInfo.picPath = loginModel.picPath;
+                //ch加的
+                shareInfo.userRoleId=loginModel.userRoleId;
                 [self didLogin:loginModel.loginName password:password];
             }
             if (requestCallBack) {

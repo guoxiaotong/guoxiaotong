@@ -63,7 +63,7 @@
     
     self.type=(NSMutableString *)typstr;
      _dongTaiArry=[[NSMutableArray alloc]init];
-    //登录返回的数据
+
     NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/dynamic.page";
     
     

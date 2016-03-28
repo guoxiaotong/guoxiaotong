@@ -40,7 +40,7 @@
     
     [super viewDidLoad];
     
-    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, screen_Width, screen_Height+tabBar_Height)];
+    UIWebView *webview = [[UIWebView alloc] initWithFrame:CGRectMake(0, 0, screen_Width, screen_Height)];
     
     [webview loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:self.httpStr]]];
     

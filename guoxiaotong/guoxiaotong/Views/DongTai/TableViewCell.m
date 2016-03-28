@@ -14,14 +14,6 @@
     // Initialization code
 }
 
-////动态里的数据模型
-//proStr(content);//动态内容
-//proStr(dynamicId);//动态ID
-//proStr(dynamicType);//动态类型 0通知1分享
-//proStr(sendTime);//发送时间
-//proStr(title);//动态的接收人列表
-//proStr(num);//未读条数
-//proStr(lastUser);//最后发送的人
 
 -(void)setModel:(DongTaiList *)model{
 

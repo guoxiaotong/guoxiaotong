@@ -125,7 +125,7 @@
     
     tabBarView.backgroundColor=[UIColor whiteColor];
     
-    NSArray *array=@[@"iconfont-huifu-副本-3.png",@"iconfont-shoucang.png",@"iconfont-crmtubiao69.png",@"组-1_2"];
+    NSArray *array=@[@"iconfont-huifu-副本-3.png",@"zhan_a",@"iconfont-crmtubiao69.png",@"组-1_2"];
     
     NSArray *labelArry=@[@"回复",@"赞",@"收藏",@"更多"];
     

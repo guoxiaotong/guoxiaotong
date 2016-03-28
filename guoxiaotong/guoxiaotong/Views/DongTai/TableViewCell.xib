@@ -76,6 +76,19 @@
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ab5-AP-MN9">
+                        <rect key="frame" x="18" y="108" width="466" height="121"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="90" id="dL5-KY-aba"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="dL5-KY-aba"/>
+                            </mask>
+                        </variation>
+                    </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tb5-uQ-6QS">
                         <rect key="frame" x="0.0" y="244" width="502" height="40"/>
                         <subviews>
@@ -118,7 +131,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CPi-lz-ZdY">
                                 <rect key="frame" x="226" y="5" width="50" height="30"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iconfont-huifu-副本-3.png" translatesAutoresizingMaskIntoConstraints="NO" id="MSK-sD-d7E">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="zhan_a" translatesAutoresizingMaskIntoConstraints="NO" id="MSK-sD-d7E">
                                         <rect key="frame" x="0.0" y="5" width="25" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="25" id="KmM-zt-EAj"/>
@@ -199,19 +212,6 @@
                             <constraint firstAttribute="bottom" secondItem="HDA-JT-RNB" secondAttribute="bottom" constant="5" id="shP-vF-0tG"/>
                         </constraints>
                     </view>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ab5-AP-MN9">
-                        <rect key="frame" x="18" y="108" width="466" height="121"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="90" id="dL5-KY-aba"/>
-                        </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="dL5-KY-aba"/>
-                            </mask>
-                        </variation>
-                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ab5-AP-MN9" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="0en-1g-oNn"/>
@@ -253,5 +253,6 @@
     <resources>
         <image name="iconfont-huifu-副本-3.png" width="50" height="50"/>
         <image name="iconfont-tupian" width="50" height="50"/>
+        <image name="zhan_a" width="28" height="28"/>
     </resources>
 </document>
