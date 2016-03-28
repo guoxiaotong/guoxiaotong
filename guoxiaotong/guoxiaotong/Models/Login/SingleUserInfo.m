@@ -10,6 +10,12 @@
 
 @implementation SingleUserInfo
 
+- (instancetype)init {
+    if (self = [super init]) {
+        _roleList = [NSMutableArray array];
+    }
+    return self;
+}
 
 + (SingleUserInfo *)shareUserInfo {
     static SingleUserInfo *userInfo = nil;

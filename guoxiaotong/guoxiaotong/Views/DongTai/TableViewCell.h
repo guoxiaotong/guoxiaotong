@@ -39,4 +39,7 @@
 @property(nonatomic,assign)int Phonnum;
 -(void)setIntroductionText:(NSString*)text andphonnum:(NSInteger)num;
 
+/**添加方法-zxc（收藏，我的）*/
+- (void)setUIWith:(id)model;
+
 @end

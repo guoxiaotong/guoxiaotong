@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "UserRoleInfoModel.h"
 
 @interface SingleUserInfo : NSObject
 
@@ -16,10 +17,8 @@
 @property (nonatomic, copy) NSString *userName;
 @property (nonatomic, copy) NSString *loginName;
 
-//ch
-@property(nonatomic,copy)NSMutableArray *roleArry;//所有角色
-@property(nonatomic,copy)NSString *roleName;
-@property(nonatomic,copy)NSString *userRoleId;
+@property (nonatomic, strong) NSMutableArray *roleList;
+@property (nonatomic, strong) UserRoleInfoModel *roleInfo;
 
 + (SingleUserInfo *)shareUserInfo;
 

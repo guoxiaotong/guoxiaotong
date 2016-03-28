@@ -7,6 +7,8 @@
 //
 
 #import "TableViewCell.h"
+/**添加*/
+#import "TrendModel.h"
 
 @implementation TableViewCell
 
@@ -75,14 +77,11 @@
     
 }
 
-
-
-
-
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)setUIWith:(id)model {
+    TrendModel *trendInfo = model;
+    UIImage *placeholderImage = [UIImage imageNamed:@""];
+    [_PhotoImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", API_ROOT_IMAGE_URL, trendInfo.userInfo.picPath]] placeholderImage:placeholderImage];
+    
 }
 
 @end

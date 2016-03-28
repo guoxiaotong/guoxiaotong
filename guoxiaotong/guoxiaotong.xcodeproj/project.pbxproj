@@ -7,6 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0008F5511CA8B7DF00E965FC /* commenData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4F11CA8B7DF00E965FC /* commenData.m */; };
+		0008F5521CA8B7DF00E965FC /* commenListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4F31CA8B7DF00E965FC /* commenListData.m */; };
+		0008F5531CA8B7DF00E965FC /* DongTaiList.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4F51CA8B7DF00E965FC /* DongTaiList.m */; };
+		0008F5541CA8B7DF00E965FC /* SingleUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4F81CA8B7DF00E965FC /* SingleUserInfo.m */; };
+		0008F5551CA8B7DF00E965FC /* UserLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4FA1CA8B7DF00E965FC /* UserLoginModel.m */; };
+		0008F5561CA8B7DF00E965FC /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4FC1CA8B7DF00E965FC /* UserService.m */; };
+		0008F5571CA8B7DF00E965FC /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F4FF1CA8B7DF00E965FC /* BaseModel.m */; };
+		0008F5581CA8B7DF00E965FC /* RolePermissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5011CA8B7DF00E965FC /* RolePermissionModel.m */; };
+		0008F5591CA8B7DF00E965FC /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5031CA8B7DF00E965FC /* UserInfoModel.m */; };
+		0008F55A1CA8B7DF00E965FC /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5051CA8B7DF00E965FC /* UserModel.m */; };
+		0008F55B1CA8B7DF00E965FC /* UserRoleInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5071CA8B7DF00E965FC /* UserRoleInfoModel.m */; };
+		0008F55C1CA8B7DF00E965FC /* UserRoleSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5091CA8B7DF00E965FC /* UserRoleSettingModel.m */; };
+		0008F55D1CA8B7DF00E965FC /* BZRCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F50D1CA8B7DF00E965FC /* BZRCourseModel.m */; };
+		0008F55E1CA8B7DF00E965FC /* BZRJianhurenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F50F1CA8B7DF00E965FC /* BZRJianhurenModel.m */; };
+		0008F55F1CA8B7DF00E965FC /* BZRManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5111CA8B7DF00E965FC /* BZRManagerService.m */; };
+		0008F5601CA8B7DF00E965FC /* BZRQuanXianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5131CA8B7DF00E965FC /* BZRQuanXianModel.m */; };
+		0008F5611CA8B7DF00E965FC /* BasicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5151CA8B7DF00E965FC /* BasicService.m */; };
+		0008F5621CA8B7DF00E965FC /* ContectMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5181CA8B7DF00E965FC /* ContectMemberModel.m */; };
+		0008F5631CA8B7DF00E965FC /* ContectRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F51A1CA8B7DF00E965FC /* ContectRoleModel.m */; };
+		0008F5641CA8B7DF00E965FC /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F51C1CA8B7DF00E965FC /* ImageModel.m */; };
+		0008F5651CA8B7DF00E965FC /* JZManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F51F1CA8B7DF00E965FC /* JZManagerService.m */; };
+		0008F5661CA8B7DF00E965FC /* JZMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5211CA8B7DF00E965FC /* JZMemberModel.m */; };
+		0008F5671CA8B7DF00E965FC /* JZPermissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5231CA8B7DF00E965FC /* JZPermissionModel.m */; };
+		0008F5681CA8B7DF00E965FC /* RelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5251CA8B7DF00E965FC /* RelationModel.m */; };
+		0008F5691CA8B7DF00E965FC /* TaskDoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5271CA8B7DF00E965FC /* TaskDoneModel.m */; };
+		0008F56A1CA8B7DF00E965FC /* TrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5291CA8B7DF00E965FC /* TrendModel.m */; };
+		0008F56B1CA8B7DF00E965FC /* BZRModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F52C1CA8B7DF00E965FC /* BZRModel.m */; };
+		0008F56C1CA8B7DF00E965FC /* ClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F52E1CA8B7DF00E965FC /* ClassModel.m */; };
+		0008F56D1CA8B7DF00E965FC /* CourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5301CA8B7DF00E965FC /* CourseModel.m */; };
+		0008F56E1CA8B7DF00E965FC /* GradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5321CA8B7DF00E965FC /* GradeModel.m */; };
+		0008F56F1CA8B7DF00E965FC /* ManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5341CA8B7DF00E965FC /* ManagerService.m */; };
+		0008F5701CA8B7DF00E965FC /* SchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5361CA8B7DF00E965FC /* SchoolModel.m */; };
+		0008F5711CA8B7DF00E965FC /* SchoolPermissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5381CA8B7DF00E965FC /* SchoolPermissionModel.m */; };
+		0008F5721CA8B7DF00E965FC /* TeacherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F53A1CA8B7DF00E965FC /* TeacherModel.m */; };
+		0008F5731CA8B7DF00E965FC /* XZEmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F53C1CA8B7DF00E965FC /* XZEmailModel.m */; };
+		0008F5741CA8B7DF00E965FC /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F53F1CA8B7DF00E965FC /* GroupModel.m */; };
+		0008F5751CA8B7DF00E965FC /* HttpDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5411CA8B7DF00E965FC /* HttpDataModel.m */; };
+		0008F5761CA8B7DF00E965FC /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5431CA8B7DF00E965FC /* LoginModel.m */; };
+		0008F5771CA8B7DF00E965FC /* ShousuoMOdel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5451CA8B7DF00E965FC /* ShousuoMOdel.m */; };
+		0008F5781CA8B7DF00E965FC /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5471CA8B7DF00E965FC /* Singleton.m */; };
+		0008F5791CA8B7DF00E965FC /* TongXunmodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5491CA8B7DF00E965FC /* TongXunmodel.m */; };
+		0008F57A1CA8B7DF00E965FC /* ADModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F54C1CA8B7DF00E965FC /* ADModel.m */; };
+		0008F57B1CA8B7DF00E965FC /* RoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F54E1CA8B7DF00E965FC /* RoleModel.m */; };
+		0008F57C1CA8B7DF00E965FC /* ZhiYuanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F5501CA8B7DF00E965FC /* ZhiYuanModel.m */; };
+		0008F57F1CA8C07600E965FC /* BigImageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0008F57E1CA8C07600E965FC /* BigImageViewController.m */; };
 		0011592C1C8FC147001E7CA8 /* guoxiaotongUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0011592B1C8FC147001E7CA8 /* guoxiaotongUITests.m */; };
 		00BDE3BD1CA686C7007BF575 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2501CA686C6007BF575 /* AppDelegate.m */; };
 		00BDE3BE1CA686C7007BF575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 00BDE2511CA686C6007BF575 /* Assets.xcassets */; };
@@ -88,50 +133,6 @@
 		00BDE40A1CA686C7007BF575 /* ZiYuanViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2F01CA686C6007BF575 /* ZiYuanViewController.m */; };
 		00BDE40B1CA686C7007BF575 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 00BDE2F11CA686C6007BF575 /* Info.plist */; };
 		00BDE40C1CA686C7007BF575 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2F21CA686C6007BF575 /* main.m */; };
-		00BDE40D1CA686C7007BF575 /* SingleUserInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2F61CA686C6007BF575 /* SingleUserInfo.m */; };
-		00BDE40E1CA686C7007BF575 /* UserLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2F81CA686C6007BF575 /* UserLoginModel.m */; };
-		00BDE40F1CA686C7007BF575 /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2FA1CA686C6007BF575 /* UserService.m */; };
-		00BDE4101CA686C7007BF575 /* ADModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2FD1CA686C6007BF575 /* ADModel.m */; };
-		00BDE4111CA686C7007BF575 /* commenData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE2FF1CA686C6007BF575 /* commenData.m */; };
-		00BDE4121CA686C7007BF575 /* commenListData.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3011CA686C6007BF575 /* commenListData.m */; };
-		00BDE4131CA686C7007BF575 /* DongTaiList.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3031CA686C6007BF575 /* DongTaiList.m */; };
-		00BDE4141CA686C7007BF575 /* GroupModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3051CA686C6007BF575 /* GroupModel.m */; };
-		00BDE4151CA686C7007BF575 /* HttpDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3071CA686C6007BF575 /* HttpDataModel.m */; };
-		00BDE4161CA686C7007BF575 /* LoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3091CA686C6007BF575 /* LoginModel.m */; };
-		00BDE4171CA686C7007BF575 /* RoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE30B1CA686C6007BF575 /* RoleModel.m */; };
-		00BDE4181CA686C7007BF575 /* ShousuoMOdel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */; };
-		00BDE4191CA686C7007BF575 /* Singleton.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE30F1CA686C6007BF575 /* Singleton.m */; };
-		00BDE41A1CA686C7007BF575 /* TongXunmodel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3111CA686C6007BF575 /* TongXunmodel.m */; };
-		00BDE41B1CA686C7007BF575 /* ZhiYuanModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */; };
-		00BDE41C1CA686C7007BF575 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3161CA686C6007BF575 /* BaseModel.m */; };
-		00BDE41E1CA686C7007BF575 /* RolePermissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE31A1CA686C6007BF575 /* RolePermissionModel.m */; };
-		00BDE41F1CA686C7007BF575 /* UserInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE31C1CA686C6007BF575 /* UserInfoModel.m */; };
-		00BDE4201CA686C7007BF575 /* UserModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE31E1CA686C6007BF575 /* UserModel.m */; };
-		00BDE4211CA686C7007BF575 /* UserRoleInfoModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3201CA686C6007BF575 /* UserRoleInfoModel.m */; };
-		00BDE4221CA686C7007BF575 /* UserRoleSettingModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3221CA686C6007BF575 /* UserRoleSettingModel.m */; };
-		00BDE4231CA686C7007BF575 /* BZRCourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3261CA686C6007BF575 /* BZRCourseModel.m */; };
-		00BDE4241CA686C7007BF575 /* BZRJianhurenModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3281CA686C6007BF575 /* BZRJianhurenModel.m */; };
-		00BDE4251CA686C7007BF575 /* BZRManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE32A1CA686C6007BF575 /* BZRManagerService.m */; };
-		00BDE4261CA686C7007BF575 /* BZRQuanXianModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE32C1CA686C6007BF575 /* BZRQuanXianModel.m */; };
-		00BDE4271CA686C7007BF575 /* BasicService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE32E1CA686C6007BF575 /* BasicService.m */; };
-		00BDE4281CA686C7007BF575 /* ContectMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3311CA686C6007BF575 /* ContectMemberModel.m */; };
-		00BDE4291CA686C7007BF575 /* ContectRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3331CA686C6007BF575 /* ContectRoleModel.m */; };
-		00BDE42A1CA686C7007BF575 /* ImageModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3351CA686C6007BF575 /* ImageModel.m */; };
-		00BDE42B1CA686C7007BF575 /* JZManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3381CA686C6007BF575 /* JZManagerService.m */; };
-		00BDE42C1CA686C7007BF575 /* JZMemberModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE33A1CA686C6007BF575 /* JZMemberModel.m */; };
-		00BDE42D1CA686C7007BF575 /* JZPermissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE33C1CA686C6007BF575 /* JZPermissionModel.m */; };
-		00BDE42E1CA686C7007BF575 /* RelationModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE33E1CA686C6007BF575 /* RelationModel.m */; };
-		00BDE42F1CA686C7007BF575 /* TaskDoneModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3401CA686C6007BF575 /* TaskDoneModel.m */; };
-		00BDE4301CA686C7007BF575 /* TrendModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3421CA686C6007BF575 /* TrendModel.m */; };
-		00BDE4311CA686C7007BF575 /* BZRModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3451CA686C6007BF575 /* BZRModel.m */; };
-		00BDE4321CA686C7007BF575 /* ClassModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3471CA686C6007BF575 /* ClassModel.m */; };
-		00BDE4331CA686C7007BF575 /* CourseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3491CA686C6007BF575 /* CourseModel.m */; };
-		00BDE4341CA686C7007BF575 /* GradeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE34B1CA686C6007BF575 /* GradeModel.m */; };
-		00BDE4351CA686C7007BF575 /* ManagerService.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE34D1CA686C6007BF575 /* ManagerService.m */; };
-		00BDE4361CA686C7007BF575 /* SchoolModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE34F1CA686C6007BF575 /* SchoolModel.m */; };
-		00BDE4371CA686C7007BF575 /* SchoolPermissionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3511CA686C6007BF575 /* SchoolPermissionModel.m */; };
-		00BDE4381CA686C7007BF575 /* TeacherModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3531CA686C6007BF575 /* TeacherModel.m */; };
-		00BDE4391CA686C7007BF575 /* XZEmailModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3551CA686C6007BF575 /* XZEmailModel.m */; };
 		00BDE43A1CA686C7007BF575 /* Helper.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3591CA686C6007BF575 /* Helper.m */; };
 		00BDE43B1CA686C7007BF575 /* HttpClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE35B1CA686C6007BF575 /* HttpClient.m */; };
 		00BDE43C1CA686C7007BF575 /* LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE35D1CA686C7007BF575 /* LoadingView.m */; };
@@ -202,6 +203,96 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0008F4F01CA8B7DF00E965FC /* commenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commenData.h; sourceTree = "<group>"; };
+		0008F4F11CA8B7DF00E965FC /* commenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commenData.m; sourceTree = "<group>"; };
+		0008F4F21CA8B7DF00E965FC /* commenListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = commenListData.h; sourceTree = "<group>"; };
+		0008F4F31CA8B7DF00E965FC /* commenListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = commenListData.m; sourceTree = "<group>"; };
+		0008F4F41CA8B7DF00E965FC /* DongTaiList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DongTaiList.h; sourceTree = "<group>"; };
+		0008F4F51CA8B7DF00E965FC /* DongTaiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DongTaiList.m; sourceTree = "<group>"; };
+		0008F4F71CA8B7DF00E965FC /* SingleUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleUserInfo.h; sourceTree = "<group>"; };
+		0008F4F81CA8B7DF00E965FC /* SingleUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleUserInfo.m; sourceTree = "<group>"; };
+		0008F4F91CA8B7DF00E965FC /* UserLoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginModel.h; sourceTree = "<group>"; };
+		0008F4FA1CA8B7DF00E965FC /* UserLoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginModel.m; sourceTree = "<group>"; };
+		0008F4FB1CA8B7DF00E965FC /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
+		0008F4FC1CA8B7DF00E965FC /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
+		0008F4FE1CA8B7DF00E965FC /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
+		0008F4FF1CA8B7DF00E965FC /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
+		0008F5001CA8B7DF00E965FC /* RolePermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RolePermissionModel.h; sourceTree = "<group>"; };
+		0008F5011CA8B7DF00E965FC /* RolePermissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RolePermissionModel.m; sourceTree = "<group>"; };
+		0008F5021CA8B7DF00E965FC /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
+		0008F5031CA8B7DF00E965FC /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
+		0008F5041CA8B7DF00E965FC /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
+		0008F5051CA8B7DF00E965FC /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
+		0008F5061CA8B7DF00E965FC /* UserRoleInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleInfoModel.h; sourceTree = "<group>"; };
+		0008F5071CA8B7DF00E965FC /* UserRoleInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleInfoModel.m; sourceTree = "<group>"; };
+		0008F5081CA8B7DF00E965FC /* UserRoleSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleSettingModel.h; sourceTree = "<group>"; };
+		0008F5091CA8B7DF00E965FC /* UserRoleSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleSettingModel.m; sourceTree = "<group>"; };
+		0008F50C1CA8B7DF00E965FC /* BZRCourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRCourseModel.h; sourceTree = "<group>"; };
+		0008F50D1CA8B7DF00E965FC /* BZRCourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRCourseModel.m; sourceTree = "<group>"; };
+		0008F50E1CA8B7DF00E965FC /* BZRJianhurenModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRJianhurenModel.h; sourceTree = "<group>"; };
+		0008F50F1CA8B7DF00E965FC /* BZRJianhurenModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRJianhurenModel.m; sourceTree = "<group>"; };
+		0008F5101CA8B7DF00E965FC /* BZRManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRManagerService.h; sourceTree = "<group>"; };
+		0008F5111CA8B7DF00E965FC /* BZRManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRManagerService.m; sourceTree = "<group>"; };
+		0008F5121CA8B7DF00E965FC /* BZRQuanXianModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRQuanXianModel.h; sourceTree = "<group>"; };
+		0008F5131CA8B7DF00E965FC /* BZRQuanXianModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRQuanXianModel.m; sourceTree = "<group>"; };
+		0008F5141CA8B7DF00E965FC /* BasicService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicService.h; sourceTree = "<group>"; };
+		0008F5151CA8B7DF00E965FC /* BasicService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicService.m; sourceTree = "<group>"; };
+		0008F5171CA8B7DF00E965FC /* ContectMemberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContectMemberModel.h; sourceTree = "<group>"; };
+		0008F5181CA8B7DF00E965FC /* ContectMemberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContectMemberModel.m; sourceTree = "<group>"; };
+		0008F5191CA8B7DF00E965FC /* ContectRoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContectRoleModel.h; sourceTree = "<group>"; };
+		0008F51A1CA8B7DF00E965FC /* ContectRoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContectRoleModel.m; sourceTree = "<group>"; };
+		0008F51B1CA8B7DF00E965FC /* ImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
+		0008F51C1CA8B7DF00E965FC /* ImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
+		0008F51E1CA8B7DF00E965FC /* JZManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZManagerService.h; sourceTree = "<group>"; };
+		0008F51F1CA8B7DF00E965FC /* JZManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZManagerService.m; sourceTree = "<group>"; };
+		0008F5201CA8B7DF00E965FC /* JZMemberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZMemberModel.h; sourceTree = "<group>"; };
+		0008F5211CA8B7DF00E965FC /* JZMemberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZMemberModel.m; sourceTree = "<group>"; };
+		0008F5221CA8B7DF00E965FC /* JZPermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZPermissionModel.h; sourceTree = "<group>"; };
+		0008F5231CA8B7DF00E965FC /* JZPermissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZPermissionModel.m; sourceTree = "<group>"; };
+		0008F5241CA8B7DF00E965FC /* RelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationModel.h; sourceTree = "<group>"; };
+		0008F5251CA8B7DF00E965FC /* RelationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationModel.m; sourceTree = "<group>"; };
+		0008F5261CA8B7DF00E965FC /* TaskDoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDoneModel.h; sourceTree = "<group>"; };
+		0008F5271CA8B7DF00E965FC /* TaskDoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDoneModel.m; sourceTree = "<group>"; };
+		0008F5281CA8B7DF00E965FC /* TrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendModel.h; sourceTree = "<group>"; };
+		0008F5291CA8B7DF00E965FC /* TrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendModel.m; sourceTree = "<group>"; };
+		0008F52B1CA8B7DF00E965FC /* BZRModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRModel.h; sourceTree = "<group>"; };
+		0008F52C1CA8B7DF00E965FC /* BZRModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRModel.m; sourceTree = "<group>"; };
+		0008F52D1CA8B7DF00E965FC /* ClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassModel.h; sourceTree = "<group>"; };
+		0008F52E1CA8B7DF00E965FC /* ClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassModel.m; sourceTree = "<group>"; };
+		0008F52F1CA8B7DF00E965FC /* CourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseModel.h; sourceTree = "<group>"; };
+		0008F5301CA8B7DF00E965FC /* CourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseModel.m; sourceTree = "<group>"; };
+		0008F5311CA8B7DF00E965FC /* GradeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeModel.h; sourceTree = "<group>"; };
+		0008F5321CA8B7DF00E965FC /* GradeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeModel.m; sourceTree = "<group>"; };
+		0008F5331CA8B7DF00E965FC /* ManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerService.h; sourceTree = "<group>"; };
+		0008F5341CA8B7DF00E965FC /* ManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerService.m; sourceTree = "<group>"; };
+		0008F5351CA8B7DF00E965FC /* SchoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolModel.h; sourceTree = "<group>"; };
+		0008F5361CA8B7DF00E965FC /* SchoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolModel.m; sourceTree = "<group>"; };
+		0008F5371CA8B7DF00E965FC /* SchoolPermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolPermissionModel.h; sourceTree = "<group>"; };
+		0008F5381CA8B7DF00E965FC /* SchoolPermissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolPermissionModel.m; sourceTree = "<group>"; };
+		0008F5391CA8B7DF00E965FC /* TeacherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherModel.h; sourceTree = "<group>"; };
+		0008F53A1CA8B7DF00E965FC /* TeacherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherModel.m; sourceTree = "<group>"; };
+		0008F53B1CA8B7DF00E965FC /* XZEmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZEmailModel.h; sourceTree = "<group>"; };
+		0008F53C1CA8B7DF00E965FC /* XZEmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZEmailModel.m; sourceTree = "<group>"; };
+		0008F53E1CA8B7DF00E965FC /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GroupModel.h; sourceTree = "<group>"; };
+		0008F53F1CA8B7DF00E965FC /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GroupModel.m; sourceTree = "<group>"; };
+		0008F5401CA8B7DF00E965FC /* HttpDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HttpDataModel.h; sourceTree = "<group>"; };
+		0008F5411CA8B7DF00E965FC /* HttpDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HttpDataModel.m; sourceTree = "<group>"; };
+		0008F5421CA8B7DF00E965FC /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginModel.h; sourceTree = "<group>"; };
+		0008F5431CA8B7DF00E965FC /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginModel.m; sourceTree = "<group>"; };
+		0008F5441CA8B7DF00E965FC /* ShousuoMOdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShousuoMOdel.h; sourceTree = "<group>"; };
+		0008F5451CA8B7DF00E965FC /* ShousuoMOdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShousuoMOdel.m; sourceTree = "<group>"; };
+		0008F5461CA8B7DF00E965FC /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Singleton.h; sourceTree = "<group>"; };
+		0008F5471CA8B7DF00E965FC /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Singleton.m; sourceTree = "<group>"; };
+		0008F5481CA8B7DF00E965FC /* TongXunmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongXunmodel.h; sourceTree = "<group>"; };
+		0008F5491CA8B7DF00E965FC /* TongXunmodel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongXunmodel.m; sourceTree = "<group>"; };
+		0008F54B1CA8B7DF00E965FC /* ADModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADModel.h; sourceTree = "<group>"; };
+		0008F54C1CA8B7DF00E965FC /* ADModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADModel.m; sourceTree = "<group>"; };
+		0008F54D1CA8B7DF00E965FC /* RoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RoleModel.h; sourceTree = "<group>"; };
+		0008F54E1CA8B7DF00E965FC /* RoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RoleModel.m; sourceTree = "<group>"; };
+		0008F54F1CA8B7DF00E965FC /* ZhiYuanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ZhiYuanModel.h; sourceTree = "<group>"; };
+		0008F5501CA8B7DF00E965FC /* ZhiYuanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZhiYuanModel.m; sourceTree = "<group>"; };
+		0008F57D1CA8C07600E965FC /* BigImageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BigImageViewController.h; sourceTree = "<group>"; };
+		0008F57E1CA8C07600E965FC /* BigImageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BigImageViewController.m; sourceTree = "<group>"; };
 		0011590E1C8FC147001E7CA8 /* guoxiaotong.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = guoxiaotong.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		001159271C8FC147001E7CA8 /* guoxiaotongUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = guoxiaotongUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0011592B1C8FC147001E7CA8 /* guoxiaotongUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = guoxiaotongUITests.m; sourceTree = "<group>"; };
@@ -365,94 +456,6 @@
 		00BDE2F01CA686C6007BF575 /* ZiYuanViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ZiYuanViewController.m; sourceTree = "<group>"; };
 		00BDE2F11CA686C6007BF575 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00BDE2F21CA686C6007BF575 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		00BDE2F51CA686C6007BF575 /* SingleUserInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleUserInfo.h; sourceTree = "<group>"; };
-		00BDE2F61CA686C6007BF575 /* SingleUserInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleUserInfo.m; sourceTree = "<group>"; };
-		00BDE2F71CA686C6007BF575 /* UserLoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserLoginModel.h; sourceTree = "<group>"; };
-		00BDE2F81CA686C6007BF575 /* UserLoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserLoginModel.m; sourceTree = "<group>"; };
-		00BDE2F91CA686C6007BF575 /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = "<group>"; };
-		00BDE2FA1CA686C6007BF575 /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = "<group>"; };
-		00BDE2FC1CA686C6007BF575 /* ADModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ADModel.h; path = ../mode/ADModel.h; sourceTree = "<group>"; };
-		00BDE2FD1CA686C6007BF575 /* ADModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ADModel.m; path = ../mode/ADModel.m; sourceTree = "<group>"; };
-		00BDE2FE1CA686C6007BF575 /* commenData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commenData.h; path = ../mode/commenData.h; sourceTree = "<group>"; };
-		00BDE2FF1CA686C6007BF575 /* commenData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = commenData.m; path = ../mode/commenData.m; sourceTree = "<group>"; };
-		00BDE3001CA686C6007BF575 /* commenListData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = commenListData.h; path = ../mode/commenListData.h; sourceTree = "<group>"; };
-		00BDE3011CA686C6007BF575 /* commenListData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = commenListData.m; path = ../mode/commenListData.m; sourceTree = "<group>"; };
-		00BDE3021CA686C6007BF575 /* DongTaiList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DongTaiList.h; path = ../mode/DongTaiList.h; sourceTree = "<group>"; };
-		00BDE3031CA686C6007BF575 /* DongTaiList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DongTaiList.m; path = ../mode/DongTaiList.m; sourceTree = "<group>"; };
-		00BDE3041CA686C6007BF575 /* GroupModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GroupModel.h; path = ../mode/GroupModel.h; sourceTree = "<group>"; };
-		00BDE3051CA686C6007BF575 /* GroupModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GroupModel.m; path = ../mode/GroupModel.m; sourceTree = "<group>"; };
-		00BDE3061CA686C6007BF575 /* HttpDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HttpDataModel.h; path = ../mode/HttpDataModel.h; sourceTree = "<group>"; };
-		00BDE3071CA686C6007BF575 /* HttpDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HttpDataModel.m; path = ../mode/HttpDataModel.m; sourceTree = "<group>"; };
-		00BDE3081CA686C6007BF575 /* LoginModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginModel.h; path = ../mode/LoginModel.h; sourceTree = "<group>"; };
-		00BDE3091CA686C6007BF575 /* LoginModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginModel.m; path = ../mode/LoginModel.m; sourceTree = "<group>"; };
-		00BDE30A1CA686C6007BF575 /* RoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RoleModel.h; path = ../mode/RoleModel.h; sourceTree = "<group>"; };
-		00BDE30B1CA686C6007BF575 /* RoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RoleModel.m; path = ../mode/RoleModel.m; sourceTree = "<group>"; };
-		00BDE30C1CA686C6007BF575 /* ShousuoMOdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShousuoMOdel.h; path = ../mode/ShousuoMOdel.h; sourceTree = "<group>"; };
-		00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShousuoMOdel.m; path = ../mode/ShousuoMOdel.m; sourceTree = "<group>"; };
-		00BDE30E1CA686C6007BF575 /* Singleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Singleton.h; path = ../mode/Singleton.h; sourceTree = "<group>"; };
-		00BDE30F1CA686C6007BF575 /* Singleton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Singleton.m; path = ../mode/Singleton.m; sourceTree = "<group>"; };
-		00BDE3101CA686C6007BF575 /* TongXunmodel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TongXunmodel.h; path = ../mode/TongXunmodel.h; sourceTree = "<group>"; };
-		00BDE3111CA686C6007BF575 /* TongXunmodel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TongXunmodel.m; path = ../mode/TongXunmodel.m; sourceTree = "<group>"; };
-		00BDE3121CA686C6007BF575 /* ZhiYuanModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZhiYuanModel.h; path = ../mode/ZhiYuanModel.h; sourceTree = "<group>"; };
-		00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZhiYuanModel.m; path = ../mode/ZhiYuanModel.m; sourceTree = "<group>"; };
-		00BDE3151CA686C6007BF575 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseModel.h; sourceTree = "<group>"; };
-		00BDE3161CA686C6007BF575 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseModel.m; sourceTree = "<group>"; };
-		00BDE3191CA686C6007BF575 /* RolePermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RolePermissionModel.h; sourceTree = "<group>"; };
-		00BDE31A1CA686C6007BF575 /* RolePermissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RolePermissionModel.m; sourceTree = "<group>"; };
-		00BDE31B1CA686C6007BF575 /* UserInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserInfoModel.h; sourceTree = "<group>"; };
-		00BDE31C1CA686C6007BF575 /* UserInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserInfoModel.m; sourceTree = "<group>"; };
-		00BDE31D1CA686C6007BF575 /* UserModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserModel.h; sourceTree = "<group>"; };
-		00BDE31E1CA686C6007BF575 /* UserModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserModel.m; sourceTree = "<group>"; };
-		00BDE31F1CA686C6007BF575 /* UserRoleInfoModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleInfoModel.h; sourceTree = "<group>"; };
-		00BDE3201CA686C6007BF575 /* UserRoleInfoModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleInfoModel.m; sourceTree = "<group>"; };
-		00BDE3211CA686C6007BF575 /* UserRoleSettingModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserRoleSettingModel.h; sourceTree = "<group>"; };
-		00BDE3221CA686C6007BF575 /* UserRoleSettingModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserRoleSettingModel.m; sourceTree = "<group>"; };
-		00BDE3251CA686C6007BF575 /* BZRCourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRCourseModel.h; sourceTree = "<group>"; };
-		00BDE3261CA686C6007BF575 /* BZRCourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRCourseModel.m; sourceTree = "<group>"; };
-		00BDE3271CA686C6007BF575 /* BZRJianhurenModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRJianhurenModel.h; sourceTree = "<group>"; };
-		00BDE3281CA686C6007BF575 /* BZRJianhurenModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRJianhurenModel.m; sourceTree = "<group>"; };
-		00BDE3291CA686C6007BF575 /* BZRManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRManagerService.h; sourceTree = "<group>"; };
-		00BDE32A1CA686C6007BF575 /* BZRManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRManagerService.m; sourceTree = "<group>"; };
-		00BDE32B1CA686C6007BF575 /* BZRQuanXianModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRQuanXianModel.h; sourceTree = "<group>"; };
-		00BDE32C1CA686C6007BF575 /* BZRQuanXianModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRQuanXianModel.m; sourceTree = "<group>"; };
-		00BDE32D1CA686C6007BF575 /* BasicService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicService.h; sourceTree = "<group>"; };
-		00BDE32E1CA686C6007BF575 /* BasicService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicService.m; sourceTree = "<group>"; };
-		00BDE3301CA686C6007BF575 /* ContectMemberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContectMemberModel.h; sourceTree = "<group>"; };
-		00BDE3311CA686C6007BF575 /* ContectMemberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContectMemberModel.m; sourceTree = "<group>"; };
-		00BDE3321CA686C6007BF575 /* ContectRoleModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContectRoleModel.h; sourceTree = "<group>"; };
-		00BDE3331CA686C6007BF575 /* ContectRoleModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContectRoleModel.m; sourceTree = "<group>"; };
-		00BDE3341CA686C6007BF575 /* ImageModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageModel.h; sourceTree = "<group>"; };
-		00BDE3351CA686C6007BF575 /* ImageModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageModel.m; sourceTree = "<group>"; };
-		00BDE3371CA686C6007BF575 /* JZManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZManagerService.h; sourceTree = "<group>"; };
-		00BDE3381CA686C6007BF575 /* JZManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZManagerService.m; sourceTree = "<group>"; };
-		00BDE3391CA686C6007BF575 /* JZMemberModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZMemberModel.h; sourceTree = "<group>"; };
-		00BDE33A1CA686C6007BF575 /* JZMemberModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZMemberModel.m; sourceTree = "<group>"; };
-		00BDE33B1CA686C6007BF575 /* JZPermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JZPermissionModel.h; sourceTree = "<group>"; };
-		00BDE33C1CA686C6007BF575 /* JZPermissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JZPermissionModel.m; sourceTree = "<group>"; };
-		00BDE33D1CA686C6007BF575 /* RelationModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RelationModel.h; sourceTree = "<group>"; };
-		00BDE33E1CA686C6007BF575 /* RelationModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RelationModel.m; sourceTree = "<group>"; };
-		00BDE33F1CA686C6007BF575 /* TaskDoneModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TaskDoneModel.h; sourceTree = "<group>"; };
-		00BDE3401CA686C6007BF575 /* TaskDoneModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TaskDoneModel.m; sourceTree = "<group>"; };
-		00BDE3411CA686C6007BF575 /* TrendModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrendModel.h; sourceTree = "<group>"; };
-		00BDE3421CA686C6007BF575 /* TrendModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrendModel.m; sourceTree = "<group>"; };
-		00BDE3441CA686C6007BF575 /* BZRModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BZRModel.h; sourceTree = "<group>"; };
-		00BDE3451CA686C6007BF575 /* BZRModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BZRModel.m; sourceTree = "<group>"; };
-		00BDE3461CA686C6007BF575 /* ClassModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassModel.h; sourceTree = "<group>"; };
-		00BDE3471CA686C6007BF575 /* ClassModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassModel.m; sourceTree = "<group>"; };
-		00BDE3481CA686C6007BF575 /* CourseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CourseModel.h; sourceTree = "<group>"; };
-		00BDE3491CA686C6007BF575 /* CourseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CourseModel.m; sourceTree = "<group>"; };
-		00BDE34A1CA686C6007BF575 /* GradeModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GradeModel.h; sourceTree = "<group>"; };
-		00BDE34B1CA686C6007BF575 /* GradeModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GradeModel.m; sourceTree = "<group>"; };
-		00BDE34C1CA686C6007BF575 /* ManagerService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ManagerService.h; sourceTree = "<group>"; };
-		00BDE34D1CA686C6007BF575 /* ManagerService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ManagerService.m; sourceTree = "<group>"; };
-		00BDE34E1CA686C6007BF575 /* SchoolModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolModel.h; sourceTree = "<group>"; };
-		00BDE34F1CA686C6007BF575 /* SchoolModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolModel.m; sourceTree = "<group>"; };
-		00BDE3501CA686C6007BF575 /* SchoolPermissionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SchoolPermissionModel.h; sourceTree = "<group>"; };
-		00BDE3511CA686C6007BF575 /* SchoolPermissionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SchoolPermissionModel.m; sourceTree = "<group>"; };
-		00BDE3521CA686C6007BF575 /* TeacherModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TeacherModel.h; sourceTree = "<group>"; };
-		00BDE3531CA686C6007BF575 /* TeacherModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TeacherModel.m; sourceTree = "<group>"; };
-		00BDE3541CA686C6007BF575 /* XZEmailModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XZEmailModel.h; sourceTree = "<group>"; };
-		00BDE3551CA686C6007BF575 /* XZEmailModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XZEmailModel.m; sourceTree = "<group>"; };
 		00BDE3561CA686C6007BF575 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		00BDE3581CA686C6007BF575 /* Helper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helper.h; sourceTree = "<group>"; };
 		00BDE3591CA686C6007BF575 /* Helper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Helper.m; sourceTree = "<group>"; };
@@ -572,6 +575,181 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0008F4EE1CA8B7DF00E965FC /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0008F4EF1CA8B7DF00E965FC /* DongTaaiList */,
+				0008F4F61CA8B7DF00E965FC /* Login */,
+				0008F4FD1CA8B7DF00E965FC /* User */,
+				0008F50A1CA8B7DF00E965FC /* WoDe */,
+				0008F53D1CA8B7DF00E965FC /* XiaoXin */,
+				0008F54A1CA8B7DF00E965FC /* ZiYuan */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		0008F4EF1CA8B7DF00E965FC /* DongTaaiList */ = {
+			isa = PBXGroup;
+			children = (
+				0008F4F01CA8B7DF00E965FC /* commenData.h */,
+				0008F4F11CA8B7DF00E965FC /* commenData.m */,
+				0008F4F21CA8B7DF00E965FC /* commenListData.h */,
+				0008F4F31CA8B7DF00E965FC /* commenListData.m */,
+				0008F4F41CA8B7DF00E965FC /* DongTaiList.h */,
+				0008F4F51CA8B7DF00E965FC /* DongTaiList.m */,
+			);
+			path = DongTaaiList;
+			sourceTree = "<group>";
+		};
+		0008F4F61CA8B7DF00E965FC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				0008F4F71CA8B7DF00E965FC /* SingleUserInfo.h */,
+				0008F4F81CA8B7DF00E965FC /* SingleUserInfo.m */,
+				0008F4F91CA8B7DF00E965FC /* UserLoginModel.h */,
+				0008F4FA1CA8B7DF00E965FC /* UserLoginModel.m */,
+				0008F4FB1CA8B7DF00E965FC /* UserService.h */,
+				0008F4FC1CA8B7DF00E965FC /* UserService.m */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		0008F4FD1CA8B7DF00E965FC /* User */ = {
+			isa = PBXGroup;
+			children = (
+				0008F4FE1CA8B7DF00E965FC /* BaseModel.h */,
+				0008F4FF1CA8B7DF00E965FC /* BaseModel.m */,
+				0008F5001CA8B7DF00E965FC /* RolePermissionModel.h */,
+				0008F5011CA8B7DF00E965FC /* RolePermissionModel.m */,
+				0008F5021CA8B7DF00E965FC /* UserInfoModel.h */,
+				0008F5031CA8B7DF00E965FC /* UserInfoModel.m */,
+				0008F5041CA8B7DF00E965FC /* UserModel.h */,
+				0008F5051CA8B7DF00E965FC /* UserModel.m */,
+				0008F5061CA8B7DF00E965FC /* UserRoleInfoModel.h */,
+				0008F5071CA8B7DF00E965FC /* UserRoleInfoModel.m */,
+				0008F5081CA8B7DF00E965FC /* UserRoleSettingModel.h */,
+				0008F5091CA8B7DF00E965FC /* UserRoleSettingModel.m */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		0008F50A1CA8B7DF00E965FC /* WoDe */ = {
+			isa = PBXGroup;
+			children = (
+				0008F50B1CA8B7DF00E965FC /* banzhuren */,
+				0008F5141CA8B7DF00E965FC /* BasicService.h */,
+				0008F5151CA8B7DF00E965FC /* BasicService.m */,
+				0008F5161CA8B7DF00E965FC /* Contect */,
+				0008F51B1CA8B7DF00E965FC /* ImageModel.h */,
+				0008F51C1CA8B7DF00E965FC /* ImageModel.m */,
+				0008F51D1CA8B7DF00E965FC /* jiazhang */,
+				0008F5241CA8B7DF00E965FC /* RelationModel.h */,
+				0008F5251CA8B7DF00E965FC /* RelationModel.m */,
+				0008F5261CA8B7DF00E965FC /* TaskDoneModel.h */,
+				0008F5271CA8B7DF00E965FC /* TaskDoneModel.m */,
+				0008F5281CA8B7DF00E965FC /* TrendModel.h */,
+				0008F5291CA8B7DF00E965FC /* TrendModel.m */,
+				0008F52A1CA8B7DF00E965FC /* xiaozhang */,
+			);
+			path = WoDe;
+			sourceTree = "<group>";
+		};
+		0008F50B1CA8B7DF00E965FC /* banzhuren */ = {
+			isa = PBXGroup;
+			children = (
+				0008F50C1CA8B7DF00E965FC /* BZRCourseModel.h */,
+				0008F50D1CA8B7DF00E965FC /* BZRCourseModel.m */,
+				0008F50E1CA8B7DF00E965FC /* BZRJianhurenModel.h */,
+				0008F50F1CA8B7DF00E965FC /* BZRJianhurenModel.m */,
+				0008F5101CA8B7DF00E965FC /* BZRManagerService.h */,
+				0008F5111CA8B7DF00E965FC /* BZRManagerService.m */,
+				0008F5121CA8B7DF00E965FC /* BZRQuanXianModel.h */,
+				0008F5131CA8B7DF00E965FC /* BZRQuanXianModel.m */,
+			);
+			path = banzhuren;
+			sourceTree = "<group>";
+		};
+		0008F5161CA8B7DF00E965FC /* Contect */ = {
+			isa = PBXGroup;
+			children = (
+				0008F5171CA8B7DF00E965FC /* ContectMemberModel.h */,
+				0008F5181CA8B7DF00E965FC /* ContectMemberModel.m */,
+				0008F5191CA8B7DF00E965FC /* ContectRoleModel.h */,
+				0008F51A1CA8B7DF00E965FC /* ContectRoleModel.m */,
+			);
+			path = Contect;
+			sourceTree = "<group>";
+		};
+		0008F51D1CA8B7DF00E965FC /* jiazhang */ = {
+			isa = PBXGroup;
+			children = (
+				0008F51E1CA8B7DF00E965FC /* JZManagerService.h */,
+				0008F51F1CA8B7DF00E965FC /* JZManagerService.m */,
+				0008F5201CA8B7DF00E965FC /* JZMemberModel.h */,
+				0008F5211CA8B7DF00E965FC /* JZMemberModel.m */,
+				0008F5221CA8B7DF00E965FC /* JZPermissionModel.h */,
+				0008F5231CA8B7DF00E965FC /* JZPermissionModel.m */,
+			);
+			path = jiazhang;
+			sourceTree = "<group>";
+		};
+		0008F52A1CA8B7DF00E965FC /* xiaozhang */ = {
+			isa = PBXGroup;
+			children = (
+				0008F52B1CA8B7DF00E965FC /* BZRModel.h */,
+				0008F52C1CA8B7DF00E965FC /* BZRModel.m */,
+				0008F52D1CA8B7DF00E965FC /* ClassModel.h */,
+				0008F52E1CA8B7DF00E965FC /* ClassModel.m */,
+				0008F52F1CA8B7DF00E965FC /* CourseModel.h */,
+				0008F5301CA8B7DF00E965FC /* CourseModel.m */,
+				0008F5311CA8B7DF00E965FC /* GradeModel.h */,
+				0008F5321CA8B7DF00E965FC /* GradeModel.m */,
+				0008F5331CA8B7DF00E965FC /* ManagerService.h */,
+				0008F5341CA8B7DF00E965FC /* ManagerService.m */,
+				0008F5351CA8B7DF00E965FC /* SchoolModel.h */,
+				0008F5361CA8B7DF00E965FC /* SchoolModel.m */,
+				0008F5371CA8B7DF00E965FC /* SchoolPermissionModel.h */,
+				0008F5381CA8B7DF00E965FC /* SchoolPermissionModel.m */,
+				0008F5391CA8B7DF00E965FC /* TeacherModel.h */,
+				0008F53A1CA8B7DF00E965FC /* TeacherModel.m */,
+				0008F53B1CA8B7DF00E965FC /* XZEmailModel.h */,
+				0008F53C1CA8B7DF00E965FC /* XZEmailModel.m */,
+			);
+			path = xiaozhang;
+			sourceTree = "<group>";
+		};
+		0008F53D1CA8B7DF00E965FC /* XiaoXin */ = {
+			isa = PBXGroup;
+			children = (
+				0008F53E1CA8B7DF00E965FC /* GroupModel.h */,
+				0008F53F1CA8B7DF00E965FC /* GroupModel.m */,
+				0008F5401CA8B7DF00E965FC /* HttpDataModel.h */,
+				0008F5411CA8B7DF00E965FC /* HttpDataModel.m */,
+				0008F5421CA8B7DF00E965FC /* LoginModel.h */,
+				0008F5431CA8B7DF00E965FC /* LoginModel.m */,
+				0008F5441CA8B7DF00E965FC /* ShousuoMOdel.h */,
+				0008F5451CA8B7DF00E965FC /* ShousuoMOdel.m */,
+				0008F5461CA8B7DF00E965FC /* Singleton.h */,
+				0008F5471CA8B7DF00E965FC /* Singleton.m */,
+				0008F5481CA8B7DF00E965FC /* TongXunmodel.h */,
+				0008F5491CA8B7DF00E965FC /* TongXunmodel.m */,
+			);
+			path = XiaoXin;
+			sourceTree = "<group>";
+		};
+		0008F54A1CA8B7DF00E965FC /* ZiYuan */ = {
+			isa = PBXGroup;
+			children = (
+				0008F54B1CA8B7DF00E965FC /* ADModel.h */,
+				0008F54C1CA8B7DF00E965FC /* ADModel.m */,
+				0008F54D1CA8B7DF00E965FC /* RoleModel.h */,
+				0008F54E1CA8B7DF00E965FC /* RoleModel.m */,
+				0008F54F1CA8B7DF00E965FC /* ZhiYuanModel.h */,
+				0008F5501CA8B7DF00E965FC /* ZhiYuanModel.m */,
+			);
+			path = ZiYuan;
+			sourceTree = "<group>";
+		};
 		001159051C8FC147001E7CA8 = {
 			isa = PBXGroup;
 			children = (
@@ -611,9 +789,9 @@
 				00BDE2541CA686C6007BF575 /* Config.h */,
 				00BDE2551CA686C6007BF575 /* Config.m */,
 				00BDE2561CA686C6007BF575 /* Controllers */,
+				0008F4EE1CA8B7DF00E965FC /* Models */,
 				00BDE2F11CA686C6007BF575 /* Info.plist */,
 				00BDE2F21CA686C6007BF575 /* main.m */,
-				00BDE2F31CA686C6007BF575 /* Models */,
 				00BDE3561CA686C6007BF575 /* PrefixHeader.pch */,
 				00BDE3571CA686C6007BF575 /* Utils */,
 				00BDE36D1CA686C7007BF575 /* Views */,
@@ -710,6 +888,8 @@
 				00BDE2D31CA686C6007BF575 /* SettingViewController.m */,
 				00BDE2D41CA686C6007BF575 /* WoDeViewController.h */,
 				00BDE2D51CA686C6007BF575 /* WoDeViewController.m */,
+				0008F57D1CA8C07600E965FC /* BigImageViewController.h */,
+				0008F57E1CA8C07600E965FC /* BigImageViewController.m */,
 			);
 			path = WoDe;
 			sourceTree = "<group>";
@@ -873,144 +1053,6 @@
 				00BDE2F01CA686C6007BF575 /* ZiYuanViewController.m */,
 			);
 			path = ZiYuan;
-			sourceTree = "<group>";
-		};
-		00BDE2F31CA686C6007BF575 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				BA4F37111CA68DF80028ECCF /* DongTai */,
-				BA4F37101CA68D8D0028ECCF /* XiaoXin */,
-				BA4F370F1CA68D380028ECCF /* ZiYuan */,
-				00BDE2F41CA686C6007BF575 /* Login */,
-				00BDE2FB1CA686C6007BF575 /* mode */,
-				00BDE3141CA686C6007BF575 /* User */,
-				00BDE3231CA686C6007BF575 /* WoDe */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
-		00BDE2F41CA686C6007BF575 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE2F51CA686C6007BF575 /* SingleUserInfo.h */,
-				00BDE2F61CA686C6007BF575 /* SingleUserInfo.m */,
-				00BDE2F71CA686C6007BF575 /* UserLoginModel.h */,
-				00BDE2F81CA686C6007BF575 /* UserLoginModel.m */,
-				00BDE2F91CA686C6007BF575 /* UserService.h */,
-				00BDE2FA1CA686C6007BF575 /* UserService.m */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
-		00BDE2FB1CA686C6007BF575 /* mode */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = mode;
-			sourceTree = "<group>";
-		};
-		00BDE3141CA686C6007BF575 /* User */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3151CA686C6007BF575 /* BaseModel.h */,
-				00BDE3161CA686C6007BF575 /* BaseModel.m */,
-				00BDE3191CA686C6007BF575 /* RolePermissionModel.h */,
-				00BDE31A1CA686C6007BF575 /* RolePermissionModel.m */,
-				00BDE31B1CA686C6007BF575 /* UserInfoModel.h */,
-				00BDE31C1CA686C6007BF575 /* UserInfoModel.m */,
-				00BDE31D1CA686C6007BF575 /* UserModel.h */,
-				00BDE31E1CA686C6007BF575 /* UserModel.m */,
-				00BDE31F1CA686C6007BF575 /* UserRoleInfoModel.h */,
-				00BDE3201CA686C6007BF575 /* UserRoleInfoModel.m */,
-				00BDE3211CA686C6007BF575 /* UserRoleSettingModel.h */,
-				00BDE3221CA686C6007BF575 /* UserRoleSettingModel.m */,
-			);
-			path = User;
-			sourceTree = "<group>";
-		};
-		00BDE3231CA686C6007BF575 /* WoDe */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3241CA686C6007BF575 /* banzhuren */,
-				00BDE32D1CA686C6007BF575 /* BasicService.h */,
-				00BDE32E1CA686C6007BF575 /* BasicService.m */,
-				00BDE32F1CA686C6007BF575 /* Contect */,
-				00BDE3341CA686C6007BF575 /* ImageModel.h */,
-				00BDE3351CA686C6007BF575 /* ImageModel.m */,
-				00BDE3361CA686C6007BF575 /* jiazhang */,
-				00BDE33D1CA686C6007BF575 /* RelationModel.h */,
-				00BDE33E1CA686C6007BF575 /* RelationModel.m */,
-				00BDE33F1CA686C6007BF575 /* TaskDoneModel.h */,
-				00BDE3401CA686C6007BF575 /* TaskDoneModel.m */,
-				00BDE3411CA686C6007BF575 /* TrendModel.h */,
-				00BDE3421CA686C6007BF575 /* TrendModel.m */,
-				00BDE3431CA686C6007BF575 /* xiaozhang */,
-			);
-			path = WoDe;
-			sourceTree = "<group>";
-		};
-		00BDE3241CA686C6007BF575 /* banzhuren */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3251CA686C6007BF575 /* BZRCourseModel.h */,
-				00BDE3261CA686C6007BF575 /* BZRCourseModel.m */,
-				00BDE3271CA686C6007BF575 /* BZRJianhurenModel.h */,
-				00BDE3281CA686C6007BF575 /* BZRJianhurenModel.m */,
-				00BDE3291CA686C6007BF575 /* BZRManagerService.h */,
-				00BDE32A1CA686C6007BF575 /* BZRManagerService.m */,
-				00BDE32B1CA686C6007BF575 /* BZRQuanXianModel.h */,
-				00BDE32C1CA686C6007BF575 /* BZRQuanXianModel.m */,
-			);
-			path = banzhuren;
-			sourceTree = "<group>";
-		};
-		00BDE32F1CA686C6007BF575 /* Contect */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3301CA686C6007BF575 /* ContectMemberModel.h */,
-				00BDE3311CA686C6007BF575 /* ContectMemberModel.m */,
-				00BDE3321CA686C6007BF575 /* ContectRoleModel.h */,
-				00BDE3331CA686C6007BF575 /* ContectRoleModel.m */,
-			);
-			path = Contect;
-			sourceTree = "<group>";
-		};
-		00BDE3361CA686C6007BF575 /* jiazhang */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3371CA686C6007BF575 /* JZManagerService.h */,
-				00BDE3381CA686C6007BF575 /* JZManagerService.m */,
-				00BDE3391CA686C6007BF575 /* JZMemberModel.h */,
-				00BDE33A1CA686C6007BF575 /* JZMemberModel.m */,
-				00BDE33B1CA686C6007BF575 /* JZPermissionModel.h */,
-				00BDE33C1CA686C6007BF575 /* JZPermissionModel.m */,
-			);
-			path = jiazhang;
-			sourceTree = "<group>";
-		};
-		00BDE3431CA686C6007BF575 /* xiaozhang */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3441CA686C6007BF575 /* BZRModel.h */,
-				00BDE3451CA686C6007BF575 /* BZRModel.m */,
-				00BDE3461CA686C6007BF575 /* ClassModel.h */,
-				00BDE3471CA686C6007BF575 /* ClassModel.m */,
-				00BDE3481CA686C6007BF575 /* CourseModel.h */,
-				00BDE3491CA686C6007BF575 /* CourseModel.m */,
-				00BDE34A1CA686C6007BF575 /* GradeModel.h */,
-				00BDE34B1CA686C6007BF575 /* GradeModel.m */,
-				00BDE34C1CA686C6007BF575 /* ManagerService.h */,
-				00BDE34D1CA686C6007BF575 /* ManagerService.m */,
-				00BDE34E1CA686C6007BF575 /* SchoolModel.h */,
-				00BDE34F1CA686C6007BF575 /* SchoolModel.m */,
-				00BDE3501CA686C6007BF575 /* SchoolPermissionModel.h */,
-				00BDE3511CA686C6007BF575 /* SchoolPermissionModel.m */,
-				00BDE3521CA686C6007BF575 /* TeacherModel.h */,
-				00BDE3531CA686C6007BF575 /* TeacherModel.m */,
-				00BDE3541CA686C6007BF575 /* XZEmailModel.h */,
-				00BDE3551CA686C6007BF575 /* XZEmailModel.m */,
-			);
-			path = xiaozhang;
 			sourceTree = "<group>";
 		};
 		00BDE3571CA686C6007BF575 /* Utils */ = {
@@ -1447,80 +1489,82 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0008F5621CA8B7DF00E965FC /* ContectMemberModel.m in Sources */,
+				0008F5531CA8B7DF00E965FC /* DongTaiList.m in Sources */,
 				00BDE3CD1CA686C7007BF575 /* AdviceViewController.m in Sources */,
+				0008F5581CA8B7DF00E965FC /* RolePermissionModel.m in Sources */,
 				00BDE3CE1CA686C7007BF575 /* BaseScrollViewController.m in Sources */,
 				00BDE3C41CA686C7007BF575 /* HuiFuViewController.m in Sources */,
 				00BDE4401CA686C7007BF575 /* PhotoViewController.m in Sources */,
 				00BDE3D21CA686C7007BF575 /* HeaderViewController.m in Sources */,
-				00BDE4331CA686C7007BF575 /* CourseModel.m in Sources */,
 				00BDE3EF1CA686C7007BF575 /* XZCourseManageViewController.m in Sources */,
 				00BDE3D91CA686C7007BF575 /* MyCollectionViewController.m in Sources */,
+				0008F57F1CA8C07600E965FC /* BigImageViewController.m in Sources */,
+				0008F57A1CA8B7DF00E965FC /* ADModel.m in Sources */,
 				00BDE43C1CA686C7007BF575 /* LoadingView.m in Sources */,
+				0008F5611CA8B7DF00E965FC /* BasicService.m in Sources */,
 				00BDE3BD1CA686C7007BF575 /* AppDelegate.m in Sources */,
 				00BDE4551CA686C7007BF575 /* RoleListTableViewCell.m in Sources */,
-				00BDE4351CA686C7007BF575 /* ManagerService.m in Sources */,
-				00BDE4141CA686C7007BF575 /* GroupModel.m in Sources */,
-				00BDE4281CA686C7007BF575 /* ContectMemberModel.m in Sources */,
 				00BDE4511CA686C7007BF575 /* TextFieldWithButton.m in Sources */,
 				00BDE3E11CA686C7007BF575 /* BZRClassInfoViewController.m in Sources */,
+				0008F55A1CA8B7DF00E965FC /* UserModel.m in Sources */,
 				00BDE46C1CA686C7007BF575 /* QunTableViewCell.m in Sources */,
 				00BDE3D51CA686C7007BF575 /* UploadView.m in Sources */,
+				0008F56E1CA8B7DF00E965FC /* GradeModel.m in Sources */,
 				00BDE4001CA686C7007BF575 /* ShousuoViewController.m in Sources */,
 				00BDE4501CA686C7007BF575 /* BZRStudentTableViewCell.m in Sources */,
 				00BDE43F1CA686C7007BF575 /* PhotoCollectionViewCell.m in Sources */,
-				00BDE4101CA686C7007BF575 /* ADModel.m in Sources */,
 				00BDE43A1CA686C7007BF575 /* Helper.m in Sources */,
+				0008F5661CA8B7DF00E965FC /* JZMemberModel.m in Sources */,
+				0008F5571CA8B7DF00E965FC /* BaseModel.m in Sources */,
 				00BDE4481CA686C7007BF575 /* HuiFuTableViewCell.m in Sources */,
-				00BDE41F1CA686C7007BF575 /* UserInfoModel.m in Sources */,
 				00BDE3D11CA686C7007BF575 /* EditNickNameView.m in Sources */,
 				00BDE4051CA686C7007BF575 /* XiaoXinViewController.m in Sources */,
-				00BDE4251CA686C7007BF575 /* BZRManagerService.m in Sources */,
 				00BDE3EC1CA686C7007BF575 /* XZAddTeacherViewController.m in Sources */,
 				00BDE3D71CA686C7007BF575 /* MyAddressListViewController.m in Sources */,
 				00BDE3E91CA686C7007BF575 /* JZStudentInfoViewController.m in Sources */,
 				00BDE4601CA686C7007BF575 /* XZEmailListTableViewCell.m in Sources */,
 				00BDE3FB1CA686C7007BF575 /* WoDeViewController.m in Sources */,
-				00BDE41C1CA686C7007BF575 /* BaseModel.m in Sources */,
-				00BDE4151CA686C7007BF575 /* HttpDataModel.m in Sources */,
 				00BDE3DA1CA686C7007BF575 /* MyIntergrationViewController.m in Sources */,
 				00BDE4041CA686C7007BF575 /* UrlViewController.m in Sources */,
+				0008F55B1CA8B7DF00E965FC /* UserRoleInfoModel.m in Sources */,
+				0008F55E1CA8B7DF00E965FC /* BZRJianhurenModel.m in Sources */,
 				00BDE4681CA686C7007BF575 /* XiaoXinTableViewCell.m in Sources */,
 				00BDE3F61CA686C7007BF575 /* XZXinXiangDetailViewController.m in Sources */,
+				0008F5681CA8B7DF00E965FC /* RelationModel.m in Sources */,
 				00BDE3D01CA686C7007BF575 /* DatePicker.m in Sources */,
 				00BDE4571CA686C7007BF575 /* SectionHeaderView.m in Sources */,
+				0008F5741CA8B7DF00E965FC /* GroupModel.m in Sources */,
 				00BDE3F81CA686C7007BF575 /* RoleListViewController.m in Sources */,
-				00BDE4201CA686C7007BF575 /* UserModel.m in Sources */,
-				00BDE42B1CA686C7007BF575 /* JZManagerService.m in Sources */,
 				00BDE3C11CA686C7007BF575 /* DetailedViewController.m in Sources */,
 				00BDE4641CA686C7007BF575 /* addTableViewCell.m in Sources */,
 				00BDE3DE1CA686C7007BF575 /* AddXiaoZhangViewController.m in Sources */,
 				00BDE3CC1CA686C7007BF575 /* AddRoleViewController.m in Sources */,
 				00BDE45C1CA686C7007BF575 /* VersionTableViewCell.m in Sources */,
 				00BDE3C31CA686C7007BF575 /* FangWeiViewController.m in Sources */,
+				0008F57C1CA8B7DF00E965FC /* ZhiYuanModel.m in Sources */,
 				00BDE3C61CA686C7007BF575 /* LoginViewController.m in Sources */,
 				00BDE3E21CA686C7007BF575 /* BZRCourseManageViewController.m in Sources */,
-				00BDE4171CA686C7007BF575 /* RoleModel.m in Sources */,
-				00BDE4291CA686C7007BF575 /* ContectRoleModel.m in Sources */,
 				00BDE3C01CA686C7007BF575 /* Config.m in Sources */,
 				00BDE3D81CA686C7007BF575 /* MyAppsViewController.m in Sources */,
+				0008F5671CA8B7DF00E965FC /* JZPermissionModel.m in Sources */,
 				00BDE3DD1CA686C7007BF575 /* AddChildViewController.m in Sources */,
 				00BDE3F51CA686C7007BF575 /* XZTeacherManageViewController.m in Sources */,
 				00BDE3E81CA686C7007BF575 /* JZQuanXianViewController.m in Sources */,
 				00BDE3C81CA686C7007BF575 /* RetreveViewController.m in Sources */,
 				00BDE3DF1CA686C7007BF575 /* BZRAddJianhurenViewController.m in Sources */,
-				00BDE4221CA686C7007BF575 /* UserRoleSettingModel.m in Sources */,
 				00BDE45E1CA686C7007BF575 /* WoDeTableViewCell.m in Sources */,
 				00BDE3F11CA686C7007BF575 /* XZEditCourseViewController.m in Sources */,
-				00BDE4391CA686C7007BF575 /* XZEmailModel.m in Sources */,
+				0008F5691CA8B7DF00E965FC /* TaskDoneModel.m in Sources */,
 				00BDE4461CA686C7007BF575 /* DianZhanTableViewCell.m in Sources */,
-				00BDE4361CA686C7007BF575 /* SchoolModel.m in Sources */,
+				0008F5761CA8B7DF00E965FC /* LoginModel.m in Sources */,
 				00BDE3DB1CA686C7007BF575 /* MyProfileViewController.m in Sources */,
 				00BDE3F91CA686C7007BF575 /* ScanCodeViewController.m in Sources */,
+				0008F56A1CA8B7DF00E965FC /* TrendModel.m in Sources */,
+				0008F5651CA8B7DF00E965FC /* JZManagerService.m in Sources */,
 				00BDE4021CA686C7007BF575 /* TongXingLuViewController.m in Sources */,
 				00BDE46E1CA686C7007BF575 /* ZhiYuanTableViewCell.m in Sources */,
 				00BDE4521CA686C7007BF575 /* ContactTableViewCell.m in Sources */,
-				00BDE4211CA686C7007BF575 /* UserRoleInfoModel.m in Sources */,
-				00BDE42C1CA686C7007BF575 /* JZMemberModel.m in Sources */,
 				00BDE3E41CA686C7007BF575 /* BZRSetTeacherViewController.m in Sources */,
 				00BDE43E1CA686C7007BF575 /* LoadAlassetData.m in Sources */,
 				BA0559431CA8F83A000EE65D /* TongZhiTiXinMdel.m in Sources */,
@@ -1528,77 +1572,77 @@
 				00BDE40C1CA686C7007BF575 /* main.m in Sources */,
 				00BDE3DC1CA686C7007BF575 /* MyTrendsViewController.m in Sources */,
 				00BDE3ED1CA686C7007BF575 /* XZBZRManageViewController.m in Sources */,
-				00BDE42A1CA686C7007BF575 /* ImageModel.m in Sources */,
 				00BDE4661CA686C7007BF575 /* qunTouXiangTableViewCell.m in Sources */,
-				00BDE4311CA686C7007BF575 /* BZRModel.m in Sources */,
+				0008F5511CA8B7DF00E965FC /* commenData.m in Sources */,
 				00BDE3F01CA686C7007BF575 /* XZEditClassViewController.m in Sources */,
 				00BDE3C91CA686C7007BF575 /* GXTNavigationController.m in Sources */,
 				00BDE4411CA686C7007BF575 /* XuanZhePhonData.m in Sources */,
 				00BDE44A1CA686C7007BF575 /* TableViewCell.m in Sources */,
 				00BDE3F21CA686C7007BF575 /* XZSchoolInfoViewController.m in Sources */,
-				00BDE4341CA686C7007BF575 /* GradeModel.m in Sources */,
-				00BDE4161CA686C7007BF575 /* LoginModel.m in Sources */,
-				00BDE41E1CA686C7007BF575 /* RolePermissionModel.m in Sources */,
+				0008F5791CA8B7DF00E965FC /* TongXunmodel.m in Sources */,
 				00BDE3CB1CA686C7007BF575 /* AboutUsViewController.m in Sources */,
 				00BDE43D1CA686C7007BF575 /* DataManager.m in Sources */,
+				0008F5561CA8B7DF00E965FC /* UserService.m in Sources */,
 				00BDE3E71CA686C7007BF575 /* JZMemberManageViewController.m in Sources */,
-				00BDE42E1CA686C7007BF575 /* RelationModel.m in Sources */,
 				00BDE4421CA686C7007BF575 /* Tools.m in Sources */,
-				00BDE40F1CA686C7007BF575 /* UserService.m in Sources */,
 				00BDE4541CA686C7007BF575 /* ImageCollectionCell.m in Sources */,
 				BA0559461CA91621000EE65D /* TiXingViewController.m in Sources */,
 				00BDE4381CA686C7007BF575 /* TeacherModel.m in Sources */,
 				00BDE3D31CA686C7007BF575 /* ImageHeaderView.m in Sources */,
+				0008F5631CA8B7DF00E965FC /* ContectRoleModel.m in Sources */,
+				0008F5541CA8B7DF00E965FC /* SingleUserInfo.m in Sources */,
+				0008F56D1CA8B7DF00E965FC /* CourseModel.m in Sources */,
 				00BDE3EB1CA686C7007BF575 /* XZAddCourseViewController.m in Sources */,
+				0008F5591CA8B7DF00E965FC /* UserInfoModel.m in Sources */,
 				00BDE3EE1CA686C7007BF575 /* XZClassManageViewController.m in Sources */,
 				00BDE44E1CA686C7007BF575 /* GXTTabBar.m in Sources */,
-				00BDE4191CA686C7007BF575 /* Singleton.m in Sources */,
-				00BDE42F1CA686C7007BF575 /* TaskDoneModel.m in Sources */,
+				0008F56B1CA8B7DF00E965FC /* BZRModel.m in Sources */,
 				00BDE4071CA686C7007BF575 /* XuanzZheQunViewContr.m in Sources */,
 				00BDE3FC1CA686C7007BF575 /* AddViewController.m in Sources */,
 				00BDE3FE1CA686C7007BF575 /* ChooseMemberViewController.m in Sources */,
+				0008F5641CA8B7DF00E965FC /* ImageModel.m in Sources */,
 				00BDE3C21CA686C7007BF575 /* DongTaiViewController.m in Sources */,
-				00BDE4111CA686C7007BF575 /* commenData.m in Sources */,
 				00BDE4581CA686C7007BF575 /* SwitchTableViewCell.m in Sources */,
+				0008F5711CA8B7DF00E965FC /* SchoolPermissionModel.m in Sources */,
+				0008F5771CA8B7DF00E965FC /* ShousuoMOdel.m in Sources */,
 				00BDE4431CA686C7007BF575 /* UITextField+CustomStyle.m in Sources */,
+				0008F56C1CA8B7DF00E965FC /* ClassModel.m in Sources */,
 				00BDE3F71CA686C7007BF575 /* XZXinXiangViewController.m in Sources */,
 				00BDE3F31CA686C7007BF575 /* XZSchoolQuanXianViewController.m in Sources */,
-				00BDE41A1CA686C7007BF575 /* TongXunmodel.m in Sources */,
-				00BDE4231CA686C7007BF575 /* BZRCourseModel.m in Sources */,
 				00BDE3CF1CA686C7007BF575 /* CustomView.m in Sources */,
 				00BDE3E61CA686C7007BF575 /* JZAddMemberViewController.m in Sources */,
-				00BDE4271CA686C7007BF575 /* BasicService.m in Sources */,
-				00BDE4371CA686C7007BF575 /* SchoolPermissionModel.m in Sources */,
 				00BDE4091CA686C7007BF575 /* ZhouBianViewController.m in Sources */,
 				00BDE45B1CA686C7007BF575 /* TrendsTableViewCell.m in Sources */,
+				0008F55F1CA8B7DF00E965FC /* BZRManagerService.m in Sources */,
+				0008F5551CA8B7DF00E965FC /* UserLoginModel.m in Sources */,
+				0008F5601CA8B7DF00E965FC /* BZRQuanXianModel.m in Sources */,
 				00BDE3D61CA686C7007BF575 /* EditPassWordViewController.m in Sources */,
 				00BDE3CA1CA686C7007BF575 /* GXTTabBarController.m in Sources */,
 				00BDE3E51CA686C7007BF575 /* BZRStudentManageViewController.m in Sources */,
-				00BDE4181CA686C7007BF575 /* ShousuoMOdel.m in Sources */,
 				00BDE44C1CA686C7007BF575 /* WeiHuiFuTableViewCell.m in Sources */,
-				00BDE4261CA686C7007BF575 /* BZRQuanXianModel.m in Sources */,
 				00BDE3F41CA686C7007BF575 /* XZSetBZRViewController.m in Sources */,
+				0008F5731CA8B7DF00E965FC /* XZEmailModel.m in Sources */,
+				0008F5701CA8B7DF00E965FC /* SchoolModel.m in Sources */,
 				00BDE45A1CA686C7007BF575 /* TaskDidTableViewCell.m in Sources */,
+				0008F55C1CA8B7DF00E965FC /* UserRoleSettingModel.m in Sources */,
 				00BDE3C71CA686C7007BF575 /* RegisterViewController.m in Sources */,
+				0008F5721CA8B7DF00E965FC /* TeacherModel.m in Sources */,
 				00BDE46A1CA686C7007BF575 /* XuanZheQunLiaoTableViewCell.m in Sources */,
 				00BDE3E01CA686C7007BF575 /* BZRAddStudentViewController.m in Sources */,
 				00BDE43B1CA686C7007BF575 /* HttpClient.m in Sources */,
-				00BDE4301CA686C7007BF575 /* TrendModel.m in Sources */,
-				00BDE4241CA686C7007BF575 /* BZRJianhurenModel.m in Sources */,
+				0008F5521CA8B7DF00E965FC /* commenListData.m in Sources */,
 				00BDE3FA1CA686C7007BF575 /* SettingViewController.m in Sources */,
-				00BDE4321CA686C7007BF575 /* ClassModel.m in Sources */,
-				00BDE41B1CA686C7007BF575 /* ZhiYuanModel.m in Sources */,
-				00BDE42D1CA686C7007BF575 /* JZPermissionModel.m in Sources */,
 				00BDE3EA1CA686C7007BF575 /* ManagerViewController.m in Sources */,
-				00BDE40E1CA686C7007BF575 /* UserLoginModel.m in Sources */,
-				00BDE4121CA686C7007BF575 /* commenListData.m in Sources */,
+				0008F5781CA8B7DF00E965FC /* Singleton.m in Sources */,
+				0008F5751CA8B7DF00E965FC /* HttpDataModel.m in Sources */,
 				00BDE3D41CA686C7007BF575 /* ListPickerView.m in Sources */,
 				00BDE40A1CA686C7007BF575 /* ZiYuanViewController.m in Sources */,
 				00BDE4441CA686C7007BF575 /* DetailedCell.m in Sources */,
 				00BDE44F1CA686C7007BF575 /* BZRCourseTableViewCell.m in Sources */,
-				00BDE40D1CA686C7007BF575 /* SingleUserInfo.m in Sources */,
 				00BDE4621CA686C7007BF575 /* addNameTableViewCell.m in Sources */,
-				00BDE4131CA686C7007BF575 /* DongTaiList.m in Sources */,
+				0008F57B1CA8B7DF00E965FC /* RoleModel.m in Sources */,
+				0008F56F1CA8B7DF00E965FC /* ManagerService.m in Sources */,
+				0008F55D1CA8B7DF00E965FC /* BZRCourseModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

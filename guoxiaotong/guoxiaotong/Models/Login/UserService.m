@@ -35,12 +35,15 @@
 #pragma mark - 登陆之后需要请求及保存数据
 - (void)didLogin:(NSString *)loginName password:(NSString *)password {
     //userId已知
+    SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
     [self getProfileWithCallBack:^(BOOL isSuccess, UserInfoModel *userInfo) {
         if (isSuccess) {
-            SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
             shareInfo.userName = userInfo.userName;
             shareInfo.loginName = userInfo.loginName;
         }
+    }];
+    [self getRoleListWithUserId:shareInfo.userId callBack:^(BOOL isSuccess, NSArray *roleList) {
+        [shareInfo.roleList addObjectsFromArray:roleList];
     }];
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def setObject:loginName forKey:@"loginName"];

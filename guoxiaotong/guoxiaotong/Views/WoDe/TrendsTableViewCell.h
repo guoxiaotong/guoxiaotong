@@ -10,4 +10,10 @@
 
 @interface TrendsTableViewCell : UITableViewCell
 
+@property (nonatomic, assign) CGFloat cellHeight;
+@property (nonatomic, copy) void (^replyCallBack)(id model);
+@property (nonatomic, copy) void (^likeCallBack)(id model);
+
+- (void)setUIWithModel:(id)model;
+
 @end
