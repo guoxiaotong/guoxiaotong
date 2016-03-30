@@ -7,7 +7,6 @@
 //
 
 #import "GXTTabBarController.h"
-#import "GXTTabBar.h"
 #import "GXTNavigationController.h"
 
 @interface GXTTabBarController ()

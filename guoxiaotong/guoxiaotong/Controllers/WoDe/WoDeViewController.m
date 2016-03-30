@@ -68,7 +68,7 @@
 //右上角设置按钮
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
     button.frame = CGRectMake(0, 0, 30, 30);
-    [button setImage:[UIImage imageNamed:@"manager_quanxian_bzr"] forState:UIControlStateNormal];
+    [button setImage:[UIImage imageNamed:@"naviBar_setting"] forState:UIControlStateNormal];
     [button addTarget:self action:@selector(setting) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:button];
 //    基础设置

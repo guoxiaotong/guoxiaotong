@@ -30,7 +30,7 @@
 }
 
 - (void)setUI {
-    [self.tableView registerNib:[UINib nibWithNibName:@"XZEmailListTableViewCell" bundle:nil] forCellReuseIdentifier:@"EmailCell"];
+    [self.tableView registerClass:[XZEmailListTableViewCell class] forCellReuseIdentifier:@"EmailCell"];
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
 }
 
@@ -46,10 +46,6 @@
             [weakSelf.tableView reloadData];
         }
     }];
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

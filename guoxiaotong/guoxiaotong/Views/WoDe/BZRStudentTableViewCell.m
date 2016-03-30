@@ -22,15 +22,15 @@
 -  (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         CGRect frame = self.frame;
-        
-        _imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, frame.size.height-10, frame.size.height-10)];
+        CGFloat icon_wid = 50;
+        _imageV = [[UIImageView alloc] initWithFrame:CGRectMake(20, 5, icon_wid, icon_wid)];
         [self.contentView addSubview:_imageV];
         
         _studentLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_imageV.frame)+10, 5, frame.size.width-CGRectGetMaxX(_imageV.frame)-30, 21)];
-        _studentLabel.font = [UIFont systemFontOfSize:15.0];
+        _studentLabel.font = [UIFont systemFontOfSize:16.0];
         [self.contentView addSubview:_studentLabel];
         
-        _jianhurenLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_imageV.frame)+10, 25, frame.size.width-CGRectGetMaxX(_imageV.frame)-30, 18)];
+        _jianhurenLabel = [[UILabel alloc] initWithFrame:CGRectMake(CGRectGetMaxX(_imageV.frame)+10, CGRectGetMaxY(_studentLabel.frame)+5, frame.size.width-CGRectGetMaxX(_imageV.frame)-30, 18)];
         _jianhurenLabel.font = [UIFont systemFontOfSize:14.0];
         [self.contentView addSubview:_jianhurenLabel];
         

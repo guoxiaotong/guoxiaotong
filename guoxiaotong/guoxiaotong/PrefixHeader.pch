@@ -25,7 +25,7 @@
 
 //环信
 #import <EaseMobSDKFull/EaseMob.h>
-#import <EaseUI.h>
+#import <EaseUI/EaseUI.h>
 
 //大部分要用到的头文件
 #import "UITextField+CustomStyle.h"
