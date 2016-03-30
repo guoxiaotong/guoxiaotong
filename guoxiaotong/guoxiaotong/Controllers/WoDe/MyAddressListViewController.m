@@ -13,6 +13,8 @@
 #import "ContectRoleModel.h"
 #import "ContectMemberModel.h"
 #import "TextFieldWithButton.h"
+//#import "ChatViewController.h"
+
 
 @interface MyAddressListViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
@@ -66,7 +68,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-    [self.tableView registerNib:[UINib nibWithNibName:@"ContactTableViewCell" bundle:nil] forCellReuseIdentifier:@"ContactCell"];
+    [self.tableView registerClass:[ContactTableViewCell class] forCellReuseIdentifier:@"ContactCell"];
     [self.view addSubview:self.tableView];
     
     UIButton *bottomButton = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -81,9 +83,9 @@
 
 - (void)serverClick {
     NSLog(@"联系客服");
-    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
-    easeMessageVC.title = @"国校通客服";
-    [self.navigationController pushViewController:easeMessageVC animated:YES];
+//    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
+//    easeMessageVC.title = @"国校通客服";
+//    [self.navigationController pushViewController:easeMessageVC animated:YES];
 }
 
 
@@ -105,9 +107,12 @@
     ContactTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ContactCell"];
     ContectRoleModel *roleModel = self.dataSource[indexPath.section];
     ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
-    cell.nameLabel.text = memberModel.userName;
-    cell.detailLabel.text = memberModel.desc;
+    [cell setUIWithModel:memberModel];
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -132,11 +137,24 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     ContectRoleModel *roleModel = self.dataSource[indexPath.section];
     ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
-    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
-    easeMessageVC.title = memberModel.userName;
-    [self.navigationController pushViewController:easeMessageVC animated:YES];
+    
+//    EMBuddy *buddy = [EMBuddy buddyWithUsername:memberModel.userName];
+//    EaseUserModel *model = [[EaseUserModel alloc] initWithBuddy:buddy];
+//    model.nickname = memberModel.userName;
+//    model.avatarURLPath = [NSString stringWithFormat:@"%@%@", API_ROOT_IMAGE_URL, memberModel.picPath];
+//    NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
+//    NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
+//    if (loginUsername && loginUsername.length > 0) {
+//        if ([loginUsername isEqualToString:memberModel.loginName]) {
+//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"friend.notChatSelf", @"can't talk to yourself") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
+//            [alertView show];
+//            
+//            return;
+//        }
+//    }
+//    ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.buddy.username conversationType:eConversationTypeChat];
+//    chatController.title = model.nickname.length > 0 ? model.nickname : model.buddy.username;
+//    [self.navigationController pushViewController:chatController animated:YES];
 }
-
-
 
 @end

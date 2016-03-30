@@ -10,6 +10,8 @@
 #import "ImageCollectionCell.h"
 #import "BasicService.h"
 #import "TrendsTableViewCell.h"
+#import "TrendModel.h"
+#import "BigImageViewController.h"
 
 @interface MyCollectionViewController ()<UITableViewDataSource, UITableViewDelegate, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -75,6 +77,7 @@
 
 - (void)setChangeButtons {
     _buttonHeight = 40;
+    UIFont *font = [UIFont systemFontOfSize:14.0];
     CGFloat height = self.buttonHeight;
     CGFloat width = (WIDTH - 12)/2;
     UIView *headerBackView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH, height)];
@@ -83,6 +86,7 @@
     _trendsButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _trendsButton.frame = CGRectMake(5, 5, width, height - 10);
     _trendsButton.layer.cornerRadius = 5;
+    _trendsButton.titleLabel.font = font;
     [_trendsButton setTitle:@"动态收藏" forState:UIControlStateNormal];
     [_trendsButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     _trendsButton.backgroundColor = DEFAULT_NAVIGATIONBAR_COLOR;
@@ -92,6 +96,7 @@
     _imageButton = [UIButton buttonWithType:UIButtonTypeCustom];
     _imageButton.frame = CGRectMake(WIDTH-5-width, 5, width, height - 10);
     _imageButton.layer.cornerRadius = 5;
+    _imageButton.titleLabel.font = font;
     [_imageButton setTitle:@"图片收藏" forState:UIControlStateNormal];
     [_imageButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     _imageButton.backgroundColor = [UIColor whiteColor];
@@ -101,12 +106,13 @@
 }
 
 - (void)setTableView {
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.buttonHeight, WIDTH, HEIGHT-self.buttonHeight-64) style:UITableViewStylePlain];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, self.buttonHeight, WIDTH, HEIGHT-self.buttonHeight-64) style:UITableViewStyleGrouped];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     [self.view addSubview:self.tableView];
     
+//    [_tableView registerNib:[UINib nibWithNibName:@"TableViewCell" bundle:nil] forCellReuseIdentifier:@"TrendCell"];
     [self.tableView registerClass:[TrendsTableViewCell class] forCellReuseIdentifier:@"TrendsCell"];
 }
 
@@ -158,16 +164,43 @@
 }
 
 #pragma mark - tableView
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.trendsDataSource.count;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     TrendsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TrendsCell"];
     ///////////////
+    TrendModel *model = self.trendsDataSource[indexPath.section];
+    [cell setUIWithModel:model];    
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (self.trendsDataSource.count) {
+        TrendsTableViewCell *cell = (TrendsTableViewCell *)[self tableView:_tableView cellForRowAtIndexPath:indexPath];
+        return cell.cellHeight;
+    }else {
+        return 0;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    return 20;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (section == 0) {
+        return 10;
+    }else {
+        return 0.001;
+    }
+}
 
 #pragma mark - collectionView
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
@@ -177,7 +210,25 @@
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     ImageCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImageCell" forIndexPath:indexPath];
     ////////
+    ImageModel *imageInfo = self.imageDataSource[indexPath.row];
+    [cell setUIWithModel:imageInfo];
+    __weak typeof (*&self)weakSelf = self;
+    cell.imageTapCallBack = ^(UIImage *image) {
+        BigImageViewController *bigVC = [[BigImageViewController alloc] init];
+        bigVC.image = image;
+        [weakSelf.navigationController pushViewController:bigVC animated:YES];
+    };
     return cell;
 }
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+    return CGSizeMake((WIDTH-30)/2, 100);
+}
+
+// 设置每个cell上下左右相距
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
+    return UIEdgeInsetsMake(10, 10, 10, 10);
+}
+
 
 @end

@@ -79,7 +79,7 @@
             break;
     }
     
-    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, WIDTH, 1)];
+    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH, 0.5)];
     border.backgroundColor = [UIColor lightGrayColor];
     [view addSubview:border];
     [self.view addSubview:view];
@@ -125,6 +125,10 @@
     }else {
         return YES;
     }
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    [self.view endEditing:YES];
 }
 
 @end

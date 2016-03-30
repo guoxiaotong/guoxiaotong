@@ -10,4 +10,8 @@
 
 @interface ImageCollectionCell : UICollectionViewCell
 
+@property (nonatomic, copy) void (^imageTapCallBack)(UIImage *image);
+
+- (void)setUIWithModel:(id)model;
+
 @end

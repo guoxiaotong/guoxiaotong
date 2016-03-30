@@ -9,8 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ContactTableViewCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UIImageView *imageV;
-@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *detailLabel;
+
+- (void)setUIWithModel:(id)model;
 
 @end

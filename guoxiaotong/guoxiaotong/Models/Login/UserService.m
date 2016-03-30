@@ -9,11 +9,11 @@
 #import "UserService.h"
 #import "HttpClient.h"
 #import "Config.h"
-
 #import "UserLoginModel.h"
 #import "UserRoleInfoModel.h"
 #import "UserInfoModel.h"
 #import "SingleUserInfo.h"
+#import "Tools.h"
 
 @interface UserService()
 
@@ -35,12 +35,21 @@
 #pragma mark - 登陆之后需要请求及保存数据
 - (void)didLogin:(NSString *)loginName password:(NSString *)password {
     //userId已知
+//    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:loginName password:[Tools md5:password] completion:^(NSDictionary *loginInfo, EMError *error) {
+//        if (!error && loginInfo) {
+//            
+//            NSLog(@"登陆成功");
+//        }
+//    } onQueue:nil];
+    SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
     [self getProfileWithCallBack:^(BOOL isSuccess, UserInfoModel *userInfo) {
         if (isSuccess) {
-            SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
             shareInfo.userName = userInfo.userName;
             shareInfo.loginName = userInfo.loginName;
         }
+    }];
+    [self getRoleListWithUserId:shareInfo.userId callBack:^(BOOL isSuccess, NSArray *roleList) {
+        [shareInfo.roleList addObjectsFromArray:roleList];
     }];
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def setObject:loginName forKey:@"loginName"];
@@ -177,6 +186,66 @@
 - (void)editPassword:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
     [LoadingView showCenterActivity:_view];
     [_clientManager post:API_EDIT_PWD_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)getCode:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_clientManager post:API_GETCODE_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)checkCode:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_clientManager post:API_CHECKCODE_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+    }];
+}
+
+-(void)registerInfo:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_clientManager post:API_REGISTER_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [LoadingView hideCenterActivity:self.view];
+        NSDictionary *json = responseObject;
+        if (callBack) {
+            callBack([json[@"code"] integerValue], json[@"msg"]);
+        }
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [LoadingView hideCenterActivity:self.view];
+        NSLog(@"%@", error);
+    }];
+}
+
+- (void)forgetPassword:(NSDictionary *)params callBack:(void (^)(NSInteger, NSString *))callBack {
+    [LoadingView showCenterActivity:_view];
+    [_clientManager post:API_RESET_PWD_URL requestParams:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [LoadingView hideCenterActivity:self.view];
         NSDictionary *json = responseObject;
         if (callBack) {
