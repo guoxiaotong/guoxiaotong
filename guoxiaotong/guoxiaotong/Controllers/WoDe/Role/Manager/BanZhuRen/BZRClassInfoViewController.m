@@ -33,7 +33,7 @@
     classLabel.text = _roleInfo.className;
     [self.view addSubview:classLabel];
     
-    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49, WIDTH, 1)];
+    UILabel *border = [[UILabel alloc] initWithFrame:CGRectMake(0, 49.5, WIDTH, 0.5)];
     border.backgroundColor = [UIColor lightGrayColor];
     [self.view addSubview:border];
 }

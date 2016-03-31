@@ -10,6 +10,11 @@
 
 @interface Tools : NSObject
 
+/**通过图片名获取图片大小*/
 + (CGSize)getSizeFromImage:(NSString *)imageName;
+
+/**MD5加密*/
++ (NSString *)md5:(NSString *)inPutText;
+
 
 @end

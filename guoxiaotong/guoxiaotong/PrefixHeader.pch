@@ -23,9 +23,22 @@
 #define DEFAULT_NAVIGATIONBAR_COLOR [UIColor colorWithRed:223.0f/225.0 green:62.0f/225.0 blue:63.0f/225.0 alpha:1.0]
 #define SEAECH_VIEW_BACK_COLOR [UIColor colorWithRed:200/225.0 green:200/225.0 blue:200/225.0 alpha:1.0]
 
-//环信
+//环信----
 #import <EaseMobSDKFull/EaseMob.h>
-#import <EaseUI.h>
+#import <EaseUI/EaseUI.h>
+#import "EMAlertView.h"
+
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
+
+#define RGBACOLOR(r,g,b,a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)]
+
+#define KNOTIFICATION_LOGINCHANGE @"loginStateChange"
+
+#define CHATVIEWBACKGROUNDCOLOR [UIColor colorWithRed:0.936 green:0.932 blue:0.907 alpha:1]
+
+#define dUserDefaults_Dic_NickName @"dUserDefaults_Dic_NickName"
+//-----
+
 
 //大部分要用到的头文件
 #import "UITextField+CustomStyle.h"
@@ -35,6 +48,8 @@
 #import "SingleUserInfo.h"
 #import <UIImageView+WebCache.h>
 #import "UserRoleInfoModel.h"
+#import "UserInfoModel.h"
+#import "BasicService.h"
 
 //字体，字体颜色
 #define TABLE_TITLE_FONT [UIFont systemFontOfSize:14.0]

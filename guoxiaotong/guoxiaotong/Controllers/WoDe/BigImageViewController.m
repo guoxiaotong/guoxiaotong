@@ -29,7 +29,8 @@
     _scroll.bounces = NO;
     [self.view addSubview:_scroll];
     
-    _imageView = [[UIImageView alloc] initWithImage:_image];
+    _imageView = [[UIImageView alloc] initWithFrame:_scroll.bounds];
+    _imageView.image = _image;
     _imageView.userInteractionEnabled = YES;
     
     UITapGestureRecognizer *doubleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(doubleTap)];
@@ -46,10 +47,16 @@
 }
 
 - (void)doubleTap {
-    if (_imageView.frame.size.width == _image.size.width) {
-
-    }else {
+    if (_imageView.frame.size.width == _scroll.frame.size.width) {
+        CGRect frame = _imageView.frame;
         
+        frame.origin.x -= frame.size.width/2;
+        frame.origin.y -= frame.size.height/2;
+        frame.size.width *= 2;
+        frame.size.height *= 2;
+        _imageView.frame = frame;
+    }else {
+        _imageView.frame = _scroll.bounds;
     }
 }
 
