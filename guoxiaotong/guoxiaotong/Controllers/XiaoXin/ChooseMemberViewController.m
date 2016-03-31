@@ -8,15 +8,32 @@
 
 #import "ChooseMemberViewController.h"
 #import "XuanZheQunLiaoTableViewCell.h"
+#import "ChooseMenSingle.h"
+
+#import "RoleModel.h"
 
 @interface ChooseMemberViewController ()<UITableViewDelegate,UITableViewDataSource>
 {
     UITableView *_tabView;
     
+    UITableView *_roleTabView;//角色tabView
+    
     UIImageView *_imageView;
     
+    NSMutableArray *_userDataArr;
+    NSMutableArray *_titleDataArr;
+    
+    NSMutableArray  *_roleDataArry;//角色数组
+    NSMutableArray *_chooseMem;//被选中的人
+    
+    UIButton *_btnleft;//选择角色按钮
+    UIButton *_btnRit;//当前角色按钮
+    
     //数组
-    int isOpen[10];
+    int isOpen[20];
+    
+    //是否勾选
+    int isChpoose[20];
 
 }
 
@@ -32,6 +49,17 @@
     
     self.view.backgroundColor=RGBA(220, 220, 220, 1);
     
+    _titleDataArr=[[NSMutableArray alloc]init];
+    _userDataArr=[[NSMutableArray alloc]init];
+    _chooseMem=[[NSMutableArray alloc]initWithArray:self.choosedarry];
+    
+    _roleDataArry=[[NSMutableArray alloc]init];
+    SingleUserInfo *sigUser=[SingleUserInfo shareUserInfo];
+    _roleDataArry=sigUser.roleList;
+
+    
+    [self lodeData];
+    
     //添加导航栏右边的确定按钮
     [self creatRightBtn];
     //创建两个按钮
@@ -39,8 +67,91 @@
     
     //创建tabView
     [self creatTabView];
+    
+    //创建角色tabView
+    [self creatRoleTabView];
 
 }
+-(void)lodeData{
+//    [LoadingView showCenterActivity:self.view];
+    
+    [_userDataArr removeAllObjects];
+    [_titleDataArr removeAllObjects];
+    
+    SingleUserInfo *singleUsel=[SingleUserInfo shareUserInfo];
+    
+    
+    NSString *urlStr = @"http://121.42.27.199:8888/csCampus/dynamic/contact.page";
+    
+    NSDictionary *bodyDict = @{@"roleId":@(singleUsel.roleId),@"userId":singleUsel.userId};
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+    
+    [manager  POST:urlStr parameters:bodyDict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"请求成功");
+        NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+        
+        NSArray *subrray=dict[@"members"];
+        for (NSDictionary *sonDict1 in subrray) {
+            TongXunmodel *titlModel=[[TongXunmodel alloc]init];
+            
+            [titlModel setValuesForKeysWithDictionary:sonDict1];
+            
+            [_titleDataArr addObject:titlModel];
+            
+            NSArray *array=sonDict1[@"userBean"];
+            
+            NSMutableArray *marry=[[NSMutableArray alloc]init];
+            
+            for (NSDictionary *dict2 in array) {
+                
+                TongXunmodel *userModel=[[TongXunmodel alloc]init];
+                [userModel setValuesForKeysWithDictionary:dict2];
+                
+                [marry addObject:userModel];
+            }
+            [_userDataArr addObject:marry];
+            
+            [_tabView reloadData];
+        }
+        
+//        [LoadingView hideCenterActivity:self.view];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"请求失败");
+    }];
+    
+
+}
+
+-(void)creatRoleTabView{
+    
+    _roleTabView=[[UITableView alloc]initWithFrame:CGRectMake(10, 105, screen_Width/2-20, 30*(_roleDataArry.count+1)) style:UITableViewStylePlain];
+    
+    _roleTabView.delegate=self;
+    
+    _roleTabView.dataSource=self;
+    
+    _roleTabView.separatorStyle=UITableViewCellSeparatorStyleSingleLineEtched;
+    
+    //
+    //    __roleTabView.backgroundColor=RGB(41, 36,33);
+    
+    
+    CALayer *layer=[_roleTabView layer];
+    
+    [layer setMasksToBounds:YES];
+    
+    [layer setCornerRadius:5];
+    
+    [layer setBorderWidth:1];
+    
+    [layer setBorderColor:[RGBA(41, 36, 33, 0.5) CGColor]];
+    
+}
+
 
 
 //添加导航栏右边的确定按钮
@@ -64,43 +175,89 @@
 //点击确定按钮后响应
 -(void)ritBtnClik{
     
+    ChooseMenSingle *singele=[ChooseMenSingle shareChooseMen];
+    singele.ChooseMenArry=_chooseMem;
+    [self.navigationController popViewControllerAnimated:YES];
     
     
 }
-
 
 //创建两个按钮
 -(void)creatBut{
+    SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
     
-    UIButton *btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnleft.frame=CGRectMake(5, 5, screen_Width/2-10, 40);
+    _btnleft.frame=CGRectMake(5, 5, screen_Width/2-10, 40);
     
-    btnleft.backgroundColor=[UIColor whiteColor];
+    _btnleft.backgroundColor=[UIColor whiteColor];
     
-    btnleft.layer.cornerRadius=5;
+    _btnleft.layer.cornerRadius=5;
     
-    [btnleft setTitle:@"全部角色" forState:UIControlStateNormal];
+    [_btnleft setTitle:@"全部角色" forState:UIControlStateNormal];
     
-    [btnleft setTintColor:[UIColor blackColor]];
+    [_btnleft setTintColor:[UIColor blackColor]];
     
-    [self.view addSubview:btnleft];
+    [_btnleft addTarget:self action:@selector(btnleftClick) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:_btnleft];
+    UIImageView *iamView=[[UIImageView alloc]initWithFrame:CGRectMake(screen_Width/2-30, 15, 15, 10)];
+    iamView.image=[UIImage imageNamed:@"iconfont-control-arr.png"];
+    [_btnleft addSubview:iamView];
+
     
-    UIButton *btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [self.view addSubview:_btnleft];
     
-    btnRit.frame=CGRectMake(screen_Width/2+5, 5, screen_Width/2-10, 40);
+    _btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    btnRit.backgroundColor=[UIColor whiteColor];
+    _btnRit.frame=CGRectMake(screen_Width/2+5, 5, screen_Width/2-10, 40);
     
-    btnRit.layer.cornerRadius=5;
+    _btnRit.backgroundColor=[UIColor whiteColor];
     
-    [btnRit setTitle:@"当前角色：" forState:UIControlStateNormal];
+    _btnRit.layer.cornerRadius=5;
     
-    [btnRit setTintColor:[UIColor blackColor]];
+    [_btnRit setTitle:[NSString stringWithFormat:@"当前角色:%@",singUser.roleInfo.roleName] forState:UIControlStateNormal];
     
-    [self.view addSubview:btnRit];
+    [_btnRit setTintColor:[UIColor blackColor]];
+    
+    [self.view addSubview:_btnRit];
     
 }
+
+//点击全部角色
+-(void)btnleftClick{
+    
+    UIView *allImageView=[[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    [self.tabBarController.view addSubview:allImageView];
+    
+    UITapGestureRecognizer *tapGes=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesClick:)];
+    
+    tapGes.cancelsTouchesInView=NO;
+    
+    [allImageView addGestureRecognizer:tapGes];
+    
+    allImageView.userInteractionEnabled=YES;
+    
+    [UIView animateWithDuration:3 animations:^{
+        
+        [allImageView addSubview:_roleTabView];
+    }];
+    
+    
+}
+
+-(void)tapGesClick:(UITapGestureRecognizer *)tap{
+    
+    UIImageView *imageView=(UIImageView *)tap.view;
+    
+    NSLog(@"23333");
+    
+    [imageView removeFromSuperview];
+    imageView=nil;
+    
+}
+
+
 
 //创建tabView
 -(void)creatTabView{
@@ -113,7 +270,6 @@
 //    
 //    [_tabView setSeparatorColor:[UIColor redColor]];
 
-    
     _tabView.delegate=self;
     
     _tabView.dataSource=self;
@@ -122,67 +278,168 @@
     
     [self.view addSubview:_tabView];
 }
+
+
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+    if (tableView==_tabView) {
+         return _titleDataArr.count;
+    }else{
     
-    return 5;
+        return 1;
+    
+    }
+    
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView==_tabView) {
+        return isOpen[section]?[_userDataArr[section] count]:0;
+    }else{
     
-   return isOpen[section]?2:0;
-
+        return _roleDataArry.count+1;
+    
+    }
+   
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
    static NSString *cellID=@"cellName";
     
-    XuanZheQunLiaoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell==nil) {
-        cell=[[[NSBundle mainBundle]loadNibNamed:@"XuanZheQunLiaoTableViewCell" owner:self options:nil]firstObject];
+    if (tableView==_tabView) {
+        XuanZheQunLiaoTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"XuanZheQunLiaoTableViewCell" owner:self options:nil]firstObject];
+        }
+        TongXunmodel *model=_userDataArr[indexPath.section][indexPath.row];
+        cell.tongXunModel=model;
+        
+        CALayer *layer=[cell.contentView layer];
+        
+        [layer setMasksToBounds:YES];
+        
+        //        [layer setCornerRadius:5];
+        
+        [layer setBorderWidth:2];
+        
+        [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
+        
+        cell.backgroundColor=RGBA(245, 245, 245, 1);
+        
+        for (int i=0; i<_chooseMem.count; i++) {
+            if ([model isEqual:_chooseMem[i]]) {
+                cell.chooesBtn.selected=YES;
+            }
+        }
+        
+        
+        [cell.chooesBtn setImage:[UIImage imageNamed:@"FriendsSendsPicturesSelectBigYIcon"] forState:UIControlStateSelected];
+        cell.chooesBtn.tag=10000*indexPath.section+indexPath.row;
+        
+        [cell.chooesBtn addTarget:self action:@selector(cellButnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+
+    }else{
+        
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell==nil) {
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        }
+        
+        if (indexPath.row==0) {
+            cell.textLabel.text=@"全部角色";
+        }else{
+            
+            RoleModel *roleModel=_roleDataArry[indexPath.row-1];
+            
+            cell.textLabel.text=roleModel.roleName;
+            
+        }
+        
+        cell.textLabel.font=[UIFont systemFontOfSize:14];
+        
+        cell.selectionStyle=NO;
+        
+        cell.backgroundColor=[UIColor whiteColor];
+        CALayer *layer=[cell.contentView layer];
+        [layer setMasksToBounds:YES];
+        [layer setBorderWidth:1];
+        [layer setBorderColor:[RGBA(41, 36, 33, 0.5) CGColor]];
+        
+        return cell;
+        
+    
     }
-  
-    CALayer *layer=[cell.contentView layer];
-  
-    [layer setMasksToBounds:YES];
-
-    //        [layer setCornerRadius:5];
-  
-    [layer setBorderWidth:2];
-
-    [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
     
-    cell.backgroundColor=RGBA(245, 245, 245, 1);
     
-    [cell.chooesBtn setImage:[UIImage imageNamed:@"FriendsSendsPicturesSelectBigYIcon"] forState:UIControlStateSelected];
-    
-    [cell.chooesBtn addTarget:self action:@selector(cellButnClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    return cell;
-
 }
 //cell后面用于勾选用的btn的点击事件
 -(void)cellButnClick:(UIButton *)butn{
-
+    
     butn.selected=!butn.selected;
+    
+    if (butn.selected) {
+        [_chooseMem addObject:_userDataArr[butn.tag/10000][butn.tag%10000]];
+        if ([_userDataArr[butn.tag/10000] count]==1) {
+            isChpoose[butn.tag/10000]=1;
+        }
+        
+    }else{
+    
+        [_chooseMem removeObject:_userDataArr[butn.tag/10000][butn.tag%10000]];
+        isChpoose[butn.tag/10000]=0;
+    
+    }
+    
+//    for (int i=0; i<_userDataArr.count; i++) {
+//        int k=0;
+//        for (int t=0; t<[_userDataArr[i] count]; t++) {
+////            UIButton *btn=[self.view viewWithTag:10000*i+t];
+////            if (btn.selected==YES) {
+////                k++;
+////            }
+//            for (int m=0; m<_chooseMem.count; i++) {
+//                if ([_userDataArr[i][t] isEqual:_chooseMem[m]]) {
+//                    k++;
+//                }
+//            }
+//            
+//        }
+//        if (k==[_userDataArr[i] count]) {
+//            
+//            isChpoose[i]=1;
+//        }else{
+//            isChpoose[i]=0;
+//            
+//        }
+//    }
+
+    
+    [_tabView reloadData];
+    
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    if (tableView==_tabView) {
+         return 60;
+    }else{
+    
+        return 30;
+    
+    }
+   
 
 }
 -(UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
 
-    NSArray *array=@[@"校长",@"班主任",@"教师",@"监护人",@"家长"];
-
-    UIButton *butn=[[UIButton alloc]initWithFrame:CGRectMake(0, 0, screen_Width, 30)];
+    UIButton *butn=[UIButton buttonWithType:UIButtonTypeCustom];
+   butn.frame=CGRectMake(0, 0, screen_Width, 30);
     
     butn.backgroundColor=[UIColor whiteColor];
     
-    UILabel *qunLabel=[[UILabel alloc]init];
+    UILabel *qunLabel=[[UILabel alloc]initWithFrame:CGRectMake(30, 5, 100, 20)];
     
-           qunLabel.frame=CGRectMake(30, 5, 100, 20); 
-        
-        qunLabel.text=array[section];
+        qunLabel.text=[_titleDataArr[section] roleName];
     
     if (isOpen[section]?1:0) {
         
@@ -213,42 +470,74 @@
     
     btnChoose.frame=CGRectMake(screen_Width-50, 5, 20, 20);
     
+    if (isChpoose[section]?1:0) {
+        [btnChoose setImage:[UIImage imageNamed:@"FriendsSendsPicturesSelectBigYIcon"] forState:UIControlStateNormal];
+
+    }else{
     [btnChoose setImage:[UIImage imageNamed:@"FriendsSendsPicturesSelectBigNIcon"] forState:UIControlStateNormal];
- 
-    [btnChoose setImage:[UIImage imageNamed:@"FriendsSendsPicturesSelectBigYIcon"] forState:UIControlStateSelected];
+    }
+    
+    btnChoose.tag=6000+section;
     
     [butn addSubview:btnChoose];
     
-    [btnChoose addTarget:self action:@selector(btnChooseClick:) forControlEvents:UIControlEventTouchUpInside];
-    
-    butn.tag=section+1100;
+       butn.tag=section+1100;
     
     [butn addTarget:self action:@selector(butnCliuck:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [btnChoose addTarget:self action:@selector(btnChooseClick:) forControlEvents:UIControlEventTouchUpInside];
     
     return butn;
 
 }
 -(void)btnChooseClick:(UIButton *)btn{
-//点击勾选按钮
-    NSLog(@"choose");
-    btn.selected=!btn.selected;
-   
+    
+    for (int i = 0; i < 20; i++) {
+        if (btn.tag - 6000 == i) {
+            isChpoose[i] = !isChpoose[i];
+        }
+        
+    }
+    if (isChpoose[btn.tag-6000]) {
+        [_chooseMem addObjectsFromArray:_userDataArr[btn.tag-6000]];
+    }else{
+        [_chooseMem removeObjectsInArray:_userDataArr[btn.tag-6000]];
+        
+    }
+    
+    NSLog(@"%@",_chooseMem);
+
+    [_tabView reloadData];
+
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView==_tabView) {
+        return 30;
+    }else{
+    
+        return 0;
+    }
 
-    return 30;
+    
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
-
-    return 3;
+    
+    if (tableView==_tabView) {
+         return 3;
+    }else{
+    
+        return 0;
+    
+    }
+   
 
 }
 
 -(void)butnCliuck:(UIButton *)btn{
     
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 20; i++) {
         if (btn.tag - 1100 == i) {
             isOpen[i] = !isOpen[i];
         }
@@ -256,6 +545,37 @@
     }
     
     [_tabView reloadData];
+
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+
+
+    
+    if (tableView==_roleTabView) {
+        
+        SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
+        if (indexPath.row==0) {
+            singUser.roleId=0;
+            singUser.roleInfo.roleName=@"全部角色";
+            
+        }else{
+            RoleModel *model=_roleDataArry[indexPath.row-1];
+            singUser.roleId=model.roleId;
+            singUser.roleInfo.roleName=model.roleName;
+            
+        }
+        [_btnleft removeFromSuperview];
+        [_btnRit removeFromSuperview];
+        _btnRit=nil;
+        _btnleft=nil;
+        [self creatBut];
+        
+        [self lodeData];
+        
+    }
+
+
 
 }
 

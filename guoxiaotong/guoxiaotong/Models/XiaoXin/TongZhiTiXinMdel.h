@@ -9,13 +9,11 @@
 #import <Foundation/Foundation.h>
 
 @interface TongZhiTiXinMdel : NSObject
-
-proStr(lastUser);//最后一条通知发送人
-proStr(lastUser2);//最后一条提醒发送人
-proStr(num);//未读通知数
+proStr(num);
 proStr(num2);
-proStr(time);//最后一条通知时间
+proStr(time);
 proStr(time2);
-
+proStr(lastUser);
+proStr(lastUser2);
 
 @end

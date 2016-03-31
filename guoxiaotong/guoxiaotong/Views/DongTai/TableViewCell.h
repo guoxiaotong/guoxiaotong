@@ -23,6 +23,8 @@
 
 
 @property (weak, nonatomic) IBOutlet UIView *dianZhanView;//点赞
+@property (weak, nonatomic) IBOutlet UIImageView *dinzhangView;//用于放点赞的大拇指图片
+
 @property (weak, nonatomic) IBOutlet UIButton *dianZhangBtn;//遮着点赞的btn
 
 @property (weak, nonatomic) IBOutlet UIView *gengDuoView;//更多

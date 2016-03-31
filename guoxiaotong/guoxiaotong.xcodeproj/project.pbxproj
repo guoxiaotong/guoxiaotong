@@ -187,8 +187,12 @@
 		00BDE46D1CA686C7007BF575 /* QunTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00BDE3B91CA686C7007BF575 /* QunTableViewCell.xib */; };
 		00BDE46E1CA686C7007BF575 /* ZhiYuanTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00BDE3BB1CA686C7007BF575 /* ZhiYuanTableViewCell.m */; };
 		00BDE46F1CA686C7007BF575 /* ZhiYuanTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00BDE3BC1CA686C7007BF575 /* ZhiYuanTableViewCell.xib */; };
-		BA0559431CA8F83A000EE65D /* TongZhiTiXinMdel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0559421CA8F83A000EE65D /* TongZhiTiXinMdel.m */; };
 		BA0559461CA91621000EE65D /* TiXingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BA0559451CA91621000EE65D /* TiXingViewController.m */; };
+		BA05594C1CA9346C000EE65D /* TongZhiTiXinMdel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA05594B1CA9346C000EE65D /* TongZhiTiXinMdel.m */; };
+		BA638A831CAB6E07002A089A /* ChooseMenSingle.m in Sources */ = {isa = PBXBuildFile; fileRef = BA638A821CAB6E07002A089A /* ChooseMenSingle.m */; };
+		BA9E06FB1CAA1CAE00944C17 /* ShouGroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9E06F91CAA1CAE00944C17 /* ShouGroupCell.m */; };
+		BA9E06FC1CAA1CAE00944C17 /* ShouGroupCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BA9E06FA1CAA1CAE00944C17 /* ShouGroupCell.xib */; };
+		BA9E06FF1CAA36C700944C17 /* UserListDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = BA9E06FE1CAA36C700944C17 /* UserListDataModel.m */; };
 		CF7646CE18E6D047D4C99CE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 080692A9D1B36040A8466472 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -549,10 +553,17 @@
 		00BDE3BC1CA686C7007BF575 /* ZhiYuanTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ZhiYuanTableViewCell.xib; sourceTree = "<group>"; };
 		080692A9D1B36040A8466472 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		9DDC6AA5720949B57EB60EF6 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		BA0559411CA8F83A000EE65D /* TongZhiTiXinMdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongZhiTiXinMdel.h; sourceTree = "<group>"; };
-		BA0559421CA8F83A000EE65D /* TongZhiTiXinMdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongZhiTiXinMdel.m; sourceTree = "<group>"; };
 		BA0559441CA91621000EE65D /* TiXingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiXingViewController.h; sourceTree = "<group>"; };
 		BA0559451CA91621000EE65D /* TiXingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiXingViewController.m; sourceTree = "<group>"; };
+		BA05594A1CA9346C000EE65D /* TongZhiTiXinMdel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TongZhiTiXinMdel.h; sourceTree = "<group>"; };
+		BA05594B1CA9346C000EE65D /* TongZhiTiXinMdel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TongZhiTiXinMdel.m; sourceTree = "<group>"; };
+		BA638A811CAB6E07002A089A /* ChooseMenSingle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMenSingle.h; sourceTree = "<group>"; };
+		BA638A821CAB6E07002A089A /* ChooseMenSingle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMenSingle.m; sourceTree = "<group>"; };
+		BA9E06F81CAA1CAE00944C17 /* ShouGroupCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShouGroupCell.h; sourceTree = "<group>"; };
+		BA9E06F91CAA1CAE00944C17 /* ShouGroupCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShouGroupCell.m; sourceTree = "<group>"; };
+		BA9E06FA1CAA1CAE00944C17 /* ShouGroupCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ShouGroupCell.xib; sourceTree = "<group>"; };
+		BA9E06FD1CAA36C700944C17 /* UserListDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserListDataModel.h; sourceTree = "<group>"; };
+		BA9E06FE1CAA36C700944C17 /* UserListDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserListDataModel.m; sourceTree = "<group>"; };
 		CAF997D8BA6E1F22D842A922 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -733,6 +744,12 @@
 				0008F5471CA8B7DF00E965FC /* Singleton.m */,
 				0008F5481CA8B7DF00E965FC /* TongXunmodel.h */,
 				0008F5491CA8B7DF00E965FC /* TongXunmodel.m */,
+				BA05594A1CA9346C000EE65D /* TongZhiTiXinMdel.h */,
+				BA05594B1CA9346C000EE65D /* TongZhiTiXinMdel.m */,
+				BA9E06FD1CAA36C700944C17 /* UserListDataModel.h */,
+				BA9E06FE1CAA36C700944C17 /* UserListDataModel.m */,
+				BA638A811CAB6E07002A089A /* ChooseMenSingle.h */,
+				BA638A821CAB6E07002A089A /* ChooseMenSingle.m */,
 			);
 			path = XiaoXin;
 			sourceTree = "<group>";
@@ -1215,6 +1232,9 @@
 				00BDE3B21CA686C7007BF575 /* XuanZheQunLiaoTableViewCell.h */,
 				00BDE3B31CA686C7007BF575 /* XuanZheQunLiaoTableViewCell.m */,
 				00BDE3B41CA686C7007BF575 /* XuanZheQunLiaoTableViewCell.xib */,
+				BA9E06F81CAA1CAE00944C17 /* ShouGroupCell.h */,
+				BA9E06F91CAA1CAE00944C17 /* ShouGroupCell.m */,
+				BA9E06FA1CAA1CAE00944C17 /* ShouGroupCell.xib */,
 			);
 			path = XiaoXin;
 			sourceTree = "<group>";
@@ -1263,53 +1283,6 @@
 				080692A9D1B36040A8466472 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		BA4F370F1CA68D380028ECCF /* ZiYuan */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3121CA686C6007BF575 /* ZhiYuanModel.h */,
-				00BDE3131CA686C6007BF575 /* ZhiYuanModel.m */,
-				00BDE30A1CA686C6007BF575 /* RoleModel.h */,
-				00BDE30B1CA686C6007BF575 /* RoleModel.m */,
-				00BDE2FC1CA686C6007BF575 /* ADModel.h */,
-				00BDE2FD1CA686C6007BF575 /* ADModel.m */,
-			);
-			path = ZiYuan;
-			sourceTree = "<group>";
-		};
-		BA4F37101CA68D8D0028ECCF /* XiaoXin */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3061CA686C6007BF575 /* HttpDataModel.h */,
-				00BDE3071CA686C6007BF575 /* HttpDataModel.m */,
-				00BDE3101CA686C6007BF575 /* TongXunmodel.h */,
-				00BDE3111CA686C6007BF575 /* TongXunmodel.m */,
-				00BDE3041CA686C6007BF575 /* GroupModel.h */,
-				00BDE3051CA686C6007BF575 /* GroupModel.m */,
-				00BDE30E1CA686C6007BF575 /* Singleton.h */,
-				00BDE30F1CA686C6007BF575 /* Singleton.m */,
-				00BDE30C1CA686C6007BF575 /* ShousuoMOdel.h */,
-				00BDE30D1CA686C6007BF575 /* ShousuoMOdel.m */,
-				00BDE3081CA686C6007BF575 /* LoginModel.h */,
-				00BDE3091CA686C6007BF575 /* LoginModel.m */,
-				BA0559411CA8F83A000EE65D /* TongZhiTiXinMdel.h */,
-				BA0559421CA8F83A000EE65D /* TongZhiTiXinMdel.m */,
-			);
-			path = XiaoXin;
-			sourceTree = "<group>";
-		};
-		BA4F37111CA68DF80028ECCF /* DongTai */ = {
-			isa = PBXGroup;
-			children = (
-				00BDE3021CA686C6007BF575 /* DongTaiList.h */,
-				00BDE3031CA686C6007BF575 /* DongTaiList.m */,
-				00BDE2FE1CA686C6007BF575 /* commenData.h */,
-				00BDE2FF1CA686C6007BF575 /* commenData.m */,
-				00BDE3001CA686C6007BF575 /* commenListData.h */,
-				00BDE3011CA686C6007BF575 /* commenListData.m */,
-			);
-			path = DongTai;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1364,7 +1337,7 @@
 				TargetAttributes = {
 					0011590D1C8FC147001E7CA8 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 7WWNV7VA7S;
+						DevelopmentTeam = 69C44WR45G;
 					};
 					001159261C8FC147001E7CA8 = {
 						CreatedOnToolsVersion = 7.2;
@@ -1417,6 +1390,7 @@
 				00BDE45F1CA686C7007BF575 /* WoDeTableViewCell.xib in Resources */,
 				00BDE4451CA686C7007BF575 /* DetailedCell.xib in Resources */,
 				00BDE44B1CA686C7007BF575 /* TableViewCell.xib in Resources */,
+				BA9E06FC1CAA1CAE00944C17 /* ShouGroupCell.xib in Resources */,
 				00BDE4691CA686C7007BF575 /* XiaoXinTableViewCell.xib in Resources */,
 				00BDE3C51CA686C7007BF575 /* HuiFuViewController.xib in Resources */,
 				00BDE4011CA686C7007BF575 /* ShousuoViewController.xib in Resources */,
@@ -1515,6 +1489,7 @@
 				00BDE4501CA686C7007BF575 /* BZRStudentTableViewCell.m in Sources */,
 				00BDE43F1CA686C7007BF575 /* PhotoCollectionViewCell.m in Sources */,
 				00BDE43A1CA686C7007BF575 /* Helper.m in Sources */,
+				BA05594C1CA9346C000EE65D /* TongZhiTiXinMdel.m in Sources */,
 				0008F5661CA8B7DF00E965FC /* JZMemberModel.m in Sources */,
 				0008F5571CA8B7DF00E965FC /* BaseModel.m in Sources */,
 				00BDE4481CA686C7007BF575 /* HuiFuTableViewCell.m in Sources */,
@@ -1532,8 +1507,10 @@
 				00BDE4681CA686C7007BF575 /* XiaoXinTableViewCell.m in Sources */,
 				00BDE3F61CA686C7007BF575 /* XZXinXiangDetailViewController.m in Sources */,
 				0008F5681CA8B7DF00E965FC /* RelationModel.m in Sources */,
+				BA9E06FF1CAA36C700944C17 /* UserListDataModel.m in Sources */,
 				00BDE3D01CA686C7007BF575 /* DatePicker.m in Sources */,
 				00BDE4571CA686C7007BF575 /* SectionHeaderView.m in Sources */,
+				BA638A831CAB6E07002A089A /* ChooseMenSingle.m in Sources */,
 				0008F5741CA8B7DF00E965FC /* GroupModel.m in Sources */,
 				00BDE3F81CA686C7007BF575 /* RoleListViewController.m in Sources */,
 				00BDE3C11CA686C7007BF575 /* DetailedViewController.m in Sources */,
@@ -1567,12 +1544,12 @@
 				00BDE4521CA686C7007BF575 /* ContactTableViewCell.m in Sources */,
 				00BDE3E41CA686C7007BF575 /* BZRSetTeacherViewController.m in Sources */,
 				00BDE43E1CA686C7007BF575 /* LoadAlassetData.m in Sources */,
-				BA0559431CA8F83A000EE65D /* TongZhiTiXinMdel.m in Sources */,
 				00BDE3E31CA686C7007BF575 /* BZRQuanXianViewController.m in Sources */,
 				00BDE40C1CA686C7007BF575 /* main.m in Sources */,
 				00BDE3DC1CA686C7007BF575 /* MyTrendsViewController.m in Sources */,
 				00BDE3ED1CA686C7007BF575 /* XZBZRManageViewController.m in Sources */,
 				00BDE4661CA686C7007BF575 /* qunTouXiangTableViewCell.m in Sources */,
+				BA9E06FB1CAA1CAE00944C17 /* ShouGroupCell.m in Sources */,
 				0008F5511CA8B7DF00E965FC /* commenData.m in Sources */,
 				00BDE3F01CA686C7007BF575 /* XZEditClassViewController.m in Sources */,
 				00BDE3C91CA686C7007BF575 /* GXTNavigationController.m in Sources */,
@@ -1587,7 +1564,6 @@
 				00BDE4421CA686C7007BF575 /* Tools.m in Sources */,
 				00BDE4541CA686C7007BF575 /* ImageCollectionCell.m in Sources */,
 				BA0559461CA91621000EE65D /* TiXingViewController.m in Sources */,
-				00BDE4381CA686C7007BF575 /* TeacherModel.m in Sources */,
 				00BDE3D31CA686C7007BF575 /* ImageHeaderView.m in Sources */,
 				0008F5631CA8B7DF00E965FC /* ContectRoleModel.m in Sources */,
 				0008F5541CA8B7DF00E965FC /* SingleUserInfo.m in Sources */,
@@ -1772,7 +1748,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.guoxiaot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zm.guoxiaotong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -1791,7 +1767,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(inherited)";
-				PRODUCT_BUNDLE_IDENTIFIER = com.test.guoxiaot;
+				PRODUCT_BUNDLE_IDENTIFIER = com.zm.guoxiaotong;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

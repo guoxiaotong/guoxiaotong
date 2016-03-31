@@ -1,14 +1,14 @@
 //
-//  TongZhiTiXinMdel.m
+//  UserListDataModel.m
 //  guoxiaotong
 //
-//  Created by 刘晓娜 on 16/3/28.
+//  Created by 刘晓娜 on 16/3/29.
 //  Copyright © 2016年 StenpChou. All rights reserved.
 //
 
-#import "TongZhiTiXinMdel.h"
+#import "UserListDataModel.h"
 
-@implementation TongZhiTiXinMdel
+@implementation UserListDataModel
 
 -(void)setValue:(id)value forUndefinedKey:(NSString *)key{
 

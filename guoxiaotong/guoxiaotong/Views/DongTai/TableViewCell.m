@@ -33,15 +33,21 @@
     
     if (_model.commentBean.count) {
         _xiaoXiLabel.text=[NSString stringWithFormat:@"%ld",_model.commentBean.count];
-
+        
     }else{
-    
-    _xiaoXiLabel.text=@"回复";
+        
+        _xiaoXiLabel.text=@"回复";
+        
+    }if ([_model.praise isEqualToString:@""]) {
+        
+        _dianzhangLabel.text=@"0";
+        
+    }else{
+        NSArray *arry=[_model.praise componentsSeparatedByString:@","];
+        _dianzhangLabel.text=[NSString stringWithFormat:@"%ld",arry.count];
     
     }
-    NSArray *arry=[_model.praise componentsSeparatedByString:@","];
-    _dianzhangLabel.text=[NSString stringWithFormat:@"%ld",arry.count];
-    
+   
     
 
 }

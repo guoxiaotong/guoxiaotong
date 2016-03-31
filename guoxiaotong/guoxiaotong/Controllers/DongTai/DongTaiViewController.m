@@ -14,6 +14,7 @@
 
 #import "DongTaiList.h"
 #import "commenData.h"
+#import "RoleModel.h"
 
 @interface DongTaiViewController ()<UITableViewDataSource,UITableViewDelegate,UIScrollViewDelegate>
 {
@@ -24,6 +25,13 @@
     UIView *_bview;
     
     UILabel *_tisiLabel; //提示无更多更能的label
+    
+    UITableView *_quanBuJueTab;//全部角色tabView
+    
+    NSMutableArray *_roleData;
+    
+    UIButton *_ritBtn;//展示角色的
+
     
 }
 
@@ -43,6 +51,12 @@
     [super viewDidLoad];
     
     self.view.backgroundColor=[UIColor whiteColor];
+     _dongTaiArry=[[NSMutableArray alloc]init];
+    _roleData=[[NSMutableArray alloc]init];
+    SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
+    _roleData=singUser.roleList;
+    
+    [self creatQuBuTabView];
     
     self.mine=@"";
     self.userId=1046;
@@ -59,15 +73,16 @@
     [self creatTabView];
     
 }
+
 -(void)lodaData:(NSString *)typstr{
     
     self.type=(NSMutableString *)typstr;
-     _dongTaiArry=[[NSMutableArray alloc]init];
-
+    
+    SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
+    //默认第一个
+//    singUser.roleInfo=singUser.roleList.firstObject;
     NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/dynamic.page";
-    
-    
-    NSDictionary *Dict=@{@"type":self.type ,@"userId":@(self.userId),@"page":@1,@"userRoleId":@123,@"mine":self.mine};
+    NSDictionary *Dict=@{@"type":self.type ,@"userId":singUser.userId,@"page":@1,@"userRoleId":singUser.roleInfo.userRoleId,@"mine":self.mine};
     
     AFHTTPRequestOperationManager *requst = [AFHTTPRequestOperationManager manager];
     //设置响应格式为NSData
@@ -78,6 +93,8 @@
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
         
         NSArray *array=dict[@"comment"];
+        
+        [_dongTaiArry removeAllObjects];
         
         for (NSDictionary *sonDict in array) {
             
@@ -108,11 +125,14 @@
          NSDictionary *userDict=sonDict[@"userBean"];
             
             [Dmodel setValuesForKeysWithDictionary:userDict];
-
-            [_dongTaiArry addObject:Dmodel];
             
-           [_dongTaiTabView reloadData];
+    
+            [_dongTaiArry addObject:Dmodel];
+             [_dongTaiTabView reloadData];
+            
+           
         }
+       
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -122,15 +142,57 @@
 }
 -(void)creatRitBtn{
     
+    SingleUserInfo *singel=[SingleUserInfo shareUserInfo];
+    
+    _ritBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    
+    _ritBtn.frame=CGRectMake(screen_Width-25, 0, 80, 50);
+    if (singel.roleId==0) {
+        [_ritBtn setTitle:@"全部角色" forState:UIControlStateNormal];
+        
+    }else{
+        
+        [_ritBtn setTitle:singel.roleInfo.roleName forState:UIControlStateNormal];
+    }
+    
+    [_ritBtn addTarget:self action:@selector(ritBtnClik:) forControlEvents:UIControlEventTouchUpInside];
+    
+    UIBarButtonItem *ritBarBtn=[[UIBarButtonItem alloc]initWithCustomView:_ritBtn];
+
+    self.navigationItem.rightBarButtonItem=ritBarBtn;
+    
+
+    
     UIBarButtonItem *ritBtn1=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemSearch target:self action:@selector(ritBtn1Click)];
     
     UIBarButtonItem *ritBtn2=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(ritBtn2Click)];
     
     NSArray *ritBtns=[NSArray arrayWithObjects:ritBtn2,ritBtn1, nil];
 
-    self.navigationItem.rightBarButtonItems=ritBtns;
+    self.navigationItem.leftBarButtonItems=ritBtns;
     
     self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+
+}
+-(void)ritBtnClik:(UIButton *)btn{
+    UIView *allImageView=[[UIView alloc]initWithFrame:[[UIScreen mainScreen]bounds]];
+    
+    [self.tabBarController.view addSubview:allImageView];
+    
+    UITapGestureRecognizer *tapGes=[[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(tapGesClick:)];
+    
+    tapGes.cancelsTouchesInView=NO;
+    
+    [allImageView addGestureRecognizer:tapGes];
+    
+    allImageView.userInteractionEnabled=YES;
+    
+    [UIView animateWithDuration:3 animations:^{
+        
+        [allImageView addSubview:_quanBuJueTab];
+    }];
+    
+
 
 }
 
@@ -180,6 +242,17 @@
     _bview.backgroundColor=[UIColor whiteColor];
     
 
+}
+
+-(void)tapGesClick:(UITapGestureRecognizer *)tap{
+    
+    UIImageView *imageView=(UIImageView *)tap.view;
+    
+    NSLog(@"23333");
+    
+    [imageView removeFromSuperview];
+    imageView=nil;
+    
 }
 
 //点击分享，通知,更多 按钮
@@ -298,6 +371,29 @@
     }
 
 }
+-(void)creatQuBuTabView{
+    
+    _quanBuJueTab=[[UITableView alloc]initWithFrame:CGRectMake(screen_Width-100, 55, 80, 30*(_roleData.count+1)) style:UITableViewStylePlain];
+    
+    _quanBuJueTab.delegate=self;
+    
+    _quanBuJueTab.dataSource=self;
+    
+    _quanBuJueTab.backgroundColor=RGB(41, 36,33);
+    
+    //设置layer
+    CALayer *layer=[_quanBuJueTab layer];
+    //是否设置边框以及是否可见
+    [layer setMasksToBounds:YES];
+    //设置边框圆角的弧度
+    [layer setCornerRadius:5];
+    //设置边框线的宽
+    [layer setBorderWidth:2];
+    //设置边框线的颜色
+    [layer setBorderColor:[RGBA(41, 36, 33, 0.5) CGColor]];
+    
+}
+
 
 -(void)creatTabView{
 
@@ -316,76 +412,132 @@
 #pragma mark UITableViewDataSource
 
 -(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
-    return 1;
+    
+       return 1;
 
 }
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (tableView==_dongTaiTabView) {
+         return _dongTaiArry.count;
+    }else{
+    
+     return [_roleData count]+1;
+    }
 
-    return _dongTaiArry.count;
+   
 
 }
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
 
 static NSString *cellID=@"cellName";
     
-    TableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
-    if (cell==nil) {
-        cell=[[[NSBundle mainBundle]loadNibNamed:@"TableViewCell" owner:self options:nil]firstObject];
-    }
-    
-    DongTaiList *model=_dongTaiArry[indexPath.row];
-    
-    cell.model=model;
-    NSLog(@"%@",model.praise);
-    NSInteger picLien;
+    if (tableView==_dongTaiTabView) {
+        TableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell==nil) {
+            cell=[[[NSBundle mainBundle]loadNibNamed:@"TableViewCell" owner:self options:nil]firstObject];
+        }
+        
+        DongTaiList *model=_dongTaiArry[indexPath.row];
+        
+        cell.model=model;
+        NSLog(@"%@",model.praise);
+        NSInteger picLien;
         if (cell.model.picBean.count==0) {
-        picLien=0;
+            picLien=0;
+        }else{
+            picLien=(cell.model.picBean.count+2)/3;
+        }
+        
+        [cell setIntroductionText:cell.model.content andphonnum:picLien];
+        
+        for (int i=0; i<cell.model.picBean.count; i++) {
+            
+            UIImageView *picImageVew=[[UIImageView alloc]initWithFrame:CGRectMake(i%3*95, i/3*95, 90, 90)];
+            NSString *str=cell.model.picBean[i][@"imageUrl"];
+            
+            [picImageVew sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://ketangzhiwai.com/%@",str]]];
+            
+            [cell.zhanSiView addSubview:picImageVew];
+        }
+        
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        
+        
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;
+        //设置layer
+        CALayer *layer=[cell.contentView layer];
+        
+        [layer setMasksToBounds:YES];
+        
+        //        [layer setCornerRadius:5];
+        
+        
+        [layer setBorderWidth:3];
+        
+        [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
+        
+        CALayer *gLayer=[cell.gongNenView layer];
+        [gLayer setMasksToBounds:YES];
+        [gLayer setBorderWidth:1.5];
+        [gLayer setBorderColor:[RGBA(220, 220, 220, 1) CGColor]];
+        
+        cell.xiaoXiBtn.tag=2000+indexPath.row;
+        cell.dianZhangBtn.tag=2500+indexPath.row;
+        [cell.xiaoXiBtn addTarget:self action:@selector(huifuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        [cell.dianZhangBtn addTarget:self action:@selector(dianZhangBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        cell.dianZhanView.tag=3000+indexPath.row;
+        //    if (cell.dianZhangBtn.selected) {
+        //        cell.dinzhangView.image=[UIImage imageNamed:@"zhan_b"];
+        //    }else{
+        //
+        //    cell.dinzhangView.image=[UIImage imageNamed:@"zhan_a"];
+        //
+        //    }
+        if ([model.isPraise isEqualToString:@"1"]) {
+            cell.dianZhangBtn.selected=YES;
+            cell.dinzhangView.image=[UIImage imageNamed:@"zhan_b"];
+            
+        }else{
+            
+            cell.dinzhangView.image=[UIImage imageNamed:@"zhan_a"];
+            
+        }
+        
+        
+        [cell.genDuoBtn addTarget:self action:@selector(genDuoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
+        
+        return cell;
+
     }else{
-        picLien=(cell.model.picBean.count+2)/3;
+        
+    //角色tabView
+        UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
+        if (cell==nil) {
+            cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellID];
+        }
+        
+        if (indexPath.row==0) {
+            cell.textLabel.text=@"全部角色";
+        }else{
+            
+            RoleModel *roleModel=_roleData[indexPath.row-1];
+            
+            cell.textLabel.text=roleModel.roleName;
+            
+        }
+        
+        cell.textLabel.font=[UIFont systemFontOfSize:12];
+        
+        cell.selectionStyle=NO;
+        
+        cell.textLabel.textColor=[UIColor whiteColor];
+        
+        cell.backgroundColor=[UIColor clearColor];
+        
+        return cell;
+
+    
     }
-    
-    [cell setIntroductionText:cell.model.content andphonnum:picLien];
-    
-    for (int i=0; i<cell.model.picBean.count; i++) {
-        
-        UIImageView *picImageVew=[[UIImageView alloc]initWithFrame:CGRectMake(i%3*95, i/3*95, 90, 90)];
-        NSString *str=cell.model.picBean[i][@"imageUrl"];
-        
-        [picImageVew sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://ketangzhiwai.com/%@",str]]];
-        
-        [cell.zhanSiView addSubview:picImageVew];
-    }
-    
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-   
-    
-    cell.selectionStyle=UITableViewCellSelectionStyleNone;
-    //设置layer
-    CALayer *layer=[cell.contentView layer];
-
-    [layer setMasksToBounds:YES];
-
-    //        [layer setCornerRadius:5];
-  
-  
-    [layer setBorderWidth:3];
-
-    [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
-    
-    CALayer *gLayer=[cell.gongNenView layer];
-    [gLayer setMasksToBounds:YES];
-    [gLayer setBorderWidth:2];
-    [gLayer setBorderColor:[RGBA(220, 220, 220, 1) CGColor]];
-
-    cell.xiaoXiBtn.tag=2000+indexPath.row;
-    cell.dianZhangBtn.tag=2500+indexPath.row;
-    [cell.xiaoXiBtn addTarget:self action:@selector(huifuBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.dianZhangBtn addTarget:self action:@selector(dianZhangBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-    [cell.genDuoBtn addTarget:self action:@selector(genDuoBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-
-    
-    
-    return cell;
     
     
 }
@@ -404,37 +556,17 @@ static NSString *cellID=@"cellName";
         }
     }
 
-
     [self.navigationController pushViewController:deVc animated:YES];
     
 
 }
 //点击赞
 -(void)dianZhangBtnClick:(UIButton *)btn{
+    
     DongTaiList *model=_dongTaiArry[btn.tag-2500];
-     NSArray *arry=[model.praise componentsSeparatedByString:@","];
-    
-    for (NSString *nameStr in arry) {
-        if ([nameStr isEqualToString:model.userName]) {
-            //以前点过赞了
-            btn.selected=YES;
-            
-        }
-    }
-
-    btn.selected=!btn.selected;
-    NSInteger praise;
-    if (btn.selected==YES) {
-        praise=1;
-    }else{
-    
-        praise=0;
-    }
     
     NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/addComment.page";
-    
-    
-    NSDictionary *Dict=@{@"type":self.type ,@"userId":@(self.userId),@"dynamicId":model.dynamicId,@"praise":@(praise),@"mcontent":self.mine,@"collection":@0};
+    NSDictionary *Dict=@{@"type":self.type ,@"userId":@(self.userId),@"dynamicId":model.dynamicId,@"praise":@1,@"mcontent":self.mine,@"collection":@0};
     
     AFHTTPRequestOperationManager *requst = [AFHTTPRequestOperationManager manager];
     //设置响应格式为NSData
@@ -443,10 +575,11 @@ static NSString *cellID=@"cellName";
     [requst  POST:str parameters:Dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-    
+        NSLog(@"%@",dict);
         NSLog(@"8888888888888%@",dict[@"msg"]);
-        
+        NSLog(@"*********%@**************",model.praise);
         [self lodaData:self.type];
+       
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
@@ -476,30 +609,82 @@ static NSString *cellID=@"cellName";
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableView *cell = [self tableView:_dongTaiTabView cellForRowAtIndexPath:indexPath];
+    if (tableView==_dongTaiTabView) {
+        UITableViewCell *cell = [self tableView:_dongTaiTabView cellForRowAtIndexPath:indexPath];
+        
+        return cell.frame.size.height;
+
+    }else{
     
-    return cell.frame.size.height;
+        return 30;
+    
+    }
+    
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+    if (tableView==_dongTaiTabView) {
+        return 5;
 
-    return 10;
+    }else{
+    
+        return 0;
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    DetailedViewController *dvc=[[DetailedViewController alloc]init];
     
-    DongTaiList *model=_dongTaiArry[indexPath.row];
-    
-    dvc.dtModel=model;
-    NSArray *titleArray=@[@"全部",@"通知",@"分享",@"校长信箱"];
-    for (int i=0; i<4; i++) {
-        UIButton *btn=[self.view viewWithTag:1200+i];
-        if (btn.selected) {
-            dvc.nacTitle=titleArray[i];
+    if (tableView==_dongTaiTabView) {
+        DetailedViewController *dvc=[[DetailedViewController alloc]init];
+        
+        DongTaiList *model=_dongTaiArry[indexPath.row];
+        
+        dvc.dtModel=model;
+        NSArray *titleArray=@[@"全部",@"通知",@"分享",@"校长信箱"];
+        for (int i=0; i<4; i++) {
+            UIButton *btn=[self.view viewWithTag:1200+i];
+            if (btn.selected) {
+                dvc.nacTitle=titleArray[i];
+            }
         }
+        dvc.zhan=YES;
+        [self.navigationController pushViewController:dvc animated:YES];
+    }else{
+    
+        SingleUserInfo *singUserl=[SingleUserInfo shareUserInfo];
+        
+        //        NSMutableArray *mRoleArry=[[NSMutableArray alloc]init];
+        //
+        //        for (int i=0; i<_roleData.count; i++) {
+        //            RoleModel *model=_roleData[i];
+        //            NSLog(@"%ld",model.roleId);
+        //
+        //
+        //        }
+        
+        if (indexPath.row==0) {
+            //点击全部角色
+            singUserl.roleId=0;
+            singUserl.roleInfo.roleName=@"全部角色";
+            
+        }else{
+            
+            RoleModel *roleModel=_roleData[indexPath.row-1];
+            singUserl.roleId=roleModel.roleId;
+            singUserl.roleInfo.roleName=roleModel.roleName;
+            
+        }
+        
+        [_ritBtn removeFromSuperview];
+        _ritBtn=nil;
+        [self creatRitBtn];
+        [self lodaData:self.type];
+        
+        NSLog(@"%ld",singUserl.roleId);
+        NSLog(@"%@",singUserl.roleInfo.roleName);
+        
+    
     }
-    dvc.zhan=YES;
-    [self.navigationController pushViewController:dvc animated:YES];
+   
 
 
 }

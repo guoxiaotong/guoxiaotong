@@ -42,9 +42,6 @@
             shareInfo.loginName = userInfo.loginName;
         }
     }];
-    [self getRoleListWithUserId:shareInfo.userId callBack:^(BOOL isSuccess, NSArray *roleList) {
-        [shareInfo.roleList addObjectsFromArray:roleList];
-    }];
     NSUserDefaults *def = [NSUserDefaults standardUserDefaults];
     [def setObject:loginName forKey:@"loginName"];
     [def setObject:password forKey:@"password"];
@@ -69,12 +66,19 @@
                 shareInfo.userId = loginModel.userId;
                 shareInfo.picPath = loginModel.picPath;
                 //ch加的
-                shareInfo.userRoleId=loginModel.userRoleId;
+                shareInfo.roleInfo.userRoleId=loginModel.userRoleId;
+                //获取角色列表
+                [self getRoleListWithUserId:shareInfo.userId callBack:^(BOOL isSuccess, NSArray *roleList) {
+                    if (isSuccess) {
+                        [shareInfo.roleList addObjectsFromArray:roleList];
+                        if (requestCallBack) {
+                            requestCallBack(YES, json[@"msg"]);
+                        }
+                    }
+                }];
                 [self didLogin:loginModel.loginName password:password];
             }
-            if (requestCallBack) {
-                requestCallBack(YES, json[@"msg"]);
-            }
+           
         }else {
             if (requestCallBack) {
                 requestCallBack(NO, json[@"msg"]);

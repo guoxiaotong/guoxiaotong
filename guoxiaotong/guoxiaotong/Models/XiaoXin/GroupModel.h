@@ -11,7 +11,7 @@
 @interface GroupModel : NSObject
 
 proStr(classId);
-proStr(createId);
+@property(nonatomic,strong)NSString *createId;
 proStr(desc);
 proStr(groupId);
 proStr(groupName);

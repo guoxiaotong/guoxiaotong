@@ -10,4 +10,7 @@
 
 @interface ChooseMemberViewController : UIViewController
 
+
+@property(nonatomic,strong)NSMutableArray *choosedarry;//从创建群页面传过来已经选择了的人
+
 @end

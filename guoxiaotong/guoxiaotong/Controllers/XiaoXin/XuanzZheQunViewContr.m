@@ -8,6 +8,7 @@
 
 #import "XuanzZheQunViewContr.h"
 #import "QunTableViewCell.h"
+#import "AddViewController.h"
 
 #import "GroupModel.h"
 
@@ -16,7 +17,11 @@
 
     UITableView *_qunTabView;
     
-    NSMutableArray *_dataArr;
+    NSMutableArray *_dataArr;//我创建的群
+    
+    NSMutableArray *_joinDataArry;//我加入的群
+    
+    BOOL _isChoose;
 
 }
 @end
@@ -31,23 +36,39 @@
     self.navigationItem.title=@"选择群对话";
     
     _dataArr=[[NSMutableArray alloc]init];
+    
+    _joinDataArry=[[NSMutableArray alloc]init];
     //解析数据
     [self reloadData];
-    
+    _isChoose=YES;
     
     //创建两个按钮
     [self creatBut];
     
     //创建tabView
     [self creatTabView];
+    //创建右边的加号按钮
+    [self creatRitBtn];
+
     
 }
+-(void)creatRitBtn{
+    
+    UIBarButtonItem *ritBtn=[[UIBarButtonItem alloc]initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(ritBtn2Click)];
+    
+    self.navigationItem.rightBarButtonItem=ritBtn;
+    
+    self.navigationController.navigationBar.tintColor=[UIColor whiteColor];
+
+
+}
 -(void)reloadData{
+    SingleUserInfo *singUse=[SingleUserInfo shareUserInfo];
 
     NSString *urlStr = @"http://121.42.27.199:8888/csCampus/dynamic/contact.page";
     
-    NSDictionary *bodyDict = @{@"roleId":@2,@"userId":@1046};
-    
+    NSDictionary *bodyDict = @{@"roleId":@(singUse.roleInfo.roleId),@"userId":singUse.userId};
+    NSLog(@"%ld",singUse.roleInfo.roleId);
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     manager.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -63,8 +84,13 @@
             
             [model setValuesForKeysWithDictionary:sonDict1];
             
-            [_dataArr addObject:model];
-            
+            if ([model.createId intValue]==[singUse.userId intValue]) {
+                [_dataArr addObject:model];
+                
+            }else{
+                [_joinDataArry addObject:model];
+                
+            }
             [_qunTabView reloadData];
         
         }
@@ -75,7 +101,12 @@
     
 
 
+}
+//➕按钮的点击事件
+-(void)ritBtn2Click{
 
+    AddViewController *addVc=[[AddViewController alloc]init];
+    [self.navigationController pushViewController:addVc animated:YES];
 
 }
 
@@ -102,9 +133,10 @@
 //创建两个按钮
 -(void)creatBut{
     
-    UIButton *btnleft=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *btnleft=[UIButton buttonWithType:UIButtonTypeCustom];
     
     btnleft.frame=CGRectMake(5, 5, screen_Width/2-10, 40);
+    btnleft.selected=YES;
     
     btnleft.backgroundColor=[UIColor whiteColor];
     
@@ -112,26 +144,77 @@
     
     [btnleft setTitle:@"我管理的群" forState:UIControlStateNormal];
     
-    [btnleft setTintColor:[UIColor blackColor]];
+    [btnleft setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnleft setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    
+    btnleft.tag=5000;
     
     [self.view addSubview:btnleft];
     
-    UIButton *btnRit=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+    UIButton *btnRit=[UIButton buttonWithType:UIButtonTypeCustom];
     
     btnRit.frame=CGRectMake(screen_Width/2+5, 5, screen_Width/2-10, 40);
     
     btnRit.backgroundColor=[UIColor whiteColor];
     
+    [btnRit setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [btnRit setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
+    
     btnRit.layer.cornerRadius=5;
     
     [btnRit setTitle:@"我加入的群" forState:UIControlStateNormal];
     
-    [btnRit setTintColor:[UIColor blackColor]];
+    btnRit.tag=5001;
+    
+    
+    for (int i=0; i<2; i++) {
+        
+        UIButton *button=[self.view viewWithTag:5000+i];
+        if (button.selected) {
+            button.backgroundColor=[UIColor redColor];
+           
+        }else{
+            button.backgroundColor=[UIColor whiteColor];
+                       
+        }
+    }
+    
+    [btnleft addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [btnRit addTarget:self action:@selector(btnClick:) forControlEvents:UIControlEventTouchUpInside];
+    
     
     [self.view addSubview:btnRit];
     
+    
+    
 }
+-(void)btnClick:(UIButton *)btn{
 
+    for (int i=0; i<2; i++) {
+        
+        UIButton *button=[self.view viewWithTag:5000+i];
+        if ([btn isEqual:button]) {
+            button.selected=YES;
+            button.backgroundColor=[UIColor redColor];
+            if (i==0) {
+                _isChoose=YES;
+            }else{
+            
+                _isChoose=NO;
+            }
+            
+        }else{
+            button.selected=NO;
+            button.backgroundColor=[UIColor whiteColor];
+        
+        
+        }
+    }
+
+    [_qunTabView reloadData];
+
+}
 #pragma mark UITableViewDataSource{
 
 
@@ -141,8 +224,14 @@
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    if (_isChoose==YES) {
+        return _dataArr.count;
+    }else{
     
-    return _dataArr.count;
+        return _joinDataArry.count;
+    
+    }
+    
     
 }
 
@@ -155,8 +244,14 @@
     if (cell==nil) {
         cell=[[[NSBundle mainBundle]loadNibNamed:@"QunTableViewCell" owner:self options:nil]firstObject];
     }
-    GroupModel *model=_dataArr[indexPath.row];
-    
+    GroupModel *model=[[GroupModel alloc]init];
+    if (_isChoose==YES) {
+         model=_dataArr[indexPath.row];
+    }else{
+        model=_joinDataArry[indexPath.row];
+        
+    }
+   
     cell.nameLabel.text=model.groupName;
     
     [cell.iconImage sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://www.ketangzhiwai.com/%@",model.picPath]]];

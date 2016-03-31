@@ -27,7 +27,7 @@
     
     _jieShaoLabel.text=_tongXunModel.desc;
     
-    [_chooesBtn removeFromSuperview];
+//    [_chooesBtn removeFromSuperview];
 
 }
 @end

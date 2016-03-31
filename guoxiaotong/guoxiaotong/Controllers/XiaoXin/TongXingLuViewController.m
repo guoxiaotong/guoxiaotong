@@ -77,7 +77,7 @@
     
     SingleUserInfo *sigUser=[SingleUserInfo shareUserInfo];
     
-    _roleDataArry=sigUser.roleArry;
+    _roleDataArry=sigUser.roleList;
     
     //请求数据
     [self relodData];
@@ -91,12 +91,14 @@
     //创建选择群对话
     [self creatXuanZheTabView];
     
-    
     //创建角色tabView
     [self creatRoleTabView];
     
 }
 -(void)relodData{
+    
+    [LoadingView showCenterActivity:self.view];
+    
     [_userDataArr removeAllObjects];
     [_titleDataArr removeAllObjects];
     
@@ -139,6 +141,8 @@
                     [_xuanZheTabView reloadData];
                 }
         
+        [LoadingView hideCenterActivity:self.view];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"请求失败");
     }];
@@ -159,14 +163,14 @@
     
     _btnleft.layer.cornerRadius=5;
     
-    [_btnleft setTitle:singUser.roleName forState:UIControlStateNormal];
+    [_btnleft setTitle:singUser.roleInfo.roleName forState:UIControlStateNormal];
     
     [_btnleft setTintColor:[UIColor blackColor]];
     
     [_btnleft addTarget:self action:@selector(btnleftClick) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:_btnleft];
-    UIImageView *iamView=[[UIImageView alloc]initWithFrame:CGRectMake(screen_Width/2-30, 15, 15, 15)];
+    UIImageView *iamView=[[UIImageView alloc]initWithFrame:CGRectMake(screen_Width/2-30, 15, 15, 10)];
     iamView.image=[UIImage imageNamed:@"iconfont-control-arr.png"];
     [_btnleft addSubview:iamView];
     
@@ -259,8 +263,6 @@
 
     [layer setBorderColor:[RGBA(41, 36, 33, 0.5) CGColor]];
     
-
-
 }
 
 //创建搜索栏
@@ -391,11 +393,13 @@
         //设置边框线的颜色
         [layer setBorderColor:[RGBA(220, 220, 220, 0.5) CGColor]];
         
-        
         cell.backgroundColor=RGBA(245, 245, 245, 1);
         
         TongXunmodel *model=_userDataArr[indexPath.section-1][indexPath.row];
         cell.tongXunModel=model;
+        
+        [cell.chooesBtn removeFromSuperview];
+        cell.chooesBtn=nil;
         
         return cell;
     
@@ -425,7 +429,6 @@
             _imagView.image=[UIImage imageNamed:@"arrows_down.png"];
             
             qunLabel.text=@"选择群对话";
-            
             
         }else{
             
@@ -516,12 +519,12 @@
         SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
         if (indexPath.row==0) {
             singUser.roleId=0;
-            singUser.roleName=@"全部角色";
+            singUser.roleInfo.roleName=@"全部角色";
             
         }else{
             RoleModel *model=_roleDataArry[indexPath.row-1];
             singUser.roleId=model.roleId;
-            singUser.roleName=model.roleName;
+            singUser.roleInfo.roleName=model.roleName;
         
         }
         [_btnleft removeFromSuperview];

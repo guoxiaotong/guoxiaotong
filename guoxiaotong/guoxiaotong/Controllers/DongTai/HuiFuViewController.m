@@ -10,11 +10,13 @@
 #import "FangWeiViewController.h"
 #import "PhotoViewController.h"
 #import "XuanZhePhonData.h"
+#import "ChooseMenSingle.h"
 
 #import "LoadAlassetData.h"
 #import "DataManager.h"
+#import "TongXunmodel.h"
 
-@interface HuiFuViewController ()<UITextViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate>
+@interface HuiFuViewController ()<UITextViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     UITextView *_textView;
     
@@ -29,6 +31,8 @@
     UIView *_imView;//用于展示选中图片的UIview
     
     UILabel * _tisileabel;//用于提示只能选中9张
+    
+    NSMutableArray *_fanweiArry;//发送范围
 
 }
 
@@ -50,6 +54,12 @@
     
     _imView=nil;
     [self creatImageView];
+    
+    _fanweiArry=[[NSMutableArray alloc]init];
+    ChooseMenSingle *chooSingle=[ChooseMenSingle shareChooseMen];
+    _fanweiArry=chooSingle.huiFuRangArry;
+    
+    
 }
 
 - (void)viewDidLoad {
@@ -109,7 +119,7 @@
                 
                 [imgbtn setImage:_mImageArry[i] forState:UIControlStateNormal];
             }else{
-                [imgbtn setImage:[UIImage imageNamed:@"iconfont-dongtai-副本"] forState:UIControlStateNormal];
+                [imgbtn setImage:[UIImage imageNamed:@"hx_roominfo_add_btn_pressed"] forState:UIControlStateNormal];
                 }
             [_imView addSubview:imgbtn];
             
@@ -217,14 +227,14 @@
     [_button removeFromSuperview];
     [_butnView removeFromSuperview];
     _button=[UIButton buttonWithType:UIButtonTypeRoundedRect];
-    _button.frame=CGRectMake(10, screen_Height-_height-64-60, 60, 20);
+    _button.frame=CGRectMake(10, screen_Height-_height-64-70, 60, 20);
     
     
-    _butnView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-_height-64-30, screen_Width, 30)];
+    _butnView=[[UIView alloc]initWithFrame:CGRectMake(0, screen_Height-_height-64-40, screen_Width, 40)];
     if (height==1) {
         [UIView animateWithDuration:0.1 animations:^{
-            _butnView.center=CGPointMake(screen_Width/2, screen_Height-15-64);
-            _button.center=CGPointMake(40, screen_Height-50-64);
+            _butnView.center=CGPointMake(screen_Width/2, screen_Height-20-64);
+            _button.center=CGPointMake(40, screen_Height-60-64);
             
         }];
     }
@@ -245,15 +255,23 @@
     
     UIButton *btn1=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn1.frame=CGRectMake(screen_Width/4-15, 5, 30, 20);
-    [btn1 setImage:[UIImage imageNamed:@"iconfont-xiangji.png"] forState:UIControlStateNormal];
+    [btn1 setImage:[UIImage imageNamed:@"iconfont-tupian.png"] forState:UIControlStateNormal];
     [_butnView addSubview:btn1];
     [btn1 addTarget:self action:@selector(tupiBtnClick) forControlEvents:UIControlEventTouchUpInside];
     
     
     UIButton *btn2=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     btn2.frame=CGRectMake(screen_Width*3/4-15, 5, 30, 20);
-    [btn2 setImage:[UIImage imageNamed:@"iconfont-sixin_undefined.png"] forState:UIControlStateNormal];
+    [btn2 setImage:[UIImage imageNamed:@"iconfont-aite.png"] forState:UIControlStateNormal];
+    [btn2 addTarget:self action:@selector(aiteBtnClick) forControlEvents:UIControlEventTouchUpInside];
     [_butnView addSubview:btn2];
+
+}
+//点击@图标后
+-(void)aiteBtnClick{
+    
+    FangWeiViewController *fwVc=[[FangWeiViewController alloc]init];
+    [self.navigationController pushViewController:fwVc animated:YES];
 
 }
 //点击相机图标后
@@ -304,25 +322,7 @@
 
     }else{
         
-        [_tisileabel removeFromSuperview];
-        _tisileabel=[[UILabel alloc]initWithFrame:CGRectMake((screen_Width-150)/2, 300, 150, 50)];
-        _tisileabel.backgroundColor=RGBA(41, 36, 33, 1);
-        _tisileabel.text=@"最多只能选择9张";
-        _tisileabel.textAlignment=NSTextAlignmentCenter;
-        CALayer *layer=[_tisileabel layer];
-        [layer setMasksToBounds:YES];
-        [layer setCornerRadius:5];
-        
-        [self.view addSubview:_tisileabel];
-        [UIView animateWithDuration:3 animations:^{
-            _tisileabel.alpha=0;
-            
-        }];
-
-    
-    
-    
-    
+        [self tisiLabel:@"最多只能选择9张"];
     }
    
 }
@@ -428,60 +428,98 @@
 //点击发布
 -(void)ritBtnClik{
     
-    if (_mImageArry.count) {
-        NSMutableArray *imagDataArry=[[NSMutableArray alloc]init];
+    SingleUserInfo *sing=[SingleUserInfo shareUserInfo];
+    
+    if ( _fanweiArry.count==0) {
+        NSLog(@"你还没选择发送范围");
         
-        for (int i=0; i<_mImageArry.count; i++) {
-            NSData *imageData=UIImagePNGRepresentation(_mImageArry[i]);
-            [imagDataArry addObject:imageData];
-        }
+        [self tisiLabel:@"你还没选择发送范围"];
+    }else{
+         [LoadingView showCenterActivity:self.view];
         
-        NSString *imgStr=[imagDataArry componentsJoinedByString:@","];
-        
-        NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/send.page";
-        
-        
-        NSDictionary *Dict=@{@"receivers":@1046 ,@"type":@1,@"content":_textView.text,@"picPath":imgStr};
-        //3创建网络请求对象
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        manager.responseSerializer = [AFHTTPResponseSerializer serializer];
-        //系统默认有一个等待加载符
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        //4发起POST上传文件的请求
-        [manager POST:str parameters:Dict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        NSMutableArray *fanmarry=[[NSMutableArray alloc]init];
+        for (int i=0; i<_fanweiArry.count; i++) {
+            TongXunmodel *model=_fanweiArry[i];
+            [fanmarry addObject:model.userId];
             
-            for (int i=0; i<imagDataArry.count; i++) {
-                
-                [formData  appendPartWithFileData:imagDataArry[i] name:@"fafg" fileName:[NSString stringWithFormat:@"%d.png",i] mimeType:@"image/png"];
+        }
+        NSString *receStr=[fanmarry componentsJoinedByString:@","];
+        
+        if (_mImageArry.count) {
+            //有图片时
+            NSMutableArray *imagDataArry=[[NSMutableArray alloc]init];
+            
+            for (int i=0; i<_mImageArry.count; i++) {
+                NSData *imageData=UIImagePNGRepresentation(_mImageArry[i]);
+                [imagDataArry addObject:imageData];
             }
             
-        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-            //请求成功
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-            NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
-            NSLog(@"%@",dict);
-            NSLog(@"上传成功");
-            //上传成功后
+            //        NSString *imgStr=[imagDataArry componentsJoinedByString:@","];
             
-            XuanZhePhonData *xuanzhe=[XuanZhePhonData shareImage];
-            [xuanzhe.imarry removeAllObjects];
-            [_imView removeFromSuperview];
-            _imView=nil;
-            [self.navigationController popToRootViewControllerAnimated:YES];
+            NSString *str=@"http://121.42.27.199:8888/csCampus/user/upload.page";
             
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-            //请求失败
-            NSLog(@"%@",error.debugDescription);
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        }];
+            //3创建网络请求对象
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            manager.responseSerializer = [AFHTTPResponseSerializer serializer];
+            //系统默认有一个等待加载符
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            //4发起POST上传文件的请求
+            [manager POST:str parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                
+                for (int i=0; i<imagDataArry.count; i++) {
+                    
+                    [formData  appendPartWithFileData:imagDataArry[i] name:@"file" fileName:@"png" mimeType:@"image/png"];
+                    
+                }
+                
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                //请求成功
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                NSLog(@"%@",dict);
+                NSString *url=dict[@"url"];
+                //上传成功后
+                
+                NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/send.page";
+                
+                NSDictionary *Dict=@{@"receivers":receStr ,@"type":@1,@"content":_textView.text,@"picPath":url,@"userId":sing.userId};
+                AFHTTPRequestOperationManager *requst = [AFHTTPRequestOperationManager manager];
+                //设置响应格式为NSData
+                requst.responseSerializer = [AFHTTPResponseSerializer serializer];
+                
+                [requst  POST:str parameters:Dict success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                    
+                    NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
+                    
+                    NSLog(@"%@",dict);
+                    [LoadingView hideCenterActivity:self.view];
+                    
+                    [self tisiLabel:@"发送成功"];
+                    
+                } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                    
+                }];
+                /******************/
+                
+                XuanZhePhonData *xuanzhe=[XuanZhePhonData shareImage];
+                [xuanzhe.imarry removeAllObjects];
+                [_imView removeFromSuperview];
+                _imView=nil;
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                //请求失败
+                NSLog(@"%@",error.debugDescription);
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            }];
+            
+            
+        }
         
-
-    }else{
-    
-    //只有文字内容
+        //只有文字内容
         NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/send.page";
         
-        NSDictionary *Dict=@{@"receivers":@1046 ,@"type":@1,@"content":_textView.text,@"picPath":@""};
+        NSDictionary *Dict=@{@"receivers":receStr ,@"type":@1,@"content":_textView.text,@"userId":sing.userId};
         AFHTTPRequestOperationManager *requst = [AFHTTPRequestOperationManager manager];
         //设置响应格式为NSData
         requst.responseSerializer = [AFHTTPResponseSerializer serializer];
@@ -491,14 +529,18 @@
             NSDictionary *dict = [NSJSONSerialization JSONObjectWithData:responseObject options:0 error:nil];
             
             NSLog(@"%@",dict);
+            [LoadingView hideCenterActivity:self.view];
+            [self tisiLabel:@"发送成功"];
+            
             
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
-
+        
+    
     }
     
-
+    
 }
 
 //点击取消
@@ -513,6 +555,29 @@
 
     FangWeiViewController *fwVc=[[FangWeiViewController alloc]init];
     [self.navigationController pushViewController:fwVc animated:YES];
+
+
+}
+//弹出的提示框
+-(void)tisiLabel:(NSString *)str{
+
+    [_tisileabel removeFromSuperview];
+    _tisileabel=[[UILabel alloc]initWithFrame:CGRectMake((screen_Width-180)/2, 300, 180, 50)];
+    _tisileabel.backgroundColor=RGBA(41, 36, 33, 1);
+    _tisileabel.text=str;
+    _tisileabel.textAlignment=NSTextAlignmentCenter;
+    CALayer *layer=[_tisileabel layer];
+    [layer setMasksToBounds:YES];
+    [layer setCornerRadius:5];
+    
+    [self.view addSubview:_tisileabel];
+    [UIView animateWithDuration:3 animations:^{
+        _tisileabel.alpha=0;
+        
+    }];
+
+
+
 
 
 }

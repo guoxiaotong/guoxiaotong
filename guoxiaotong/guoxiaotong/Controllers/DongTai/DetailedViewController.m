@@ -43,6 +43,7 @@
 
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     self.navigationItem.title=self.nacTitle;
@@ -62,8 +63,12 @@
 
 }
 -(void)loadData{
+    if ([self.dtModel.praise isEqualToString:@""]) {
+        [_dianZhangMarry removeAllObjects];
+    }else{
+        _dianZhangMarry=(NSMutableArray *)[self.dtModel.praise componentsSeparatedByString:@","];
     
-       _dianZhangMarry=(NSMutableArray *)[self.dtModel.praise componentsSeparatedByString:@","];
+    }
     
     NSArray *array=self.dtModel.commentBean;
     if (array.count) {
@@ -104,8 +109,6 @@
         }
             [_tabView reloadData];
 
-            
-            
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             
         }];
@@ -113,8 +116,6 @@
         
 //    }
     }
-    
-        
 
 }
 
@@ -125,7 +126,7 @@
     
     tabBarView.backgroundColor=[UIColor whiteColor];
     
-    NSArray *array=@[@"iconfont-huifu-副本-3.png",@"zhan_a",@"iconfont-crmtubiao69.png",@"组-1_2"];
+    NSArray *array=@[@"iconfont-huifu-副本-3.png",@"zhan_a",@"collect_b",@"组-1_2"];
     
     NSArray *labelArry=@[@"回复",@"赞",@"收藏",@"更多"];
     
@@ -133,13 +134,33 @@
        
         UIView *view=[[UIView alloc]initWithFrame:CGRectMake( screen_Width/4*i,0, screen_Width/4, 44)];
         
-        UIButton *viewbtn=[UIButton buttonWithType:UIButtonTypeCustom];
-        viewbtn.frame=CGRectMake(0, 0, screen_Width/4, 44);
-        
         UIImageView *imgeView=[[UIImageView alloc]initWithFrame:CGRectMake(screen_Width/16, 10, screen_Width/16, 20)];
         imgeView.image=[UIImage imageNamed:array[i]];
 
         
+        UIButton *viewbtn=[UIButton buttonWithType:UIButtonTypeCustom];
+        viewbtn.frame=CGRectMake(0, 0, screen_Width/4, 44);
+        viewbtn.tag=1400+i;
+        
+        if(i==1) {
+            if ([self.dtModel.isPraise isEqualToString:@"1"]) {
+                //以前点过赞了
+                viewbtn.selected=YES;
+                imgeView.image=[UIImage imageNamed:@"zhan_b"];
+                
+            }
+
+        }
+        if(i==2) {
+            if ([self.dtModel.isCollection isEqualToString:@"1"]) {
+                //以前收藏过了
+                viewbtn.selected=YES;
+                imgeView.image=[UIImage imageNamed:@"collect_a"];
+                
+            }
+            
+        }
+
         UILabel *label=[[UILabel alloc]initWithFrame:CGRectMake(screen_Width/8, 10, screen_Width/16, 20)];
         label.text=labelArry[i];
         label.textAlignment=NSTextAlignmentCenter;
@@ -151,12 +172,11 @@
         [tabBarView addSubview:view];
         
         [view addSubview:imgeView];
-
-        viewbtn.tag=1400+i;
+        
+        
         [view addSubview:viewbtn];
         [viewbtn addTarget:self action:@selector(viewBtnClick:) forControlEvents:UIControlEventTouchUpInside];
-        
-        
+    
     }
 
 
@@ -185,9 +205,10 @@
             
             for (NSString *nameStr in _dianZhangMarry) {
                 
-                if ([nameStr isEqualToString:self.dtModel.userName]) {
+                if ([self.dtModel.isPraise isEqualToString:@"1"]) {
                     //以前点过赞了
                     btn.selected=YES;
+                    
                 }
                 btn.selected=!btn.selected;
                 NSInteger praise;
@@ -238,19 +259,11 @@
             break;
     }
     
-
-
-
-
-
-
-
-
 }
 
 -(void)creatTabView{
 
-    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, screen_Height-108) style:UITableViewStylePlain];;
+    _tabView=[[UITableView alloc]initWithFrame:CGRectMake(0, 0, screen_Width, screen_Height-108) style:UITableViewStyleGrouped];
     
     _tabView.delegate=self;
     
@@ -367,7 +380,7 @@ static NSString *cellID=@"cellName";
                 return cell;
                 
             }else{
-                
+            
                 DianZhanTableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:cellID];
                 if (cell==nil) {
                     cell=[[[NSBundle mainBundle]loadNibNamed:@"DianZhanTableViewCell" owner:self options:nil]firstObject];
@@ -378,18 +391,16 @@ static NSString *cellID=@"cellName";
             }
         
         
-        }
+       }
         
     }
     return nil;
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-        UITableView *cell = [self tableView:_tabView cellForRowAtIndexPath:indexPath];
+        UITableViewCell *cell = [self tableView:_tabView cellForRowAtIndexPath:indexPath];
         
         return cell.frame.size.height;
-      
-        
     
 
 }
@@ -397,16 +408,16 @@ static NSString *cellID=@"cellName";
 -(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
 
     if (section==1) {
-        return 30;
+        return 35;
     }else{
     
-        return 5;
+        return 3;
     }
 
 }
 -(CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
 
-    return 15;
+    return 0;
 
 
 }

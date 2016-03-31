@@ -116,6 +116,8 @@ self.tabBarController.tabBar.hidden=NO;
     //创建tabView
     [self creatTabView];
     
+     [LoadingView showCenterActivity:self.view];
+    
     //添加导航栏右边的全部角色按钮
     [self creatRightBtn];
     
@@ -124,6 +126,7 @@ self.tabBarController.tabBar.hidden=NO;
 }
 
 -(void)lodeLoginData{
+    
     Singleton *sing=[Singleton shareUser];
     
     sing.SingleMarry=[[NSMutableArray alloc]init];
@@ -172,9 +175,10 @@ self.tabBarController.tabBar.hidden=NO;
 -(void)lodeTongData{
 
     SingleUserInfo *singleUser=[SingleUserInfo shareUserInfo];
-    
+    //默认第一个
+    singleUser.roleInfo=singleUser.roleList.firstObject;
     NSString *str=@"http://121.42.27.199:8888/csCampus/dynamic/unReadNum.page";
-    NSDictionary *Dict=@{@"userId":singleUser.userId,@"userRoleId":singleUser.userRoleId};
+    NSDictionary *Dict=@{@"userId":singleUser.userId,@"userRoleId":singleUser.roleInfo.userRoleId};
     
     AFHTTPRequestOperationManager *requst = [AFHTTPRequestOperationManager manager];
     //设置响应格式为NSData
@@ -215,6 +219,8 @@ self.tabBarController.tabBar.hidden=NO;
 
 -(void)lodeADData{
     
+    
+    
     NSString *urlStr = @"http://121.42.27.199:8888/csCampus/basic/rankingChart.page";
     
     NSDictionary *bodyDict = @{@"type":@9,@"city":@25};
@@ -242,7 +248,7 @@ self.tabBarController.tabBar.hidden=NO;
             [_adDataArry insertObject:_adDataArry[_adDataArry.count - 2] atIndex:0];
             
            
-            
+            [LoadingView hideCenterActivity:self.view];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
@@ -280,7 +286,7 @@ self.tabBarController.tabBar.hidden=NO;
         [self creatQuBuTabView];
         
         SingleUserInfo *singUser=[SingleUserInfo shareUserInfo];
-        singUser.roleArry=_roleData;
+        singUser.roleList=_roleData;
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
        
@@ -316,20 +322,20 @@ self.tabBarController.tabBar.hidden=NO;
     
     SingleUserInfo *singel=[SingleUserInfo shareUserInfo];
     
-    UIButton *ritBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
+   _ritBtn=[UIButton buttonWithType:UIButtonTypeRoundedRect];
     
-    ritBtn.frame=CGRectMake(screen_Width-25, 0, 80, 50);
-    if (singel.roleId==nil) {
-        [ritBtn setTitle:@"全部角色" forState:UIControlStateNormal];
+    _ritBtn.frame=CGRectMake(screen_Width-25, 0, 80, 50);
+    if (singel.roleId==0) {
+        [_ritBtn setTitle:@"全部角色" forState:UIControlStateNormal];
 
     }else{
     
-        [ritBtn setTitle:singel.roleName forState:UIControlStateNormal];
+        [_ritBtn setTitle:singel.roleInfo.roleName forState:UIControlStateNormal];
     }
     
-    [ritBtn addTarget:self action:@selector(ritBtnClik:) forControlEvents:UIControlEventTouchUpInside];
+    [_ritBtn addTarget:self action:@selector(ritBtnClik:) forControlEvents:UIControlEventTouchUpInside];
     
-    UIBarButtonItem *ritBarBtn=[[UIBarButtonItem alloc]initWithCustomView:ritBtn];
+    UIBarButtonItem *ritBarBtn=[[UIBarButtonItem alloc]initWithCustomView:_ritBtn];
     
     self.navigationItem.rightBarButtonItem=ritBarBtn;
     
@@ -354,7 +360,6 @@ self.tabBarController.tabBar.hidden=NO;
         [allImageView addSubview:_quanBuJueTab];
     }];
     
-
 }
 
 -(void)tapGesClick:(UITapGestureRecognizer *)tap{
@@ -597,13 +602,13 @@ self.tabBarController.tabBar.hidden=NO;
         if (indexPath.row==0) {
             //点击全部角色
             singUserl.roleId=0;
-            singUserl.roleName=@"全部角色";
+            singUserl.roleInfo.roleName=@"全部角色";
             
         }else{
             
             RoleModel *roleModel=_roleData[indexPath.row-1];
             singUserl.roleId=roleModel.roleId;
-            singUserl.roleName=roleModel.roleName;
+            singUserl.roleInfo.roleName=roleModel.roleName;
 
         }
         
@@ -612,7 +617,7 @@ self.tabBarController.tabBar.hidden=NO;
         [self creatRightBtn];
         
         NSLog(@"%ld",singUserl.roleId);
-        NSLog(@"%@",singUserl.roleName);
+        NSLog(@"%@",singUserl.roleInfo.roleName);
         
         
     }else{
