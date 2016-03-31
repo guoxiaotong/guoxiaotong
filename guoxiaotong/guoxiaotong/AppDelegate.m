@@ -27,12 +27,12 @@
     
 //    //registerSDKWithAppKey:注册的appKey，详细见下面注释。
 //    //apnsCertName:推送证书名(不需要加后缀)，详细见下面注释。
-    [[EaseMob sharedInstance] registerSDKWithAppKey:@"douser#istore" apnsCertName:@"istore_dev"];
+    [[EaseMob sharedInstance] registerSDKWithAppKey:@"guoxiaotong#guoxiaotong" apnsCertName:@"istore_dev"];
     [[EaseMob sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [[EaseSDKHelper shareHelper] easemobApplication:application
                       didFinishLaunchingWithOptions:launchOptions
-                                             appkey:@"douser#istore"
+                                             appkey:@"guoxiaotong#guoxiaotong"
                                        apnsCertName:@"istore_dev"
                                         otherConfig:@{kSDKConfigEnableConsoleLogger:[NSNumber numberWithBool:YES]}];
     

@@ -17,7 +17,9 @@
         [self addSubview:_imageV];
         _button = [UIButton buttonWithType:UIButtonTypeCustom];
         _button.frame = CGRectMake(-5, -5, 20, 20);
-        _button.backgroundColor = [UIColor blackColor];
+        _button.clipsToBounds = YES;
+        _button.layer.cornerRadius = 10;
+//        _button.backgroundColor = [UIColor blackColor];
         [_button setImage:[UIImage imageNamed:@"button_del_icon"] forState:UIControlStateNormal];
         [_button addTarget:self action:@selector(buttonClick) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:_button];

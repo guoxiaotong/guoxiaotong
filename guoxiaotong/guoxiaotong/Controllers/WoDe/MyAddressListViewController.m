@@ -13,7 +13,7 @@
 #import "ContectRoleModel.h"
 #import "ContectMemberModel.h"
 #import "TextFieldWithButton.h"
-//#import "ChatViewController.h"
+#import "ChatViewController.h"
 
 
 @interface MyAddressListViewController ()<UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
@@ -83,9 +83,22 @@
 
 - (void)serverClick {
     NSLog(@"联系客服");
-//    EaseMessageViewController *easeMessageVC = [[EaseMessageViewController alloc] init];
-//    easeMessageVC.title = @"国校通客服";
-//    [self.navigationController pushViewController:easeMessageVC animated:YES];
+    EMBuddy *buddy = [EMBuddy buddyWithUsername:@"kefu"];
+    EaseUserModel *model = [[EaseUserModel alloc] initWithBuddy:buddy];
+    //    model.avatarURLPath = [NSString stringWithFormat:@"%@%@", API_ROOT_IMAGE_URL, memberModel.picPath];
+    NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
+    NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
+    if (loginUsername && loginUsername.length > 0) {
+        if ([loginUsername isEqualToString:@"kefu"]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"friend.notChatSelf", @"can't talk to yourself") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
+            [alertView show];
+            
+            return;
+        }
+    }
+    ChatViewController *chatController = [[ChatViewController alloc] initWithChatter:model.buddy.username conversationType:eConversationTypeChat];
+    chatController.title = model.nickname.length > 0 ? model.nickname : model.buddy.username;
+    [self.navigationController pushViewController:chatController animated:YES];
 }
 
 
@@ -138,23 +151,25 @@
     ContectRoleModel *roleModel = self.dataSource[indexPath.section];
     ContectMemberModel *memberModel = roleModel.memberList[indexPath.row];
     
-//    EMBuddy *buddy = [EMBuddy buddyWithUsername:memberModel.userName];
-//    EaseUserModel *model = [[EaseUserModel alloc] initWithBuddy:buddy];
-//    model.nickname = memberModel.userName;
+    EMBuddy *buddy = [EMBuddy buddyWithUsername:memberModel.loginName];
+    EaseUserModel *model = [[EaseUserModel alloc] initWithBuddy:buddy];
+    model.nickname = memberModel.userName;
 //    model.avatarURLPath = [NSString stringWithFormat:@"%@%@", API_ROOT_IMAGE_URL, memberModel.picPath];
-//    NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
-//    NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
-//    if (loginUsername && loginUsername.length > 0) {
-//        if ([loginUsername isEqualToString:memberModel.loginName]) {
-//            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"friend.notChatSelf", @"can't talk to yourself") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
-//            [alertView show];
-//            
-//            return;
-//        }
-//    }
-//    ChatViewController *chatController = [[ChatViewController alloc] initWithConversationChatter:model.buddy.username conversationType:eConversationTypeChat];
-//    chatController.title = model.nickname.length > 0 ? model.nickname : model.buddy.username;
-//    [self.navigationController pushViewController:chatController animated:YES];
+    NSDictionary *loginInfo = [[[EaseMob sharedInstance] chatManager] loginInfo];
+    NSString *loginUsername = [loginInfo objectForKey:kSDKUsername];
+    if (loginUsername && loginUsername.length > 0) {
+        if ([loginUsername isEqualToString:memberModel.loginName]) {
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"prompt", @"Prompt") message:NSLocalizedString(@"friend.notChatSelf", @"can't talk to yourself") delegate:nil cancelButtonTitle:NSLocalizedString(@"ok", @"OK") otherButtonTitles:nil, nil];
+            [alertView show];
+            
+            return;
+        }
+    }
+    ChatViewController *chatController = [[ChatViewController alloc] initWithChatter:model.buddy.username conversationType:eConversationTypeChat];
+    chatController.title = model.nickname.length > 0 ? model.nickname : model.buddy.username;
+    [self.navigationController pushViewController:chatController animated:YES];
 }
+
+
 
 @end

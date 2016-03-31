@@ -35,12 +35,54 @@
 #pragma mark - 登陆之后需要请求及保存数据
 - (void)didLogin:(NSString *)loginName password:(NSString *)password {
     //userId已知
-//    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:loginName password:[Tools md5:password] completion:^(NSDictionary *loginInfo, EMError *error) {
-//        if (!error && loginInfo) {
-//            
-//            NSLog(@"登陆成功");
-//        }
-//    } onQueue:nil];
+    //异步登陆账号
+    [[EaseMob sharedInstance].chatManager asyncLoginWithUsername:loginName
+                                                        password:[Tools md5: password]
+                                                      completion:
+     ^(NSDictionary *loginInfo, EMError *error) {
+         if (loginInfo && !error) {
+             //设置是否自动登录
+//             [[EaseMob sharedInstance].chatManager setIsAutoLoginEnabled:NO];
+             
+             // 旧数据转换 (如果您的sdk是由2.1.2版本升级过来的，需要家这句话)
+             [[EaseMob sharedInstance].chatManager importDataToNewDatabase];
+             //获取数据库中数据
+             [[EaseMob sharedInstance].chatManager loadDataFromDatabase];
+             
+             //获取群组列表
+             [[EaseMob sharedInstance].chatManager asyncFetchMyGroupsList];
+             
+             //发送自动登陆状态通知
+             [[NSNotificationCenter defaultCenter] postNotificationName:KNOTIFICATION_LOGINCHANGE object:@YES];
+             
+             //保存最近一次登录用户名
+             [self saveLastLoginUsername];
+         }
+         else
+         {
+//             switch (error.errorCode)
+//             {
+//                 case EMErrorNotFound:
+//                     TTAlertNoTitle(error.description);
+//                     break;
+//                 case EMErrorNetworkNotConnected:
+//                     TTAlertNoTitle(NSLocalizedString(@"error.connectNetworkFail", @"No network connection!"));
+//                     break;
+//                 case EMErrorServerNotReachable:
+//                     TTAlertNoTitle(NSLocalizedString(@"error.connectServerFail", @"Connect to the server failed!"));
+//                     break;
+//                 case EMErrorServerAuthenticationFailure:
+//                     TTAlertNoTitle(error.description);
+//                     break;
+//                 case EMErrorServerTimeout:
+//                     TTAlertNoTitle(NSLocalizedString(@"error.connectServerTimeout", @"Connect to the server timed out!"));
+//                     break;
+//                 default:
+//                     TTAlertNoTitle(NSLocalizedString(@"login.fail", @"Login failure"));
+//                     break;
+//             }
+         }
+     } onQueue:nil];
     SingleUserInfo *shareInfo = [SingleUserInfo shareUserInfo];
     [self getProfileWithCallBack:^(BOOL isSuccess, UserInfoModel *userInfo) {
         if (isSuccess) {
@@ -55,6 +97,16 @@
     [def setObject:loginName forKey:@"loginName"];
     [def setObject:password forKey:@"password"];
     [def synchronize];
+}
+
+- (void)saveLastLoginUsername
+{
+    NSString *username = [[[EaseMob sharedInstance].chatManager loginInfo] objectForKey:kSDKUsername];
+    if (username && username.length > 0) {
+        NSUserDefaults *ud = [NSUserDefaults standardUserDefaults];
+        [ud setObject:username forKey:[NSString stringWithFormat:@"em_lastLogin_%@",kSDKUsername]];
+        [ud synchronize];
+    }
 }
 
 #pragma mark - 用户登录

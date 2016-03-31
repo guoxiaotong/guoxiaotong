@@ -93,6 +93,11 @@
 - (void)logout {
     SingleUserInfo *userInfo = [SingleUserInfo shareUserInfo];
     userInfo = nil;
+    [[EaseMob sharedInstance].chatManager asyncLogoffWithUnbindDeviceToken:YES completion:^(NSDictionary *info, EMError *error) {
+        if (!error && info) {
+            NSLog(@"退出成功");
+        }
+    } onQueue:nil];
     LoginViewController *loginVC = [[LoginViewController alloc] init];
     GXTNavigationController *navi = [[GXTNavigationController alloc] initWithRootViewController:loginVC];
     self.view.window.rootViewController = navi;

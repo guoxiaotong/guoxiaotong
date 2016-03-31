@@ -10,4 +10,10 @@
 
 @interface NickNameAndHeadImage : NSObject
 
++(instancetype) shareInstance;
+
+- (void)loadUserProfileInBackgroundWithBuddy:(NSArray*)buddyList;
+
+- (NSString*)getNicknameByUserName:(NSString*)username;
+
 @end
