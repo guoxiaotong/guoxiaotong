@@ -32,4 +32,14 @@ typedef void(^HttpRequestCallBack)(BOOL isSuccessed, id data, NSError *error);
 /**修改密码*/
 - (void)editPassword:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
 
+/**获取验证码*/
+- (void)getCode:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+
+/**验证验证码*/
+- (void)checkCode:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+/**注册*/
+- (void)registerInfo:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+/**找回密码*/
+- (void)forgetPassword:(NSDictionary *)params callBack:(void (^)(NSInteger code, NSString *msg))callBack;
+
 @end

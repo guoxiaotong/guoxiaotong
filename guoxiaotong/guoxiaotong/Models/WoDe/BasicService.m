@@ -324,4 +324,22 @@
     }];
 }
 
+- (void)getUserInfo:(NSString *)loginName callBack:(void (^)(BOOL, UserInfoModel *))callBack {
+    [_manager post:API_ROLELIST_URL requestParams:@{@"loginName": loginName} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *json = responseObject;
+        NSDictionary *userInfo = json[@"userBean"];
+        UserInfoModel *infoModel;
+        if (userInfo) {
+            infoModel = [[UserInfoModel alloc] initWithDictionary:userInfo];
+        }
+        if (callBack) {
+            callBack(YES, infoModel);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if (callBack) {
+            callBack(NO, nil);
+        }
+    }];
+}
+
 @end

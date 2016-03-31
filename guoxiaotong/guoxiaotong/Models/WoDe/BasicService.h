@@ -49,4 +49,7 @@
 /**获取已做任务列表*/
 - (void)getTaskDidListCallBack:(void (^)(NSInteger code, NSArray *taskList))callBack;
 
+/**通过loginName获取用户信息*/
+- (void)getUserInfo:(NSString *)loginName callBack:(void (^)(BOOL isSuccess, UserInfoModel *userInfo))callBack;
+
 @end

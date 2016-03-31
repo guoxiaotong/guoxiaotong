@@ -71,6 +71,18 @@
         
         [self addSubview:backView];
         [self addSubview:_view];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillShow:)
+                                                     name:UIKeyboardWillShowNotification
+                                                   object:nil];
+        
+        //增加监听，当键退出时收出消息
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(keyboardWillHide:)
+                                                     name:UIKeyboardWillHideNotification
+                                                   object:nil];
+        
         [self show];
     }
     return self;
@@ -81,8 +93,42 @@
 }
 
 - (void)hide {
+    
     [self removeFromSuperview];
 }
+
+//当键盘出现或改变时调用
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    //获取键盘的高度
+    NSDictionary *userInfo = [aNotification userInfo];
+    //    CGRect rect = userInfo[UIKeyboardFrameEndUserInfoKey];
+    NSValue *aValue = [userInfo objectForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardRect = [aValue CGRectValue];
+    CGFloat orgin_y = HEIGHT - keyboardRect.size.height;
+    CGRect frame = _view.frame;
+    if (orgin_y < CGRectGetMaxY(_view.frame)) {
+        frame.origin.y -= CGRectGetMaxY(_view.frame) - orgin_y;
+        __weak typeof(*&self)weakSelf = self;
+        [UIView animateWithDuration:0.3 animations:^{
+            weakSelf.view.frame = frame;
+        } completion:^(BOOL finished) {
+            nil;
+        }];
+    }
+}
+
+//当键退出时调用
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    CGRect frame = _view.frame;
+    frame.origin.y += 100;
+    __weak typeof (*&self)weakSelf = self;
+    [UIView animateWithDuration:0.3 animations:^{
+        weakSelf.view.frame = frame;
+    } completion:^(BOOL finished) {
+        nil;
+    }];
+}
+
 
 - (void)sureClick {
     if (_sureCallBack) {
@@ -110,6 +156,10 @@
             
         }
     }
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end

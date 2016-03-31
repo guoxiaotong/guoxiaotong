@@ -37,6 +37,8 @@
         _imageVs = [NSMutableArray array];
         _icon = [[UIImageView alloc] initWithFrame:CGRectMake(20, 10, 50, 50)];
         _icon.userInteractionEnabled = YES;
+        _icon.layer.cornerRadius = 25;
+        _icon.clipsToBounds = YES;
         //图像处理，点击事件
         [self.contentView addSubview:_icon];
         
@@ -134,7 +136,7 @@
 - (void)setUIWithModel:(id)model {
     TrendModel *trendInfo = model;
     
-    [_icon sd_setImageWithURL:[self imageUrl:trendInfo.userInfo.picPath]];
+    [_icon sd_setImageWithURL:[self imageUrl:trendInfo.userInfo.picPath] placeholderImage:[UIImage imageNamed:@"default_user_icon"]];
     _nameLabel.text = trendInfo.userInfo.userName;
     _timeLabel.text = trendInfo.sendTime;
     
