@@ -1,15 +1,3 @@
-/************************************************************
- *  * EaseMob CONFIDENTIAL
- * __________________
- * Copyright (C) 2013-2014 EaseMob Technologies. All rights reserved.
- *
- * NOTICE: All information contained herein is, and remains
- * the property of EaseMob Technologies.
- * Dissemination of this information or reproduction of this material
- * is strictly forbidden unless prior written permission is obtained
- * from EaseMob Technologies.
- */
-
 //general
 "register" = "注册";
 "login" = "登录";
@@ -28,7 +16,6 @@
 "error" = "错误";
 "delete" = "删除";
 "copy" = "复制";
-"transpond" = "转发";
 "save" = "保存";
 "prompt" = "提示";
 "add" = "添加";
@@ -43,8 +30,6 @@
 "sendingApply" = "正在发送申请...";
 "acceptFail" = "接受失败";
 "rejectFail" = "拒绝失败";
-"transponding" = "正在转发...";
-"transpondFail" = "转发失败";
 "refreshData" = "刷新数据...";
 "loadData" = "加载数据...";
 "loadDataFailed" = "加载数据失败";
@@ -195,7 +180,7 @@
 "chatroom.remove" = "被踢出聊天室\'%@\'";
 
 //call
-"call.initFailed"="创建实时通话失败，请稍后重试";
+"call.initFailed"="通话建立失败";
 "call.waiting"="等待接听...";
 "call.connecting"="正在建立连接...";
 "call.silence"="静音";
@@ -203,9 +188,6 @@
 "call.reject"="拒接";
 "call.answer"="接听";
 "call.hangup"="挂断";
-"call.finished"="连接建立完成";
-"call.autoHangup"="没有响应，自动挂断";
-"call.noResponse"="对方没有回应";
 "call.connectFailed"="建立连接失败";
 "call.failed"="通话失败";
 "call.suspended"="通话已挂断";
@@ -308,7 +290,7 @@
 "setting.sureNotDisturb" = "此设置会导致全天都处于免打扰模式, 不会再收到推送消息. 是否继续?";
 
 "setting.uploadLog" = "上传运行日志";
-"setting.sdkVersion" = "ONE SDK 版本";
+"setting.sdkVersion" = "SDK 版本";
 "setting.uploading" = "正在上传...";
 "setting.uploadSuccess" = "上传成功";
 "setting.uploadFail" = "上传失败";
@@ -317,8 +299,6 @@
 "setting.saveName" = "保存更改昵称";
 "setting.namenotempty" = "昵称不能为空";
 "setting.personalInfo" = "个人信息";
-"setting.setBitrate" = "设置视频通话码率";
-"setting.setBitrateTips" = "设置视频通话码率范围在150-1000";
 "setting.personalInfoUpload" = "头像";
 "setting.edittips" = "设置此昵称以后,在与iOS客户端demo聊天工程中,iOS一侧会显示此昵称而不是环信ID,如果对方使用安卓客户端则此设置不生效";
 "setting.iospushname" = "iOS离线推送昵称";

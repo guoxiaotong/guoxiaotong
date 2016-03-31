@@ -92,4 +92,7 @@ static NSString * const API_CLASS_ADD_JIAZHANG_URL = @"classes/addManager.page";
 static NSString * const API_CLASS_CHANGE_JHR_URL = @"classes/changeGuardian.page";
 static NSString * const API_CLASS_DEL_JIAZHANG_URL = @"classes /deleteManager.page";
 
+/**聊天相关*/
+static NSString * const API_CHAT_SENDMSG_URL = @"consult/send.page";
+
 #endif /* Config_h */
